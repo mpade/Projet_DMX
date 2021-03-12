@@ -1,0 +1,9 @@
+﻿  uic IHMDMX.ui
+  rcc IHMDMX.qrc
+  moc IHMDMX.h
+   RCC: Warning: No resources in 'C:\Users\Edouard\source\repos\IHMDMX\IHMDMX\IHMDMX.qrc'.
+  IHMDMX.cpp
+  main.cpp
+  qrc_IHMDMX.cpp
+  moc_IHMDMX.cpp
+  IHMDMX.vcxproj -> C:\Users\Edouard\source\repos\IHMDMX\x64\Debug\IHMDMX.exe
