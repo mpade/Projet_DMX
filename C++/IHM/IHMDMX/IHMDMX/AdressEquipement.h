@@ -1,4 +1,4 @@
-#pragma on#ce
+#pragma once
 #include "Equipement.h"
 #include "Property.h"
 #include <map>
