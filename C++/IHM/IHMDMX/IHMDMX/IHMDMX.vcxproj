@@ -88,8 +88,11 @@
   <ItemGroup>
     <ClCompile Include="AdressEquipement.cpp" />
     <ClCompile Include="Equipement.cpp" />
+    <ClCompile Include="Programme.cpp" />
     <ClCompile Include="Property.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Sequence.cpp" />
+    <ClCompile Include="SequenceUsedEquipement.cpp" />
     <ClCompile Include="TrameManager.cpp" />
     <QtRcc Include="IHMDMX.qrc" />
     <QtUic Include="IHMDMX.ui" />
@@ -100,8 +103,11 @@
   <ItemGroup>
     <ClInclude Include="AdressEquipement.h" />
     <ClInclude Include="Equipement.h" />
+    <ClInclude Include="Programme.h" />
     <ClInclude Include="Property.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Sequence.h" />
+    <ClInclude Include="SequenceUsedEquipement.h" />
     <ClInclude Include="TrameManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

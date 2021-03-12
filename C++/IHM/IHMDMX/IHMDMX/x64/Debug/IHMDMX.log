@@ -1,5 +1,8 @@
-﻿  AdressEquipement.cpp
+﻿  Reading Qt configuration (C:/Qt/5.14.2/msvc2017_64/bin/qmake)
+  Programme.cpp
+  Property.cpp
+  Scene.cpp
+  Sequence.cpp
+  SequenceUsedEquipement.cpp
   TrameManager.cpp
-  qrc_IHMDMX.cpp
-  moc_IHMDMX.cpp
   IHMDMX.vcxproj -> C:\Users\Edouard\Desktop\ProjetDMX\Projet_DMX\C++\IHM\IHMDMX\x64\Debug\IHMDMX.exe
