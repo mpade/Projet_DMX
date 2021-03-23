@@ -16,8 +16,6 @@ public:
 
 	int getDuree();									// Récupérer la durée d'une séquence
 
-	void setId(int);								// Donner l'id d'une séquence
-
 	int getId();									// Récupérer l'id d'une séquence
 
 };

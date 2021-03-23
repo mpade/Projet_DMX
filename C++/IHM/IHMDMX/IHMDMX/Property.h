@@ -10,8 +10,6 @@ private:
 public:
 	Property(int, char*, int);			// Constructeur
 
-	void setId(int);					// Donner l'id d'une propriété
-
 	int getId();						// Récupérer l'id d'une propriété
 
 	void setDescription(char*);			// Donner la description d'un order 

@@ -10,8 +10,6 @@ private:
 	std::vector<Scene*> scene;
 
 public:
-	void setId(int);								// Donner l'id d'un programme
-
 	int getId();									// Récupérer l'id d'un programme
 
 	void setName(char*);							// Donner le nom d'un programme
