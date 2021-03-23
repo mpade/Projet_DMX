@@ -12,7 +12,7 @@ private:
 public:
 	Sequence(int, int, TrameManager*, int);			// Constructeur
 
-	void setDuree(int);								// Donner la durée d'une séquence
+	void setDuree(int);								// Donner la durée d'une séquence *-----------* valeur attendu : duree (int)
 
 	int getDuree();									// Récupérer la durée d'une séquence
 

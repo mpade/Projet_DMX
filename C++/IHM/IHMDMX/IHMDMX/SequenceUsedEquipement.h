@@ -12,6 +12,6 @@ public:
 
 	int getSequenceValue();						// Récupérer la valeur d'un canal sur la trame DMX 
 
-	int setSequenceValue(int);					// Donner la valeur d'un canal sur la trame DMX *----------------* valeur attendu : value
+	int setSequenceValue(int);					// Donner la valeur d'un canal sur la trame DMX *----------------* valeur attendu : value (int)
 };
 
