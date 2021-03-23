@@ -6,26 +6,21 @@ private:
 	int id;
 	char* description;
 	int order;
+
 public:
-	Property(int, char*, int);
+	Property(int, char*, int);			// Constructeur
 
-	void setId(int);
+	void setId(int);					// Donner l'id d'une propriété
 
-	int getId() {
-		return this->id;
-	}
+	int getId();						// Récupérer l'id d'une propriété
 
-	void setDescription(char*);
+	void setDescription(char*);			// Donner la description d'un order 
 
-	char* getDescription() {
-		return this->description;
-	}
+	char* getDescription();				// Récupérer la description d'un order
 
-	void setOrder(int);
+	void setOrder(int);					// Donner un order
 
-	int getOrder() {
-		return this->order;
-	}
+	int getOrder(int);					// Récupérer un order
 
 };
 

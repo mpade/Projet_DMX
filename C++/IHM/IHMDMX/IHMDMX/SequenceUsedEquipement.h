@@ -4,15 +4,16 @@ class SequenceUsedEquipement
 private:
 	int id;
 	int value;
+
 public:
-	SequenceUsedEquipement(int, int);
-	int getId() {
-		return this->id;
-	}
-	int setId(int);
-	int getSequenceValue() {
-		return this->value;
-	}
-	int setSequenceValue(int);
+	SequenceUsedEquipement(int, int);			// Constructeur
+
+	int getId();								// Récupérer l'id d'une SequenceUsedEquipement
+
+	int setId(int);								// Donner l'id d'une SequenceUsedEquipement
+
+	int getSequenceValue();						// Récupérer la valeur d'un canal sur la trame DMX 
+
+	int setSequenceValue(int);					// Donner la valeur d'un canal sur la trame DMX
 };
 

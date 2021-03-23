@@ -10,14 +10,15 @@ private:
 	int nbSeqAdressEq;
 
 public:
-	Sequence(int, int, TrameManager*, int);
-	void setDuree(int);
-	int getDuree() {
-		return this->duree;
-	}
-	void setId(int);
-	int getId() {
-		return this->id;
-	}
+	Sequence(int, int, TrameManager*, int);			// Constructeur
+
+	void setDuree(int);								// Donner la durée d'une séquence
+
+	int getDuree();									// Récupérer la durée d'une séquence
+
+	void setId(int);								// Donner l'id d'une séquence
+
+	int getId();									// Récupérer l'id d'une séquence
+
 };
 

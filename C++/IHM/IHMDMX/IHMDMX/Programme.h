@@ -10,21 +10,21 @@ private:
 	std::vector<Scene*> scene;
 
 public:
-	void setId(int);
-	int getId() {
-		return this->id;
-	}
-	void setName(char*);
-	char* getName() {
-		return this->nom;
-	}
-	void setNbScene(int);
-	int getNbScene() {
-		return this->nbScene;
-	}
-	void setScene(std::vector<Scene*>);
-	std::vector<Scene*> getScene() {
-		return this->scene;
-	}
+	void setId(int);								// Donner l'id d'un programme
+
+	int getId();									// Récupérer l'id d'un programme
+
+	void setName(char*);							// Donner le nom d'un programme
+
+	char* getName();								// Récupérer le nom d'un programme
+
+	void setNbScene(int);							// Donner le nombre de scène qu'attend un programme
+
+	int getNbScene();								// Récupérer le nombre de scène qu'attend un programme
+
+	void setScene(std::vector<Scene*>);				// Donner les scènes qui composent le programme
+
+	std::vector<Scene*> getScene();					// Récupérer les scènes qui composent le programme
+
 };
 

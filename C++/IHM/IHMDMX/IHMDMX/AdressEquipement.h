@@ -12,15 +12,15 @@ private:
 	std::map<Property*, int> values;
 
 public:
-	AdressEquipement(int, std::map<Property*, int>);
-	std::map<Property*, int> getValues(){
-		return this->values;
-	}
-	int getAdress() {
-		return this->adresse;
-	}
-	void setValues(std::map<Property*, int>);
-	void setAdresse(int);
+	AdressEquipement(int, std::map<Property*, int>);    // ( adresse, map<Property*, values )
+
+	std::map<Property*, int> getValues();				// Récupérer la valeur des canaux
+
+	int getAdress();									// Récupérer l'adresse de début d'un équipement
+
+	void setValues(std::map<Property*, int>);		    // Donner la valeur des cannaux
+
+	void setAdresse(int);								// Donner l'adresse de début d'un équipement
 
 };
 
