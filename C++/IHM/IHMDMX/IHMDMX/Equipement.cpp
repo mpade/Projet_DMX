@@ -14,10 +14,6 @@ bool Equipement::verifOrder(Property * order)
 	return false;
 }
 
-void Equipement::setId(int)
-{
-}
-
 int Equipement::getId()
 {
 	return this->id;

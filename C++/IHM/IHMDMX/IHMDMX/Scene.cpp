@@ -10,17 +10,13 @@ char * Scene::getName()
 	return this->nom;
 }
 
-void Scene::setId(int)
-{
-}
-
 void Scene::setTime(int)
 {
 }
 
 int Scene::getTime()
 {
-	return this->pause;
+	return this->tpsPause;
 }
 
 char * Scene::setName(char *)

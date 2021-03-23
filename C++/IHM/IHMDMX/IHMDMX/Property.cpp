@@ -4,10 +4,6 @@ Property::Property(int id, char* description, int order)
 
 }
 
-void Property::setId(int id) {
-
-}
-
 int Property::getId()
 {
 	return this->id;

@@ -13,10 +13,6 @@ int Sequence::getDuree()
 	return this->duree;
 }
 
-void Sequence::setId(int)
-{
-}
-
 int Sequence::getId()
 {
 	return this->id;

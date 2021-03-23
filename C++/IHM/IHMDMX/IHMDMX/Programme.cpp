@@ -1,9 +1,5 @@
 #include "Programme.h"
 
-void Programme::setId(int)
-{
-}
-
 int Programme::getId()
 {
 	return this->id;
