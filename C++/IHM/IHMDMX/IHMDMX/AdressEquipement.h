@@ -18,9 +18,9 @@ public:
 
 	int getAdress();									// Récupérer l'adresse de début d'un équipement
 
-	void setValues(std::map<Property*, int>);		    // Donner la valeur des cannaux
+	void setValues(std::map<Property*, int>);		    // Donner la valeur des cannaux *-------------------------* valeur attendu : values
 
-	void setAdresse(int);								// Donner l'adresse de début d'un équipement
+	void setAdresse(int);								// Donner l'adresse de début d'un équipement *------------* valeur attendu : adresse
 
 };
 

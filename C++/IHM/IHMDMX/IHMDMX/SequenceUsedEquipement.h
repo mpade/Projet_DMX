@@ -10,10 +10,8 @@ public:
 
 	int getId();								// Récupérer l'id d'une SequenceUsedEquipement
 
-	int setId(int);								// Donner l'id d'une SequenceUsedEquipement
-
 	int getSequenceValue();						// Récupérer la valeur d'un canal sur la trame DMX 
 
-	int setSequenceValue(int);					// Donner la valeur d'un canal sur la trame DMX
+	int setSequenceValue(int);					// Donner la valeur d'un canal sur la trame DMX *----------------* valeur attendu : value
 };
 

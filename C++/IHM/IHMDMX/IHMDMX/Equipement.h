@@ -19,11 +19,9 @@ public:
 
 	bool verifOrder(Property* order);								// Vérifier si un équipement n'a pas 2 fois le même order
 
-	void setId(int);												// Donner l'id de l'équipement
-
 	int getId();													// Récupérer l'id de l'équipement
 
-	void setName(char*);											// Donner le nom de l'équipement
+	void setName(char*);											// Donner le nom de l'équipement *-------------------------------------* valeur attendu : name
 
 	char* getName();												// Récupérer le nom de l'équipement
 
