@@ -1,8 +1,2 @@
-﻿  Reading Qt configuration (C:/Qt/5.14.2/msvc2017_64/bin/qmake)
-  Programme.cpp
-  Property.cpp
-  Scene.cpp
-  Sequence.cpp
-  SequenceUsedEquipement.cpp
-  TrameManager.cpp
-  IHMDMX.vcxproj -> C:\Users\Edouard\Desktop\ProjetDMX\Projet_DMX\C++\IHM\IHMDMX\x64\Debug\IHMDMX.exe
+﻿  IHMDMX.cpp
+  IHMDMX.vcxproj -> C:\Users\Lecouflet\Desktop\projet DMX\Projet_DMX\C++\IHM\IHMDMX\x64\Debug\IHMDMX.exe

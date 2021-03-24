@@ -1,15 +1,32 @@
-#pragma once
+#ifndef MYWINDOW_H
+#define MYWINDOW_H
 
-#include <QtWidgets/QMainWindow>
-#include "ui_IHMDMX.h"
+#include <QWidget>
+#include <QObject>
+#include <QPushButton>
+#include <QMessageBox>
+#include "BDD.h"
+#include "mysql.h"
 
-class IHMDMX : public QMainWindow
+
+class IHMDMX : public QWidget // On hérite de QWidget (IMPORTANT)
 {
-    Q_OBJECT
+	Q_OBJECT                    // Nécessaire pour créer un slot maison
 
 public:
-    IHMDMX(QWidget *parent = Q_NULLPTR);
+	IHMDMX();                // Constructeur (forcément pubic)
+
+public slots:               // Slots maison
+
+	void ConnexionBdd();
 
 private:
-    Ui::IHMDMXClass ui;
+	QPushButton *m_bouton;      // Attribut (forcément privé)
+								// pointeur --> il faudra le construire dynamiquement (new)
+	MYSQL *mysql;
+	MYSQL_ROW row = NULL;
+	MYSQL_RES *res = NULL;
+
 };
+
+#endif // MYWINDOW_H

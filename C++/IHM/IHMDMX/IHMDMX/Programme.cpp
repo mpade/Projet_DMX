@@ -11,7 +11,7 @@ void Programme::setName(char *)
 
 char * Programme::getName()
 {
-	return this->nom;
+	return this->name;
 }
 
 void Programme::setNbScene(int)
@@ -21,10 +21,6 @@ void Programme::setNbScene(int)
 int Programme::getNbScene()
 {
 	return this->nbScene;
-}
-
-void Programme::setScene(std::vector<Scene*>)
-{
 }
 
 std::vector<Scene*> Programme::getScene()
