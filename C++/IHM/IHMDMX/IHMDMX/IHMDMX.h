@@ -5,7 +5,6 @@
 #include <QObject>
 #include <QPushButton>
 #include <QMessageBox>
-#include "BDD.h"
 #include "mysql.h"
 
 
@@ -23,6 +22,7 @@ public slots:               // Slots maison
 private:
 	QPushButton *m_bouton;      // Attribut (forcément privé)
 								// pointeur --> il faudra le construire dynamiquement (new)
+	QLabel *m_label;
 	MYSQL *mysql;
 	MYSQL_ROW row = NULL;
 	MYSQL_RES *res = NULL;
