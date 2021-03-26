@@ -104,6 +104,7 @@
     <ClCompile Include="SequenceUsedEquipement.cpp" />
     <ClCompile Include="IHMDMX2.cpp" />
     <ClCompile Include="TrameManager.cpp" />
+    <ClCompile Include="User.cpp" />
     <QtRcc Include="IHMDMX.qrc" />
     <QtUic Include="IHMDMX.ui" />
     <QtMoc Include="IHMDMX.h" />
@@ -113,6 +114,7 @@
   <ItemGroup>
     <ClInclude Include="AdressEquipement.h" />
     <ClInclude Include="Equipement.h" />
+    <ClInclude Include="User.h" />
     <QtMoc Include="IHMDMX2.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Programme.h" />

@@ -1,4 +1,6 @@
 #include "AdressEquipement.h"
+#include "IHMDMX.h"
+
 
 std::map<Property*, int> AdressEquipement::getValues()
 {

@@ -12,5 +12,4 @@ int main(int argc, char *argv[])
 	x.show();
     return a.exec();
 
-
 }

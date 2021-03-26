@@ -2,29 +2,36 @@
 #include "iostream"
 #include <QLabel>
 
-IHMDMX::IHMDMX() : QWidget()																								// spécification du constructeur
+IHMDMX::IHMDMX() : QWidget()																						// spécification du constructeur
 {
-	setGeometry(1000, 100, 500, 500);																						
-																															
-	/* Construction du bouton */
-	m_bouton = new QPushButton("ConnexionBdd", this);																		// this = pointeur vers le widget parent																							
-	m_label = new QLabel("ConnexionBdd", this);
-	m_bouton->move(100, 100);
-	/* Connexions Signal - Slot */
-	QObject::connect(m_bouton, SIGNAL(clicked()), this, SLOT(ConnexionBdd()));												// this = SLOT de IHMDMX (SLOT MAISON)
+	/* Position de la fenêtre */
+	setGeometry(1000, 100, 500, 500);	
+
+	/* Construction du Widget */
+	m_BConnexionBdd = new QPushButton("Liaison BDD", this);
+	m_LConnexionBdd = new QLabel("Resultat Liaison BDD", this);
+
+	/* Position des Widgets */
+	m_BConnexionBdd->move(200, 100);
+	m_LConnexionBdd->move(200, 75);
+	
+	/* Connexions Signal - Slot */											
+	QObject::connect(m_BConnexionBdd, SIGNAL(clicked()), this, SLOT(ConnexionBdd()));//	this = SLOT de IHMDMX (SLOT MAISON)
 }
 //==========================================================================================
 
 void IHMDMX::ConnexionBdd()
 {
-	mysql = mysql_init(NULL);
+	mySQL = mysql_init(NULL);
 
-	if (mysql) {
-		m_label->setText( "Mysql Initialise");
-	}
-	else
+	if (!mysql_real_connect(mySQL, "localhost", "root", "root", "DMX", 0, NULL, 0)) 
 	{
-		 m_label->setText("Impossible d'Initialise Mysql");
+		m_LConnexionBdd->setText("Erreur de connexion a la base");
 	}
+	else 
+	{
+		m_LConnexionBdd->setText("Connexion à la bdd reussi");
+	}
+
 }
-//==========================================================================================
+

@@ -1,7 +1,9 @@
 #pragma once
 #include "Equipement.h"
 #include "Property.h"
+#include "IHMDMX.h"
 #include <map>
+
 class AdressEquipement
 {
 
