@@ -1,10 +1,10 @@
-#include "IHMDMX.h"
+#include "IHMDMX2.h"
 #include "iostream"
 #include <QLabel>
 
-IHMDMX::IHMDMX() : QWidget()																								// spécification du constructeur
+IHMDMX2::IHMDMX2() : QWidget()																								// spécification du constructeur
 {
-	setGeometry(1000, 100, 500, 500);																						
+	setGeometry(100, 100, 500, 500);																						// place la fenêtre aux coordonnés : 100px,100px
 																															
 	/* Construction du bouton */
 	m_bouton = new QPushButton("ConnexionBdd", this);																		// this = pointeur vers le widget parent																							
@@ -15,7 +15,7 @@ IHMDMX::IHMDMX() : QWidget()																								// spécification du construc
 }
 //==========================================================================================
 
-void IHMDMX::ConnexionBdd()
+void IHMDMX2::ConnexionBdd()
 {
 	mysql = mysql_init(NULL);
 
