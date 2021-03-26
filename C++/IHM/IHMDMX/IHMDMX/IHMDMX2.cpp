@@ -5,7 +5,8 @@
 IHMDMX2::IHMDMX2() : QWidget()																								// spécification du constructeur
 {
 	setGeometry(100, 100, 500, 500);																						// place la fenêtre aux coordonnés : 100px,100px
-																															
+				
+
 	/* Construction du bouton */
 	m_bouton = new QPushButton("ConnexionBdd", this);																		// this = pointeur vers le widget parent																							
 	m_label = new QLabel("ConnexionBdd", this);

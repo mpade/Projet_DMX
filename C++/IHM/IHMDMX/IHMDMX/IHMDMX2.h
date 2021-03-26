@@ -26,4 +26,3 @@ private:
 	MYSQL_RES *res = NULL;
 
 };
-
