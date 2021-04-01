@@ -1,0 +1,13 @@
+1ère étape : git clone https://github.com/mpade/Projet_DMX.git
+
+2ème étape : Rendez-vous dans votre dossier Projet_DMX et fait 1 clic droit->Git Bash Here
+
+3ème étape : 1 fois dans le Git Bash, faites git init
+
+4ème et dernière chose : Pour limiter les conflits sur le github, vous effectuerais les commandes suivantes dans l'ordre défini ci-dessous (TRES IMPORTANT): 
+
+    -   1 git status (pour voir toutes vos modifications).
+    -   2 git add ./ (pour ajouter toutes vos modifications).
+    -   3 git pull (pour récupérer la dernière version du projet).
+    -   4 git commit -m "votre message" (pour envoyer vos modifications en attente d'envoie).
+    -   5 git push (pour envoyer vos modifications qui ont étaient commit à l'étape précédente).
