@@ -12,6 +12,7 @@
 #include <QtGui>
 
 
+
 class IHMDMX : public QWidget   // On hérite de QWidget (IMPORTANT)
 {
 	Q_OBJECT                    // Nécessaire pour créer un slot maison

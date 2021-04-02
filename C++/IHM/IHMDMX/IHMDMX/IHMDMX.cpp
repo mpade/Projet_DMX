@@ -4,7 +4,6 @@
 
 IHMDMX::IHMDMX() : QWidget()																				// spécification du constructeur
 {
-	
 	/* Position de la fenêtre */
 	setGeometry(1000, 100, 500, 500);	
 
