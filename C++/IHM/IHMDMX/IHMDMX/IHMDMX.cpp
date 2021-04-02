@@ -2,21 +2,26 @@
 #include "iostream"
 #include <QLabel>
 
-IHMDMX::IHMDMX() : QWidget()																						// spécification du constructeur
+IHMDMX::IHMDMX() : QWidget()																				// spécification du constructeur
 {
+	
 	/* Position de la fenêtre */
 	setGeometry(1000, 100, 500, 500);	
 
-	/* Construction du Widget */
-	m_BConnexionBdd = new QPushButton("Liaison BDD", this);
+	/* Construction des Widgets */
 	m_LConnexionBdd = new QLabel("Resultat Liaison BDD", this);
+	m_SAfficherEquipement = new QLabel("Resultat Requete Equipement", this);
 
 	/* Position des Widgets */
-	m_BConnexionBdd->move(200, 100);
-	m_LConnexionBdd->move(200, 75);
+	m_LConnexionBdd->move(200, 10);
+	m_SAfficherEquipement->move(200, 125);
 	
-	/* Connexions Signal - Slot */											
-	QObject::connect(m_BConnexionBdd, SIGNAL(clicked()), this, SLOT(ConnexionBdd()));//	this = SLOT de IHMDMX (SLOT MAISON)
+	/* Connexions Signal - Slot */																
+	
+
+	/* Méthode éxecutée au lancement de l'IHM */
+	ConnexionBdd();
+	AfficherEquipement();
 }
 //==========================================================================================
 
@@ -24,14 +29,21 @@ void IHMDMX::ConnexionBdd()
 {
 	mySQL = mysql_init(NULL);
 
-	if (!mysql_real_connect(mySQL, "localhost", "root", "root", "DMX", 0, NULL, 0)) 
+	if (!mysql_real_connect(mySQL, "mysql-projet-dmx.alwaysdata.net", "231034_pade", "Projet_Dmx1234", "projet-dmx_dmx", 0, NULL, 0)) 
 	{
 		m_LConnexionBdd->setText("Erreur de connexion a la base");
 	}
 	else 
 	{
-		m_LConnexionBdd->setText("Connexion à la bdd reussi");
+		m_LConnexionBdd->setText("Connexion a la bdd reussi");
 	}
 
 }
+//==========================================================================================
 
+void IHMDMX::AfficherEquipement()
+{		
+	
+	int MaRequete = mysql_query(mySQL, "SELECT `Name` FROM `Equipement` ;");			
+	m_SAfficherEquipement->setText("MaRequete");
+}
