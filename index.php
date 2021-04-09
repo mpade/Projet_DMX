@@ -31,7 +31,16 @@
         if(isset($_POST['email']) && isset($_POST['pass']))
         {
             $user = new user($bdd);
+            $_SESSION['Email'] = 
             $user->Connexion($_POST['email'], $_POST['pass']);
+            if(empty($_SESSION['Email']))
+            {
+                return "Probleme de champs";
+            }
+            else
+            {
+                ?><script>window.location.replace("index2.php");</script><?php
+            }
         }
 
         

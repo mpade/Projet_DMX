@@ -1,6 +1,15 @@
-<?php echo"tu es co"; ?>
-<?php include('bdd.php') ?>
-<?php include('utilisateur.php'); ?>
+<?php 
+    // Démarrage des sessions + include des classes + vérification de la session
+    session_start(); 
+    include('bdd.php');
+    include('utilisateur.php'); 
+    $user = new user($bdd);
+    if(empty($_SESSION['Email']))
+    {
+        ?><script>window.location.replace("index.php");</script><?php
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -10,8 +19,26 @@
     <title>Connecté</title>
 </head>
 <body>
-    <form action="" method="POST">
-    <a href ="" onclick="deconnexion()">Se déconnecter</a>
-    </form>    
+<?php
+    // On appelle la méthode déconnexion pour se déconnecter
+    if(isset($_POST['deconnexion']))
+    {
+        $user->deconnexion();
+    }
+    ?>
+    <!-- Formulaire de déconnexion "bouton se déconecter" -->
+        <form action="" method="POST">
+        <input type="submit" name="deconnexion" value="Se déconnecter">
+        </form>   
+<?php 
+    if(isset($_POST['Programme']))
+    {
+        $user->Programme();
+    }
+    ?>
+        <form action="" method="POST">
+        <input type="submit" name="Programme" value="Crée un programme">
+        </form>      
+        
 </body>
 </html>

@@ -1,4 +1,5 @@
-<?php  include("bdd.php");  ?>
+<?php 
+    include("bdd.php");  ?>
 <?php
 
     // Déclaration de la classe user
@@ -30,7 +31,7 @@
                 $result = $req->fetch(PDO::FETCH_ASSOC);
     
                 if ($result['MotDePasse'] == $Pass) {
-                    header("Location: index2.php");
+                    return $result['Email'];
                 } else {
                     echo "Identifiant ou mot de passe incorrect";
                 }
@@ -59,10 +60,17 @@
 
         function deconnexion()
         {
-            session_start();
             session_destroy();
             session_unset();   
-            header('Location:index.php'); 
+            ?><script>window.location.replace("index.php");</script><?php
+        }
+
+        function Programme()
+        {
+            $clients = $this->$client->query('SELECT * FROM utilisateur');
+           
+            
+
         }
     }
 
