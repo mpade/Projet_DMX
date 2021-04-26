@@ -4,6 +4,12 @@
     include('bdd.php');
     include('utilisateur.php'); 
     $user = new user($bdd);
+    $user->setNom($_SESSION['Email']);
+    echo $user->getNom();
+    $user->setPrenom($_SESSION['Email']);
+    echo $user->getPrenom();
+    
+    
     if(empty($_SESSION['Email']))
     {
         ?><script>window.location.replace("index.php");</script><?php
@@ -31,14 +37,55 @@
         <input type="submit" name="deconnexion" value="Se déconnecter">
         </form>   
 <?php 
+        
+           
+             
+    if(isset($_POST['ajoutprogramme']))
+    {
+        $user->Programme($_SESSION['Email'], $_POST['nomprogramme']);
+    }  
     if(isset($_POST['Programme']))
     {
-        $user->Programme();
+        
+        ?>
+        <form action="" method="POST">
+            <input type="text" name="nomprogramme" placeholder="Nom du programme">
+            <input type="checkbox" name="ajoutscene" value="Scene 1">
+            <input type="checkbox" name="ajoutscene" value="Scene 2">
+            <input type="checkbox" name="ajoutscene" value="Scene 3">     
+            <input type="submit" name="ajoutprogramme" value="Ajouter programme">
+        </form>  
+       <?php
+       
+
     }
+    
     ?>
+    
         <form action="" method="POST">
         <input type="submit" name="Programme" value="Crée un programme">
-        </form>      
+        </form> 
+    <?php
+        if(isset($_POST['voirprogramme']))
+        {
+            $user->getNomProgramme($_SESSION['Email']);
+            $user->setafficherprogramme($_SESSION['Email']);
+            $programme = $user->getNomProgramme();
+           
+            for($i=0 ;$i<sizeof($programme); $i++)
+            {
+                echo $programme[$i];
+            }
+            
+    ?>   
+        
+    <?php    
+    }
+    ?><form action="" method="POST">  
+            <input type="submit" name="voirprogramme" value="Voir mes programme">
+        </form> 
+    
+             
         
 </body>
 </html>
