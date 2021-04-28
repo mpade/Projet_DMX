@@ -1,10 +1,18 @@
 #pragma once
+#include "main.h"
 #include <QWidget>
 #include <QObject>
 #include <QPushButton>
 #include <QMessageBox>
 #include "mysql.h"
-
+#include <QLabel>
+#include <Qcheckbox>
+#include <QGroupBox>
+#include <QVBoxLayout>
+#include <vector>
+#include <string>
+#include <QtWidgets/QApplication>
+#include "IHM_create_Sequence.h"
 
 class IHMDMX2 : public QWidget // On hérite de QWidget (IMPORTANT)
 {
@@ -14,15 +22,8 @@ public:
 	IHMDMX2();                // Constructeur (forcément pubic)
 
 public slots:               // Slots maison
-
-	void ConnexionBdd();
-
+	void creat_sequence();
 private:
-	QPushButton *m_bouton;      // Attribut (forcément privé)
-								// pointeur --> il faudra le construire dynamiquement (new)
-	QLabel *m_label;
-	MYSQL *mysql;
-	MYSQL_ROW row = NULL;
-	MYSQL_RES *res = NULL;
+	QPushButton *sequence_creat;      // Attribut (forcément privé)
 
-};
+}; 

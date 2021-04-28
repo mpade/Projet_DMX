@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_IHMDMX2_t {
     QByteArrayData data[3];
-    char stringdata0[22];
+    char stringdata0[24];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,11 +33,11 @@ struct qt_meta_stringdata_IHMDMX2_t {
 static const qt_meta_stringdata_IHMDMX2_t qt_meta_stringdata_IHMDMX2 = {
     {
 QT_MOC_LITERAL(0, 0, 7), // "IHMDMX2"
-QT_MOC_LITERAL(1, 8, 12), // "ConnexionBdd"
-QT_MOC_LITERAL(2, 21, 0) // ""
+QT_MOC_LITERAL(1, 8, 14), // "creat_sequence"
+QT_MOC_LITERAL(2, 23, 0) // ""
 
     },
-    "IHMDMX2\0ConnexionBdd\0"
+    "IHMDMX2\0creat_sequence\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -69,7 +69,7 @@ void IHMDMX2::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         auto *_t = static_cast<IHMDMX2 *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->ConnexionBdd(); break;
+        case 0: _t->creat_sequence(); break;
         default: ;
         }
     }

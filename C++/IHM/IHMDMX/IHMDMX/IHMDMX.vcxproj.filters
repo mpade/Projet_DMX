@@ -71,6 +71,12 @@
     <ClCompile Include="User.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="IHM_create_Sequence.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IHM_SrolBar_Sequence.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TrameManager.h">
@@ -97,10 +103,10 @@
     <ClInclude Include="Programme.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="main.h">
+    <ClInclude Include="User.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="User.h">
+    <ClInclude Include="main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -108,5 +114,16 @@
     <QtMoc Include="IHMDMX2.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="IHM_create_Sequence.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="IHM_SrolBar_Sequence.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="Widget.ui">
+      <Filter>Header Files\Form Files</Filter>
+    </QtUic>
   </ItemGroup>
 </Project>
