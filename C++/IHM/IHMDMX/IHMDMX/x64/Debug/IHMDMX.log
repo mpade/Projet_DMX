@@ -1,3 +1,2 @@
-﻿  IHM_SrolBar_Sequence.cpp
-moc_IHM_SrolBar_Sequence.obj : error LNK2019: symbole externe non résolu "public: void __cdecl IHM_SrolBar_Sequence::ScrollBar(void)" (?ScrollBar@IHM_SrolBar_Sequence@@QEAAXXZ) référencé dans la fonction "private: static void __cdecl IHM_SrolBar_Sequence::qt_static_metacall(class QObject *,enum QMetaObject::Call,int,void * *)" (?qt_static_metacall@IHM_SrolBar_Sequence@@CAXPEAVQObject@@W4Call@QMetaObject@@HPEAPEAX@Z)
-C:\Users\Edouard\Desktop\Projet_DMX\C++\IHM\IHMDMX\x64\Debug\IHMDMX.exe : fatal error LNK1120: 1 externes non résolus
+﻿  IHM_create_Sequence.cpp
+  IHMDMX.vcxproj -> C:\Users\Edouard\Desktop\Projet_DMX\C++\IHM\IHMDMX\x64\Debug\IHMDMX.exe

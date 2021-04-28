@@ -26,14 +26,10 @@ public:
 
 public slots:               // Slots maison
 
-	void ScrollBar();
-	
 private:
 
-	QGroupBox *groupBox;
-	QVBoxLayout *vbox;
-	QGridLayout *grid;
-	std::vector<QSlider*>e;
 	
+	std::vector<QSlider*>e;
+	std::vector< QLCDNumber*>a;
 };
 

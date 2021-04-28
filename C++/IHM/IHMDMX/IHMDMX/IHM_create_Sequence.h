@@ -1,6 +1,6 @@
 #pragma once
 #include "main.h"
-
+#include "IHM_SrolBar_Sequence.h"
 #include <QWidget>
 #include <QObject>
 #include <QPushButton>

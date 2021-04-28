@@ -41,7 +41,8 @@ void IHM_Create_Sequence::slidergetEquipement() {
 
 	for (int i = 0; i < e.size(); i++) {
 		if (e[i]->checkState()) {
-			
+			IHM_SrolBar_Sequence *t = new IHM_SrolBar_Sequence(3);
+			t->show();
 		}
 			
 	}
