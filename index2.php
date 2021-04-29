@@ -2,12 +2,13 @@
     // Démarrage des sessions + include des classes + vérification de la session
     session_start(); 
     include('bdd.php');
-    include('utilisateur.php'); 
+    include('programme.php');
+    $programme = new programme($bdd);
     $user = new user($bdd);
-    $user->setNom($_SESSION['Email']);
+    $user->setinformations($_SESSION['Email']);
     echo $user->getNom();
-    $user->setPrenom($_SESSION['Email']);
     echo $user->getPrenom();
+    
     
     
     if(empty($_SESSION['Email']))
@@ -42,7 +43,7 @@
              
     if(isset($_POST['ajoutprogramme']))
     {
-        $user->Programme($_SESSION['Email'], $_POST['nomprogramme']);
+        $programme->CreeProgramme($_SESSION['Email'], $_POST['nomprogramme']);
     }  
     if(isset($_POST['Programme']))
     {
@@ -68,9 +69,8 @@
     <?php
         if(isset($_POST['voirprogramme']))
         {
-            $user->getNomProgramme($_SESSION['Email']);
-            $user->setafficherprogramme($_SESSION['Email']);
-            $programme = $user->getNomProgramme();
+            $programme->setafficherprogramme($_SESSION['Email']);
+            $programme = $programme->getNomProgramme();
            
             for($i=0 ;$i<sizeof($programme); $i++)
             {
