@@ -25,5 +25,5 @@ public slots:               // Slots maison
 	void creat_sequence();
 private:
 	QPushButton *sequence_creat;      // Attribut (forcément privé)
-
+	QPushButton *sequence_delete;
 }; 

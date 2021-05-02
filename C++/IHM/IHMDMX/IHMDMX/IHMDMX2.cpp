@@ -8,6 +8,9 @@ IHMDMX2::IHMDMX2() : QWidget()																								// spécification du constr
 	/* Construction du bouton */
 	sequence_creat = new QPushButton("Cree une Sequence", this);																		// this = pointeur vers le widget parent																							
 	sequence_creat->move(50, 100);
+
+	sequence_delete = new QPushButton("Suprimmer une Sequence", this);																		// this = pointeur vers le widget parent																							
+	sequence_delete->move(50, 200);
 	/* Connexions Signal - Slot */
 	QObject::connect(sequence_creat, SIGNAL(clicked()), this, SLOT(creat_sequence()));	// this = SLOT de IHMDMX (SLOT MAISON)
 	
