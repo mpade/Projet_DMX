@@ -63,14 +63,18 @@ void IHMDMX::AfficherEquipement()
 
 void IHMDMX::creat_equipement()
 {
-
+	IHM_Create_Equipement *t = new IHM_Create_Equipement;
+	t->show();
+	this->close();
 }
 
 //==========================================================================================
 
 void IHMDMX::modifier_equipement()
 {
-
+	IHM_Modifier_Equipement *t = new IHM_Modifier_Equipement;
+	t->show();
+	this->close();
 }
 
 //==========================================================================================
