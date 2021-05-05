@@ -22,10 +22,16 @@ public:
 
 public slots:					// Slots maison
 	void ConnexionBdd();
-	void AfficherEquipement();
+	//void AfficherEquipement();
+	void creat_equipement();
+	void modifier_equipement();
+	void supprimer_equipement();
 
 private:
 	//QPushButton *m_BConnexionBdd;
+	QPushButton *equipement_creat;
+	QPushButton *equipement_modifier;
+	QPushButton *equipement_delete;
 	QLabel *m_LConnexionBdd;
 	QLabel *m_SAfficherEquipement;
 	MYSQL *mySQL;
