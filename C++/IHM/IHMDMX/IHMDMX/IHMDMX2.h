@@ -13,6 +13,7 @@
 #include <string>
 #include <QtWidgets/QApplication>
 #include "IHM_create_Sequence.h"
+#include "IHM_Delete_Sequence.h"
 
 class IHMDMX2 : public QWidget // On hérite de QWidget (IMPORTANT)
 {
@@ -23,7 +24,16 @@ public:
 
 public slots:               // Slots maison
 	void creat_sequence();
+	void modifier_sequence();
+	void supprimer_sequence();
+	void creat_scene();
+	void modifier_scene();
+	void supprimer_scene();
 private:
 	QPushButton *sequence_creat;      // Attribut (forcément privé)
+	QPushButton *sequence_modifier;
 	QPushButton *sequence_delete;
+	QPushButton *scene_creat;
+	QPushButton *scene_modifier;
+	QPushButton *scene_delete;
 }; 

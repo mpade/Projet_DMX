@@ -22,7 +22,7 @@ class IHM_SrolBar_Sequence :
 	Q_OBJECT                    // Nécessaire pour créer un slot maison
 
 public:
-	IHM_SrolBar_Sequence(int);                // Constructeur (forcément pubic)
+	IHM_SrolBar_Sequence(const QString, int);                // Constructeur (forcément pubic)
 
 public slots:               // Slots maison
 
@@ -31,5 +31,6 @@ private:
 	
 	std::vector<QSlider*>e;
 	std::vector< QLCDNumber*>a;
+	QPushButton *Valid;
 };
 

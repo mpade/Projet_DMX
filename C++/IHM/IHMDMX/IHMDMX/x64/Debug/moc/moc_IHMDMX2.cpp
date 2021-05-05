@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_IHMDMX2_t {
-    QByteArrayData data[3];
-    char stringdata0[24];
+    QByteArrayData data[8];
+    char stringdata0[104];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,10 +34,17 @@ static const qt_meta_stringdata_IHMDMX2_t qt_meta_stringdata_IHMDMX2 = {
     {
 QT_MOC_LITERAL(0, 0, 7), // "IHMDMX2"
 QT_MOC_LITERAL(1, 8, 14), // "creat_sequence"
-QT_MOC_LITERAL(2, 23, 0) // ""
+QT_MOC_LITERAL(2, 23, 0), // ""
+QT_MOC_LITERAL(3, 24, 17), // "modifier_sequence"
+QT_MOC_LITERAL(4, 42, 18), // "supprimer_sequence"
+QT_MOC_LITERAL(5, 61, 11), // "creat_scene"
+QT_MOC_LITERAL(6, 73, 14), // "modifier_scene"
+QT_MOC_LITERAL(7, 88, 15) // "supprimer_scene"
 
     },
-    "IHMDMX2\0creat_sequence\0"
+    "IHMDMX2\0creat_sequence\0\0modifier_sequence\0"
+    "supprimer_sequence\0creat_scene\0"
+    "modifier_scene\0supprimer_scene"
 };
 #undef QT_MOC_LITERAL
 
@@ -47,7 +54,7 @@ static const uint qt_meta_data_IHMDMX2[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -55,9 +62,19 @@ static const uint qt_meta_data_IHMDMX2[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   19,    2, 0x0a /* Public */,
+       1,    0,   44,    2, 0x0a /* Public */,
+       3,    0,   45,    2, 0x0a /* Public */,
+       4,    0,   46,    2, 0x0a /* Public */,
+       5,    0,   47,    2, 0x0a /* Public */,
+       6,    0,   48,    2, 0x0a /* Public */,
+       7,    0,   49,    2, 0x0a /* Public */,
 
  // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -70,6 +87,11 @@ void IHMDMX2::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->creat_sequence(); break;
+        case 1: _t->modifier_sequence(); break;
+        case 2: _t->supprimer_sequence(); break;
+        case 3: _t->creat_scene(); break;
+        case 4: _t->modifier_scene(); break;
+        case 5: _t->supprimer_scene(); break;
         default: ;
         }
     }
@@ -105,13 +127,13 @@ int IHMDMX2::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 6)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 1;
+        _id -= 6;
     }
     return _id;
 }
