@@ -25,20 +25,23 @@
         // Fonction qui permet à l'utilisateur de se connecter à l'IHM WEB
         function Connexion($Email,$Pass)
         {
-                $req = $this->_bdd->prepare("SELECT * FROM `utilisateur` WHERE `utilisateur`.`Email` = :email AND `utilisateur`.`MotDePasse` = :pass");
-                $req->bindParam('email', $Email, PDO::PARAM_STR);
-                $req->bindParam('pass', $Pass, PDO::PARAM_STR);
-                $req->execute();
-                $result = $req->fetch(PDO::FETCH_ASSOC);
-    
-                if ($result['MotDePasse'] == $Pass) {
-                    $this->_Nom = $result['Nom'];
-                    $_SESSION['Id'] = $result['Id_Utilisateur'];
-                    return $result['Email'];
-                } else {
-                    echo "Identifiant ou mot de passe incorrect";
-                }
+            $req = $this->_bdd->prepare("SELECT * FROM `utilisateur` WHERE `utilisateur`.`Email` = :email AND `utilisateur`.`MotDePasse` = :pass");
+            $req->bindParam('email', $Email, PDO::PARAM_STR);
+            $req->bindParam('pass', $Pass, PDO::PARAM_STR);
+            $req->execute();
+            $result = $req->fetch(PDO::FETCH_ASSOC);
+
+            if ($result['MotDePasse'] == $Pass) 
+            {
+                $this->_Nom = $result['Nom'];
+                $_SESSION['Id'] = $result['Id_Utilisateur'];
+                return $result['Email'];
+            } 
+            else 
+            {
+                echo "Identifiant ou mot de passe incorrect";
             }
+        }
 
         function setinformations($Email)
         {
@@ -50,12 +53,6 @@
             $_Nom = $this->_Nom;
             $_Prenom = $this->_Prenom;
         }
-        // function setafficherscene($Email)
-        // {
-
-        // }
-    
-        // Fonction qui retourne l'adresse mail de l'utilisateur
         
         // Fonction qui retourne le nom de l'utilisateur
         function getNom()
@@ -68,10 +65,6 @@
             return $this->_Prenom;
         }
         
-        // function getNomScene()
-        // {
-        //     return $this->_AfficherScene;
-        // }
         // Fonction qui retourne le grade de l'utilisateur
         function getGrade()
         {

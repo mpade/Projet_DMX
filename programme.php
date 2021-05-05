@@ -50,6 +50,10 @@ class Programme
     {
         return $this->_AfficherProgramme;
     }
+    function ModifierProgramme()
+    {
+        $modifProgramme = $this->_bdd->query('UPDATE `programme` SET `Id_Programme`=?,`Nom`=?,`Id_Utilisateur`=? WHERE 1 ');
+    }
     function ajouterscene($Email,$Nom)
     {
 
