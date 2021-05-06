@@ -4,6 +4,7 @@
     include('bdd.php');
     include('gestion.php');
     include('programme.php');
+    
     $programme = new programme($bdd);
     $user = new user($bdd);
     $user->setinformations($_SESSION['Email']);
@@ -28,36 +29,68 @@
 </head>
 <body>
 <?php
+$selectprogrammes = $bdd->query("SELECT * FROM programme");
+$programmeindex = 0;
+
+while($selectprogramme = $selectprogrammes->fetch()) 
+{
+    $prog[$programmeindex++] = new gestion($selectprogramme['Id_Programme'], $selectprogramme['Nom']);
+}
+
+if (isset($_GET["voirprogramme"])) 
+{
+    foreach ($prog as $objetprogramme) 
+    {
+        if ($objetprogramme->getId() == $_GET["voirprogramme"]) 
+        {
+            $deleteprogrammes = $bdd->prepare("DELETE FROM programme WHERE Id_Programme =:id");
+            $deleteprogrammes->execute([
+            'id' => $objetprogramme->getId()
+            ]);
+            
+        }
+    }
+}
+
+if (isset($_GET["modifieprogramme"])) 
+{
+ 
+    
+    foreach ($prog as $objetprogramme) 
+    {
+        if ($objetprogramme->getId() == $_GET["modifieprogramme"]) 
+        {
+            
+            ?>
+            <form action="" method="POST">
+                <input type="text" name="nommodifiee" placeholder="Nouveau nom du programme">
+                <input type="submit" name="nommodifie" value="Valider">
+                </form>
+            <?php
+            if(isset($_POST['nommodifie']))
+            {
+                echo "le nom à bien été modifié";
+                $bdd->query("UPDATE `programme` SET `Nom`='".$_POST['nommodifiee']."'WHERE `Id_Programme` = '".$objetprogramme->getId()."'");
+            }  
+        }
+    }
+}
     // On appelle la méthode déconnexion pour se déconnecter
     if(isset($_POST['deconnexion']))
     {
         $user->deconnexion();
     }
     ?>
+
+
+     <!-- TOUS LES FORMULAIRES -->
+
       
 <?php 
         
         // Exécution après avoir cliqué sur le formulaire de modification de programme   
           
-        if(isset($_POST['modifprogramme']))
-        {
-            $programme->setafficherprogramme($_SESSION['Email']);
-            $programme = $programme->getNomProgramme();
-           
-            for($i=0 ;$i<sizeof($programme); $i++)
-            {
-                echo $programme[$i];
-            }
-            
-            ?>
-            
-            <form action="" method="POST">
-            <input type="text" name="modifieprogramme" placeholder="Nom du programme">
-            <input type="submit" name="modifieprogramme2" value="Valider">
-            </form>
-            <?php
-            
-        }  
+       
         // Exécution après avoir entré le nom du programme à modifié
         if(isset($_POST['modifieprogramme2']))
             {
@@ -67,12 +100,9 @@
                 <input type="submit" name="nommodifie" value="Valider">
                 </form>
                 <?php
-            }
+            } 
             // Exécution après avoir entré le nouveau nom du programme
-            if(isset($_POST['nommodifie']))
-            {
-                echo "le nom à bien été modifié";
-            }  
+            
             
     // Exécution après avoir cliqué sur le bouton d'ajout programme
     if(isset($_POST['ajoutprogramme']))
@@ -93,43 +123,13 @@
         </form>  
        <?php
     }
-    if(isset($_POST['']))
     
-    ?>
     
+    
+
+            // $programme->setafficherprogramme($_SESSION['Email']);echo "c";
+            // $programme = $programme->getNomProgramme();
         
-        
-    <?php
-
-            $programme->setafficherprogramme($_SESSION['Email']);
-            $programme = $programme->getNomProgramme();
-            $selectprogrammes = $bdd->query("SELECT * FROM programme");
-            $programmeindex = 0;
-           
-            while($selectprogramme = $selectprogrammes->fetch()) 
-            {
-                $prog[$programmeindex++] = new gestion($selectprogramme['Id_Programme'], $selectprogramme['Nom']);
-            }
-            if (isset($_GET["voirprogramme"])) 
-            {
-                foreach ($prog as $objetprogramme) 
-                {
-                    if ($objetprogramme->getId() == $_GET["voirprogramme"]) 
-                    {
-                        $deleteprogrammes = $bdd->prepare("DELETE FROM programme WHERE Id_Programme =:id");
-                        $deleteprogrammes->execute([
-                        'id' => $objetprogramme->getId()
-                        ]);
-                        
-                    }
-                }
-            }
-
-
-            
-
-
-
 
             
     ?>   
@@ -137,8 +137,6 @@
     
     
              
-      <!-- TOUS LES FORMULAIRES -->
-
     <!-- Formulaire de déconnexion "bouton se déconecter" -->
     <form action="" method="POST">
         <input type="submit" name="deconnexion" value="Se déconnecter">
@@ -149,10 +147,6 @@
         <input type="submit" name="Programme" value="Crée un programme">
     </form> 
 
-    <!-- Formulaire permettant de modifié un programme" -->
-    <form action="" method="POST">  
-        <input type="submit" name="modifprogramme" value="Modifié programme">
-    </form>
     <!-- Formulaire permettant de supprimer un programme" -->
     <form action="" methode="GET">
         <select name="voirprogramme">
@@ -166,6 +160,7 @@
         </select>
         <input type="submit" value="Supprimer programme"></input>
     </form>
+     
 
 
 
