@@ -97,8 +97,10 @@
   <ItemGroup>
     <ClCompile Include="AdressEquipement.cpp" />
     <ClCompile Include="Equipement.cpp" />
+    <ClCompile Include="IHM_Create_Equipement.cpp" />
     <ClCompile Include="IHM_create_Sequence.cpp" />
     <ClCompile Include="IHM_Delete_Sequence.cpp" />
+    <ClCompile Include="IHM_Modifier_Equipement.cpp" />
     <ClCompile Include="IHM_SrolBar_Sequence.cpp" />
     <ClCompile Include="Programme.cpp" />
     <ClCompile Include="Property.cpp" />
@@ -121,6 +123,8 @@
     <QtMoc Include="IHM_create_Sequence.h" />
     <QtMoc Include="IHM_SrolBar_Sequence.h" />
     <QtMoc Include="IHM_Delete_Sequence.h" />
+    <QtMoc Include="IHM_Create_Equipement.h" />
+    <QtMoc Include="IHM_Modifier_Equipement.h" />
     <ClInclude Include="User.h" />
     <QtMoc Include="IHMDMX2.h" />
     <ClInclude Include="main.h" />
