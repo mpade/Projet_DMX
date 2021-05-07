@@ -1,11 +1,16 @@
 #include "IHM_SrolBar_Sequence.h"
-IHM_SrolBar_Sequence::IHM_SrolBar_Sequence(const QString name,int t) : QWidget()																								// spécification du constructeur
+IHM_SrolBar_Sequence::IHM_SrolBar_Sequence(const QString name,int voie, int adresse) : QWidget()																								// spécification du constructeur
 {
 	int x = 65, y = 20;
 	QWidget::setWindowTitle(name);
-	for (int i = 0; i < t; i++) {
+	for (int i = 0; i < voie; i++) {
 		e.push_back(new QSlider(Qt::Vertical, this));
 		a.push_back(new QLCDNumber(this));
+	}
+
+	for (int i = 0; i < e.size(); i++) {
+		e[i]->setObjectName(QString::number(adresse));
+		adresse++;
 	}
 
 	for (int i = 0; i < e.size(); i++) {
@@ -23,4 +28,8 @@ IHM_SrolBar_Sequence::IHM_SrolBar_Sequence(const QString name,int t) : QWidget()
 	}
 	Valid = new QPushButton("Valider", this);
 	Valid->move(x, 150);
+	QObject::connect(Valid, SIGNAL(clicked()), this, SLOT(getValide()));
+}
+void IHM_SrolBar_Sequence::getValide() {
+
 }

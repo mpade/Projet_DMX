@@ -24,5 +24,6 @@ public:
 
 	void setAdresse(int);								// Donner l'adresse de début d'un équipement *------------* valeur attendu : adresse
 
+	int getAdresse();
 };
 

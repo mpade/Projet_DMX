@@ -1,7 +1,2 @@
-﻿  moc IHM_Create_Equipement.h
-  moc IHM_Modifier_Equipement.h
-  IHM_Create_Equipement.cpp
-  IHM_Modifier_Equipement.cpp
-  moc_IHM_Create_Equipement.cpp
-  moc_IHM_Modifier_Equipement.cpp
+﻿  IHM_create_Sequence.cpp
   IHMDMX.vcxproj -> C:\Users\Edouard\Desktop\Projet_DMX\C++\IHM\IHMDMX\x64\Debug\IHMDMX.exe

@@ -89,35 +89,31 @@ void IHM_Create_Sequence::slidergetEquipement() {
 	for (int d = 0; d < e.size(); d++) {
 		if (e[d]->checkState()) {
 			std::string name = e[d]->objectName().toStdString();
-			std::string requete = "SELECT `Nb_voie` FROM `equipement` WHERE `Name` = '" + name + "'";
+			std::string requete = "SELECT `Id_Equipement`, `Nb_voie` FROM `equipement` WHERE `Name` = '" + name + "'";
+			
 			mysql_query(mysql, requete.c_str());
 
 			//Déclaration des pointeurs de structure
 			MYSQL_RES *result = NULL;
 			MYSQL_ROW row;
-
-			unsigned int i = 0, z = 0;
-			unsigned int num_champs = 0;
+			
 
 			//On met le jeu de résultat dans le pointeur result
 			result = mysql_use_result(mysql);
 
-			//On récupère le nombre de champs
-			num_champs = mysql_num_fields(result);
-
+			
 			while ((row = mysql_fetch_row(result)))
 			{
-
-				//On déclare un pointeur long non signé pour y stocker la taille des valeurs
-				unsigned long *lengths;
-
-				//On stocke ces tailles dans le pointeur
-				lengths = mysql_fetch_lengths(result);
-
-				for (i = 0; i < num_champs; i++)
+				
+				std::string requetes = "SELECT `Adresse` FROM `adressequipement` WHERE `Id_Equipement` = " + std::to_string(atoi(row[0])) ;
+				mysql_query(mysql, requetes.c_str());
+				
+				MYSQL_RES *results = mysql_use_result(mysql);
+				MYSQL_ROW rows;
+				while ((rows = mysql_fetch_row(results)))
 				{
 					//On ecrit toutes les valeurs
-					IHM_SrolBar_Sequence *t = new IHM_SrolBar_Sequence(e[d]->objectName(), atoi(row[i]));
+					IHM_SrolBar_Sequence *t = new IHM_SrolBar_Sequence(e[d]->objectName(), atoi(row[1]), atoi(rows[0]));
 					t->show();
 				}
 
