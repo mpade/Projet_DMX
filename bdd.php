@@ -1,9 +1,9 @@
 <?php
 
     // Paramètres du PDO (base de donnée,utilisateur,mot de passe)
-    $dsn = 'mysql:dbname=marco;host=127.0.0.1';
-    $user = 'root';
-    $password = '';
+    $dsn = 'mysql:dbname=Projet_DMX;host=192.168.64.102';
+    $user = 'ROOT';
+    $password = 'ROOT';
 
     // Permet de voir si la connexion à la base de données est bonne
     try
