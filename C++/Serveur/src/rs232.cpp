@@ -1,4 +1,4 @@
-#include "rs232.h"
+#include "../include/rs232.h"
 
 CRS232::CRS232()
 {

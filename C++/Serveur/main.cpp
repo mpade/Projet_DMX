@@ -1,6 +1,6 @@
 #include <iostream>
-#include "serverTCP.h"
-#include "enttecdmxusb.h"
+#include "include/serverTCP.h"
+#include "include/enttecdmxusb.h"
 #define DMXDEVICE "/dev/ttyUSB0"
 using namespace std;
 class myServerEventListener : public TCPServerEventListener

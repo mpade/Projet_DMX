@@ -1,4 +1,4 @@
-#include "enttecdmxusb.h"
+#include "../include/enttecdmxusb.h"
 
 EnttecDMXUSB::EnttecDMXUSB(EnttecInterfaces typeInterface/*=DMX_USB_PRO*/, string portInterface/*="/dev/ttyUSB0"*/)
 {

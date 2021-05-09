@@ -1,4 +1,4 @@
-#include "serverTCP.h"
+#include "../include/serverTCP.h"
 
 serverTCP::serverTCP()
 {
