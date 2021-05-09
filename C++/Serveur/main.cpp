@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
     bool etat = false;
 
     myServerEventListener myEventListener;
-    serverTCP  tcpServer;
+    serverTCP  tcpServer(interfaceDMX);
 
     tcpServer.addListener(&myEventListener);
 
@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
             {
                 if ( tcpServer.acceptCom() == true)
                 {
-
+                    tcpServer.readBuffer();
                 }
                 else
                 {
