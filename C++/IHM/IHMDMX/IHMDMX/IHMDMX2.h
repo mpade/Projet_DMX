@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include "IHM_create_Sequence.h"
 #include "IHM_Delete_Sequence.h"
+#include "IHM_Create_Scene.h"
 
 class IHMDMX2 : public QWidget // On hérite de QWidget (IMPORTANT)
 {
