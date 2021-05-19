@@ -12,9 +12,9 @@ int AdressEquipement::getAdress()
 	return this->adresse;
 }
 
-void AdressEquipement::setValues(std::map<Property*, int>)
+void AdressEquipement::setValues(std::map<Property*, int> v)
 {
-
+	this->values = v;
 }
 
 void AdressEquipement::setAdresse(int)

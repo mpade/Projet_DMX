@@ -28,10 +28,10 @@ public:
 
 public slots:					// Slots maison
 	void ConnexionBdd();
-	//void AfficherEquipement();
 	void creat_equipement();
 	void modifier_equipement();
 	void supprimer_equipement();
+	void getAllEquipement();
 
 private:
 	//QPushButton *m_BConnexionBdd;
@@ -40,10 +40,15 @@ private:
 	QPushButton *equipement_delete;
 	QLabel *m_LConnexionBdd;
 	QLabel *m_SAfficherEquipement;
+	QListWidget *ListAfficherEquipement;
+	QListWidget *listWidgetSequenceScene;
+	QLineEdit *name;
+	QGridLayout *grid1;
 	MYSQL *mySQL;
 	MYSQL_ROW row = NULL;
 	MYSQL_RES *result = NULL;
 	QString MaRequete;
+	std::vector<QListWidgetItem*>e;
 	
 };
 

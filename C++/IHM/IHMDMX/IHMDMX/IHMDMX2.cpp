@@ -59,7 +59,9 @@ void IHMDMX2::supprimer_sequence()
 
 void IHMDMX2::creat_scene()
 {
-
+	IHM_Create_Scene *t = new IHM_Create_Scene;
+	t->show();
+	this->close();
 
 }
 

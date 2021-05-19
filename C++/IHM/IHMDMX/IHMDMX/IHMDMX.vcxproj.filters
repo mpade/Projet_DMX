@@ -80,6 +80,21 @@
     <ClCompile Include="IHM_Delete_Sequence.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="IHM_Create_Equipement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IHM_Modifier_Equipement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IHM_Create_Scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IHM_Delete_scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IHM_Update_scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TrameManager.h">
@@ -124,6 +139,21 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="IHM_Delete_Sequence.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="IHM_Create_Equipement.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="IHM_Modifier_Equipement.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="IHM_Create_Scene.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="IHM_Delete_scene.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="IHM_Update_scene.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

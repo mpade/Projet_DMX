@@ -23,7 +23,10 @@ IHM_Create_Sequence::IHM_Create_Sequence() : QWidget()																								//
 	duree->setPlaceholderText("Duree en seconde !");
 	grid->addWidget(duree, 1, 1);
 	cree = new QPushButton("Cree", this);
-	grid->addWidget(cree, 1, 2);
+	grid->addWidget(cree, 2, 2);
+	name = new QLineEdit;
+	name->setPlaceholderText("entre un nom");
+	grid->addWidget(name, 2, 1);
 	QObject::connect(cree, SIGNAL(clicked()), this, SLOT(slidergetEquipement()));
 
 	}
@@ -85,47 +88,57 @@ void IHM_Create_Sequence::getAllEquipement()
 	setLayout(grid);
 }
 void IHM_Create_Sequence::slidergetEquipement() {
-	
-	for (int d = 0; d < e.size(); d++) {
-		if (e[d]->checkState()) {
-			std::string name = e[d]->objectName().toStdString();
-			std::string requete = "SELECT `Nb_voie` FROM `equipement` WHERE `Name` = '" + name + "'";
-			mysql_query(mysql, requete.c_str());
+	if (name->displayText() != "" || duree->displayText() != "") {
+		
+		std::string requete = "INSERT INTO `sequence`(`Id_Sequence`, `Duree`, `name`) VALUES (NULL,'"+ duree->displayText().toStdString() +"','"+ name->displayText().toStdString() +"')";
+		mysql_query(mysql, requete.c_str());
+		for (int d = 0; d < e.size(); d++) {
+			if (e[d]->checkState()) {
+				std::string names = e[d]->objectName().toStdString();
+				std::string requete = "SELECT `Id_Equipement`, `Nb_voie` FROM `equipement` WHERE `Name` = '" + names + "'";
 
-			//Déclaration des pointeurs de structure
-			MYSQL_RES *result = NULL;
-			MYSQL_ROW row;
+				mysql_query(mysql, requete.c_str());
 
-			unsigned int i = 0, z = 0;
-			unsigned int num_champs = 0;
+				//Déclaration des pointeurs de structure
+				MYSQL_RES *result = NULL;
+				MYSQL_ROW row;
 
-			//On met le jeu de résultat dans le pointeur result
-			result = mysql_use_result(mysql);
 
-			//On récupère le nombre de champs
-			num_champs = mysql_num_fields(result);
+				//On met le jeu de résultat dans le pointeur result
+				result = mysql_store_result(mysql);
 
-			while ((row = mysql_fetch_row(result)))
-			{
-
-				//On déclare un pointeur long non signé pour y stocker la taille des valeurs
-				unsigned long *lengths;
-
-				//On stocke ces tailles dans le pointeur
-				lengths = mysql_fetch_lengths(result);
-
-				for (i = 0; i < num_champs; i++)
+				while ((row = mysql_fetch_row(result)))
 				{
-					//On ecrit toutes les valeurs
-					IHM_SrolBar_Sequence *t = new IHM_SrolBar_Sequence(e[d]->objectName(), atoi(row[i]));
-					t->show();
+
+					std::string requetes = "SELECT `Adresse` FROM `adressequipement` WHERE `Id_Equipement` = " + std::to_string(atoi(row[0]));
+					mysql_query(mysql, requetes.c_str());
+					MYSQL_RES *results = NULL;
+					MYSQL_ROW rows;
+					results = mysql_store_result(mysql);
+					while ((rows = mysql_fetch_row(results)))
+					{
+						std::string requetesd = "SELECT `Id_Sequence` FROM `sequence` WHERE name = '"+ name->displayText().toStdString()+"'";
+						mysql_query(mysql, requetesd.c_str());
+						MYSQL_RES *resultsd = NULL;
+						MYSQL_ROW rowsd;
+						resultsd = mysql_store_result(mysql);
+						while ((rowsd = mysql_fetch_row(resultsd)))
+						{
+							//On ecrit toutes les valeurs
+							IHM_SrolBar_Sequence *t = new IHM_SrolBar_Sequence(e[d]->objectName(), atoi(row[1]), atoi(rows[0]), atoi(rowsd[0]));
+							t->show();
+						}
+					}
+
 				}
+
+
+
+
 
 			}
 
-			
 		}
-			
 	}
 
 }

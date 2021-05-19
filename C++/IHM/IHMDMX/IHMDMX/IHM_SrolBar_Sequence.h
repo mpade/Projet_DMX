@@ -15,20 +15,23 @@
 #include <string>
 #include <QtWidgets/QApplication>
 #include <QSlider>
-
+#include "mysql.h"
 class IHM_SrolBar_Sequence :
 	public QWidget
 {
 	Q_OBJECT                    // Nécessaire pour créer un slot maison
 
 public:
-	IHM_SrolBar_Sequence(const QString, int);                // Constructeur (forcément pubic)
+	IHM_SrolBar_Sequence(const QString, int,int,int);                // Constructeur (forcément pubic)
 
 public slots:               // Slots maison
-
+	void getValide();
 private:
-
-	
+	int idsequence;
+	int adress;
+	MYSQL *mysql;
+	MYSQL_ROW row = NULL;
+	MYSQL_RES *res = NULL;
 	std::vector<QSlider*>e;
 	std::vector< QLCDNumber*>a;
 	QPushButton *Valid;

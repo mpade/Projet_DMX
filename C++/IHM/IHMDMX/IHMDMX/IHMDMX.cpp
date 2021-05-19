@@ -8,32 +8,52 @@ IHMDMX::IHMDMX() : QWidget()																				// spécification du constructeur
 	setGeometry(1000, 100, 500, 500);	
 
 	/* Construction des Widgets */
+	//grid1 = new QGridLayout;
 	m_LConnexionBdd = new QLabel("Resultat Liaison BDD", this);
-	//m_SAfficherEquipement = new QLabel("Resultat Requete Equipement", this);
 	equipement_creat = new QPushButton("Cree un equipement", this);
 	equipement_modifier = new QPushButton("modifier un equipement", this);
 	equipement_delete = new QPushButton("Suprimmer un equipement", this);
+	//ListAfficherEquipement = new QListWidget(this);
 	
 
 	/* Position des Widgets */
-	m_LConnexionBdd->move(200, 10);
-	//m_SAfficherEquipement->move(200, 125);
-	equipement_creat->move(250, 100);
-	equipement_modifier->move(250, 150);
-	equipement_delete->move(250, 200);
+	//m_LConnexionBdd->move(200, 10);
+	//equipement_creat->move(250, 100);
+	//equipement_modifier->move(250, 150);
+	//equipement_delete->move(250, 200);
+	//grid1->addWidget(ListAfficherEquipement);
 
+
+
+
+
+	// setLayout(grid1);
+
+	/* TEST */
+	grid1 = new QGridLayout;
+	ListAfficherEquipement = new QListWidget();
+	
+
+	grid1->addWidget(ListAfficherEquipement, 1, 1);
+	grid1->addWidget(equipement_creat, 2, 3, 3, 1);
+	grid1->addWidget(equipement_modifier, 2, 2, 3, 1);
+	grid1->addWidget(equipement_delete, 2, 1, 3, 1);
+	grid1->addWidget(m_LConnexionBdd, 0, 0, 1, 3);
+
+	setLayout(grid1);
 
 	/* Connexions Signal - Slot */																
-	QObject::connect(equipement_creat, SIGNAL(clicked()), this, SLOT(creat_equipement()));	// this = SLOT de IHMDMX (SLOT MAISON)
-	QObject::connect(equipement_modifier, SIGNAL(clicked()), this, SLOT(modifier_equipement()));	// this = SLOT de IHMDMX (SLOT MAISON)
-	QObject::connect(equipement_delete, SIGNAL(clicked()), this, SLOT(supprimer_equipement()));	// this = SLOT de IHMDMX (SLOT MAISON)
+	QObject::connect(equipement_creat, SIGNAL(clicked()), this, SLOT(creat_equipement()));	
+	QObject::connect(equipement_modifier, SIGNAL(clicked()), this, SLOT(modifier_equipement()));	
+	QObject::connect(equipement_delete, SIGNAL(clicked()), this, SLOT(supprimer_equipement()));	
 
 	/* Méthode éxecutée au lancement de l'IHM */
 	ConnexionBdd();
-	// AfficherEquipement();
+	getAllEquipement();
+	
 }
 
-//==========================================================================================
+//============================= Connexion à la BDD =============================================================
 
 void IHMDMX::ConnexionBdd()
 {
@@ -50,16 +70,7 @@ void IHMDMX::ConnexionBdd()
 
 }
 
-//==========================================================================================
-/*
-void IHMDMX::AfficherEquipement()
-{		
-	
-	int MaRequete = mysql_query(mySQL, "SELECT `Name` FROM `Equipement` ;");			
-	m_SAfficherEquipement->setText("MaRequete");
-}
-*/
-//==========================================================================================
+//================= Ouverture fenêtre création d'équipement ======================================================
 
 void IHMDMX::creat_equipement()
 {
@@ -68,7 +79,7 @@ void IHMDMX::creat_equipement()
 	this->close();
 }
 
-//==========================================================================================
+//============= Ouverture fenêtre de modification d'équipement====================================================
 
 void IHMDMX::modifier_equipement()
 {
@@ -77,9 +88,32 @@ void IHMDMX::modifier_equipement()
 	this->close();
 }
 
-//==========================================================================================
+//============== Ouverture fenêtre de suppression d'équipement ===================================================
 
 void IHMDMX::supprimer_equipement()
 {
 
 }
+
+//======== Récupération des noms d'équipement dans une liste déroulante ==========================================
+
+void IHMDMX::getAllEquipement()
+{
+	std::string requet = "SELECT `Name` FROM `equipement`";
+	mysql_query(mySQL, requet.c_str());
+	int x = 0;
+
+	result = mysql_store_result(mySQL);
+
+	while ((row = mysql_fetch_row(result)))
+	{
+		e.push_back(new QListWidgetItem);
+		e[x]->setText(row[0]);
+		e[x]->setSelected(false);
+		ListAfficherEquipement->insertItem(x, e[x]);
+		x++;
+	}
+
+}
+
+//==========================================================================================
