@@ -100,9 +100,11 @@
     <ClCompile Include="IHM_Create_Equipement.cpp" />
     <ClCompile Include="IHM_Create_Scene.cpp" />
     <ClCompile Include="IHM_create_Sequence.cpp" />
+    <ClCompile Include="IHM_Delete_scene.cpp" />
     <ClCompile Include="IHM_Delete_Sequence.cpp" />
     <ClCompile Include="IHM_Modifier_Equipement.cpp" />
     <ClCompile Include="IHM_SrolBar_Sequence.cpp" />
+    <ClCompile Include="IHM_Update_scene.cpp" />
     <ClCompile Include="Programme.cpp" />
     <ClCompile Include="Property.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -127,6 +129,8 @@
     <QtMoc Include="IHM_Create_Equipement.h" />
     <QtMoc Include="IHM_Modifier_Equipement.h" />
     <QtMoc Include="IHM_Create_Scene.h" />
+    <QtMoc Include="IHM_Delete_scene.h" />
+    <QtMoc Include="IHM_Update_scene.h" />
     <ClInclude Include="User.h" />
     <QtMoc Include="IHMDMX2.h" />
     <ClInclude Include="main.h" />

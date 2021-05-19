@@ -1,2 +1,4 @@
-﻿  IHM_Create_Scene.cpp
+﻿  moc IHM_Delete_scene.h
+  IHM_Delete_scene.cpp
+  moc_IHM_Delete_scene.cpp
   IHMDMX.vcxproj -> C:\Users\Edouard\Desktop\Projet_DMX\C++\IHM\IHMDMX\x64\Debug\IHMDMX.exe

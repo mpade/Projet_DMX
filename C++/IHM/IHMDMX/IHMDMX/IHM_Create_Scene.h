@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QMessageBox>
 #include "mysql.h"
+#include <QLineEdit>
 class IHM_Create_Scene :
 	public QWidget
 {
@@ -17,10 +18,12 @@ public:
 public slots:               // Slots maison
 	void getAllSequencelist();
 	void gettest();
+	void test();
 private:
 	QLineEdit *scene_name;
 	QListWidget *listWidgetSequence;
 	QListWidget *listWidgetSequenceScene;
+	QLineEdit *name;
 	std::vector<QListWidgetItem*>e;
 	std::vector<QListWidgetItem*>a;
 	QGridLayout *grid;
