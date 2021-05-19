@@ -20,11 +20,11 @@ class Programme
     function CreeProgramme($Email,$Nom)
     {
         // Requête SQL, permettant de sélectionner l'utilisateur connecté.
-        $selectutilisateur = $this->_bdd->query('SELECT Id_Utilisateur FROM utilisateur WHERE Email = "'.$Email.'"');
+        $selectutilisateur = $this->_bdd->query('SELECT `Email`FROM `utilisateur` WHERE Email = "'.$Email.'"');
         $selectutilisateur = $selectutilisateur->fetch();
 
         // Requête SQL, permettant d'ajouter un programme dans la base de données.
-        $ajoutprogramme = $this->_bdd->query('INSERT INTO `programme` (`Nom`,`Id_Utilisateur`) VALUE ("'.$Nom.'","'.$selectutilisateur['Id_Utilisateur'].'")');
+        $ajoutprogramme = $this->_bdd->query('INSERT INTO `programme`(`Id_Programme`, `Nom`) VALUES (NULL,"'.$Nom.'")');
         
         // Requête SQL, permettant d'ajouter une ou des scènes à un programme présent en base de données.
         // $ajoutsceneprogramme =('UPDATE `programme` SET `NbScene`=[?]WHERE Id_Utilisateur = ?');
