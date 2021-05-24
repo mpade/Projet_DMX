@@ -24,8 +24,8 @@ public:
 	IHM_Delete_scene();                // Constructeur (forcément pubic)
 
 public slots:               // Slots maison
-	//void getAllScene();
-	//void getDeleteScene();
+	void getAllScene();
+	void getDeleteScene();
 private:
 
 	QPushButton *supprimer;
@@ -33,7 +33,7 @@ private:
 	MYSQL *mysql;
 	MYSQL_ROW row = NULL;
 	MYSQL_RES *res = NULL;
-	std::vector<QCheckBox*>e;
+	QListWidget *listScene;
 	QVBoxLayout *vbox;
 	QGridLayout *grid;
 };

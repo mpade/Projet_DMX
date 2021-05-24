@@ -6,7 +6,7 @@ IHM_Create_Sequence::IHM_Create_Sequence() : QWidget()																								//
 
 	mysql = mysql_init(NULL);
 
-	if (!mysql_real_connect(mysql, "192.168.64.102", "DMX", "dmx", "Projet_DMX", 0, NULL, 0))
+	if (!mysql_real_connect(mysql, "127.0.0.1", "root", "", "Projet_DMX", 0, NULL, 0))
 	{
 		QMessageBox msgBox;
 		msgBox.setText("Eror de connection a la BDD");
@@ -36,23 +36,13 @@ IHM_Create_Sequence::IHM_Create_Sequence() : QWidget()																								//
 
 void IHM_Create_Sequence::getAllEquipement()
 {
-
 	mysql_query(mysql, "SELECT `Name` FROM `equipement` WHERE 1");
-
 	//Déclaration des pointeurs de structure
 	MYSQL_RES *result = NULL;
 	MYSQL_ROW row;
 	unsigned int i = 0, z =0;
-	unsigned int num_champs = 0;
 	
-	//On met le jeu de résultat dans le pointeur result
 	result = mysql_use_result(mysql);
-
-	//On récupère le nombre de champs
-	num_champs = mysql_num_fields(result);
-
-
-
 	groupBox = new QGroupBox(tr("Equipement"));
 	vbox = new QVBoxLayout;
 	
@@ -60,24 +50,14 @@ void IHM_Create_Sequence::getAllEquipement()
 	while ((row = mysql_fetch_row(result)))
 	{
 
-		//On déclare un pointeur long non signé pour y stocker la taille des valeurs
-		unsigned long *lengths;
-
-		//On stocke ces tailles dans le pointeur
-		lengths = mysql_fetch_lengths(result);
-
-		for (i = 0; i < num_champs; i++)
-		{
 			//On ecrit toutes les valeurs
 			e.push_back(new QCheckBox(tr(row[i]), this));
 			for (int x = z; x < e.size(); x++) {
 				e[x]->setObjectName(row[i]);
 				z++;
 			}
-		}
 		
 	}
-	
 	for (int i = 0; i < e.size(); i++) {
 		
 		vbox->addWidget(e[i]);
@@ -87,6 +67,7 @@ void IHM_Create_Sequence::getAllEquipement()
 	grid->addWidget(groupBox, 0, 1);
 	setLayout(grid);
 }
+
 void IHM_Create_Sequence::slidergetEquipement() {
 	if (name->displayText() != "" || duree->displayText() != "") {
 		
