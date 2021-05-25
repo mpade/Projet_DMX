@@ -57,6 +57,15 @@
     $selectprogrammes = $bdd->query("SELECT * FROM programme");
     $programmeindex = 0;
 
+    $selectscene = $bdd->query("SELECT * FROM scene");
+    $sceneindex = 0;
+
+    // Boucle permettant d'afficher les scène dans une liste déroulante
+     while($selectscenes = $selectscene->fetch())
+     {
+         $scene[$sceneindex++] = new gestion($selectscenes['Id_Scene'], $selectscenes['Nom']);
+         
+     }
     // Boucle permettant d'afficher dans la liste déroulante les programmes présents sur la base de données
     while($selectprogramme = $selectprogrammes->fetch()) 
     {
@@ -106,7 +115,7 @@
                     
                 ?>   <script> function timedRefresh(timeoutPeriod) {
                         setTimeout("location.reload(true);",timeoutPeriod);
-                    }window.onload = timedRefresh(1); </script> <?php
+                    }onload = timedRefresh(1); </script> <?php
                 
                 } 
             }
@@ -119,7 +128,7 @@
         // Permet de créer des programme et enregistrer dans la base de données
         if(isset($_POST['Programme']))
         {
-            $scene = ("SELECT Id_Scene,Nom FROM scene ORDER BY Id_Scene");
+            
             ?>
                 
                 <input type="text" name="nomprogramme" placeholder="Nom du programme" id="nameprog">
@@ -183,8 +192,36 @@
             </select>
             <input type="submit" value=" Modifier programme"></input>
         </form>  
+
+        <!-- Formulaire permettant d'accéder aux listes drag'n drop -->
+        <form action="drag.js" method="POST">
+            <input type="submit" name="drag" value="Drag'n Drop">
+        </form> 
     </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <!-- 
