@@ -4,7 +4,7 @@ IHM_Delete_Sequence::IHM_Delete_Sequence() : QWidget()																								//
 {
 	mysql = mysql_init(NULL);
 
-	if (!mysql_real_connect(mysql, "127.0.0.1", "root", "", "Projet_DMX", 0, NULL, 0))
+	if (!mysql_real_connect(mysql, "192.168.64.102", "DMX", "dmx", "Projet_DMX", 0, NULL, 0))
 	{
 		QMessageBox msgBox;
 		msgBox.setText("Eror de connection a la BDD");
