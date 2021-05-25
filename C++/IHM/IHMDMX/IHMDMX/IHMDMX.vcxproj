@@ -105,6 +105,7 @@
     <ClCompile Include="IHM_Modifier_Equipement.cpp" />
     <ClCompile Include="IHM_SrolBar_Sequence.cpp" />
     <ClCompile Include="IHM_Update_scene.cpp" />
+    <ClCompile Include="IHM_Update_Sequence.cpp" />
     <ClCompile Include="Programme.cpp" />
     <ClCompile Include="Property.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -131,6 +132,7 @@
     <QtMoc Include="IHM_Create_Scene.h" />
     <QtMoc Include="IHM_Delete_scene.h" />
     <QtMoc Include="IHM_Update_scene.h" />
+    <QtMoc Include="IHM_Update_Sequence.h" />
     <ClInclude Include="User.h" />
     <QtMoc Include="IHMDMX2.h" />
     <ClInclude Include="main.h" />

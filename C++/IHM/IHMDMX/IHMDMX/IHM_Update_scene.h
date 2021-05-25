@@ -27,13 +27,16 @@ public slots:               // Slots maison
 	//void getDeleteScene();
 private:
 
-	QPushButton *supprimer;
+	QPushButton *supSequence;
+	QPushButton *modifier;
 	QGroupBox *groupBox;							// pointeur --> il faudra le construire dynamiquement (new)
 	MYSQL *mysql;
 	MYSQL_ROW row = NULL;
 	MYSQL_RES *res = NULL;
-	std::vector<QCheckBox*>e;
-	QVBoxLayout *vbox;
+	QListWidget *listScene;
+	QListWidget * listSceneSequence;	
+	QLabel * nameScene;
 	QGridLayout *grid;
 };
+
 

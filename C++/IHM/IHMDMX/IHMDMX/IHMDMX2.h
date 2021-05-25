@@ -16,7 +16,8 @@
 #include "IHM_Delete_Sequence.h"
 #include "IHM_Create_Scene.h"
 #include "IHM_Delete_Scene.h"
-
+#include "IHM_Update_scene.h"
+#include "IHM_Update_Sequence.h"
 class IHMDMX2 : public QWidget // On hérite de QWidget (IMPORTANT)
 {
 	Q_OBJECT                    // Nécessaire pour créer un slot maison

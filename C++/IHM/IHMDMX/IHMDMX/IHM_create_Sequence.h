@@ -26,9 +26,12 @@ public slots:               // Slots maison
 
 	void getAllEquipement();
 	void slidergetEquipement();
+	void gettest();
 private:
 	QLineEdit *duree;
 	QLineEdit *name;
+	QListWidget *listequipement;
+	QListWidget *listsequenceequipement;
 	QPushButton *cree;
 	QGroupBox *groupBox;							// pointeur --> il faudra le construire dynamiquement (new)
 	QLabel *m_label;

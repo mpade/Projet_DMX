@@ -79,14 +79,13 @@ void IHM_Create_Scene::gettest()
 			i = listWidgetSequence->currentRow();
 			QListWidgetItem *item= listWidgetSequence->takeItem(i);
 			listWidgetSequenceScene->addItem(item);
-			
-			for (int x = 0; x < e.size(); x++)
-				e[x]->setSelected(false);
+			listWidgetSequence->clearSelection();
 			
 		}
 		if (listWidgetSequenceScene->selectedItems().count() == 1) {
 			QListWidgetItem *item = listWidgetSequenceScene->takeItem(listWidgetSequenceScene->currentRow());
 			listWidgetSequence->addItem(item);
+			listWidgetSequenceScene->clearSelection();
 		}
 
 }
