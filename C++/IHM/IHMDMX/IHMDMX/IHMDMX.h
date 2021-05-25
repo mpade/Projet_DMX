@@ -52,7 +52,9 @@ private:
 
 	MYSQL *mySQL;
 	MYSQL_ROW row = NULL;
+	MYSQL_ROW rows = NULL;
 	MYSQL_RES *result = NULL;
+	MYSQL_RES *results = NULL;
 
 	std::vector<QListWidgetItem*>e;
 	

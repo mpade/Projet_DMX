@@ -12,7 +12,7 @@ IHMDMX::IHMDMX() : QWidget()																				// spécification du constructeur
 	m_LConnexionBdd = new QLabel("Resultat Liaison BDD", this);
 	equipement_creat = new QPushButton("Cree un equipement", this);
 	equipement_modifier = new QPushButton("modifier un equipement", this);
-	equipement_delete = new QPushButton("Suprimmer un equipement", this);
+	equipement_delete = new QPushButton("Supprimer un equipement", this);
 	refresh = new QPushButton("Actualiser", this);
 	grid1 = new QGridLayout;
 	ListAfficherEquipement = new QListWidget();
@@ -32,7 +32,7 @@ IHMDMX::IHMDMX() : QWidget()																				// spécification du constructeur
 	setLayout(grid1);
 
 	/* Connexions Signal - Slot */																
-	QObject::connect(equipement_creat, SIGNAL(clicked()), this, SLOT(creat_equipement()));	
+	QObject::connect(equipement_creat, SIGNAL(clicked()), this, SLOT(creat_equipement()));
 	QObject::connect(equipement_modifier, SIGNAL(clicked()), this, SLOT(modifier_equipement()));	
 	QObject::connect(equipement_delete, SIGNAL(clicked()), this, SLOT(supprimer_equipement()));
 	QObject::connect(refresh, SIGNAL(clicked()), this, SLOT(Refresh()));
@@ -80,14 +80,48 @@ void IHMDMX::modifier_equipement()
 	IHM_Modifier_Equipement *t = new IHM_Modifier_Equipement;
 	t->show();
 	
-	// récupérer toutes les personnalisations de l'équipement surpprimer puis pouvoir les modifier
+	// récupérer toutes les personnalisations de l'équipement puis pouvoir les modifier
 }
-
-//============== Ouverture fenêtre de suppression d'équipement ===================================================
+//============== Suppression d'un équipement et de ces composants ==============================================
 
 void IHMDMX::supprimer_equipement()
 {
-	
+	if (ListAfficherEquipement->selectedItems().count() == 1) {
+		QListWidgetItem *item = ListAfficherEquipement->takeItem(ListAfficherEquipement->currentRow());
+
+		std::string Name = item->text().toStdString();
+		std::string requetId_equipement = "SELECT `Id_Equipement` FROM `equipement` WHERE `Name` ='" + Name + "'";
+		mysql_query(mySQL, requetId_equipement.c_str());
+
+		
+
+		result = mysql_store_result(mySQL);
+
+		while ((row = mysql_fetch_row(result)))
+		{
+
+			std::string requetId_adressequipement = "SELECT `Id_AdressEquipement` FROM `adressequipement` WHERE `Id_Equipement` ='" + std::to_string(atoi(row[0])) + "'";
+			mysql_query(mySQL, requetId_adressequipement.c_str());
+
+			results = mysql_store_result(mySQL);
+
+			while((rows = mysql_fetch_row(results))){
+
+				std::string requetDelete = "DELETE FROM `sequenceusedequipement` WHERE `Id_AdressEquipement` = '" + std::to_string(atoi(rows[0])) + "'";
+				mysql_query(mySQL, requetDelete.c_str());
+
+			}
+
+			std::string requetDelete2 = "DELETE FROM `adressequipement` WHERE `Id_Equipement` = '" + std::to_string(atoi(row[0])) + "'";
+			mysql_query(mySQL, requetDelete2.c_str());
+
+			std::string requetDelete3 = "DELETE FROM `equipement` WHERE `Id_Equipement` = '" + std::to_string(atoi(row[0])) + "'";
+			mysql_query(mySQL, requetDelete3.c_str());
+		}
+		
+	}
+
+
 }
 
 //======== Récupération des noms d'équipement dans une liste déroulante ==========================================
