@@ -33,12 +33,14 @@ public slots:					// Slots maison
 	void modifier_equipement();
 	void supprimer_equipement();
 	void getAllEquipement();
+	void Refresh();
 
 private:
 
 	QPushButton *equipement_creat;
 	QPushButton *equipement_modifier;
 	QPushButton *equipement_delete;
+	QPushButton *refresh;
 
 	QLabel *m_LConnexionBdd;
 	QLabel *m_SAfficherEquipement;
