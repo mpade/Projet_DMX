@@ -33,7 +33,7 @@ private:
 	MYSQL *mysql;
 	MYSQL_ROW row = NULL;
 	MYSQL_RES *res = NULL;
-	std::vector<QCheckBox*>e;
+	QListWidget *listSequence;
 	QVBoxLayout *vbox;
 	QGridLayout *grid;
 	

@@ -73,6 +73,8 @@ void IHMDMX2::modifier_scene()
 
 void IHMDMX2::supprimer_scene()
 {
-
+	IHM_Delete_scene *t = new IHM_Delete_scene;
+	t->show();
+	this->close();
 
 }

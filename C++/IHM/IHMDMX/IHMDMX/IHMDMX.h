@@ -27,27 +27,33 @@ public:
 	IHMDMX();					// Constructeur (forcément pubic)
 
 public slots:					// Slots maison
+
 	void ConnexionBdd();
 	void creat_equipement();
 	void modifier_equipement();
 	void supprimer_equipement();
 	void getAllEquipement();
+	void Refresh();
 
 private:
-	//QPushButton *m_BConnexionBdd;
+
 	QPushButton *equipement_creat;
 	QPushButton *equipement_modifier;
 	QPushButton *equipement_delete;
+	QPushButton *refresh;
+
 	QLabel *m_LConnexionBdd;
 	QLabel *m_SAfficherEquipement;
+
 	QListWidget *ListAfficherEquipement;
 	QListWidget *listWidgetSequenceScene;
-	QLineEdit *name;
+
 	QGridLayout *grid1;
+
 	MYSQL *mySQL;
 	MYSQL_ROW row = NULL;
 	MYSQL_RES *result = NULL;
-	QString MaRequete;
+
 	std::vector<QListWidgetItem*>e;
 	
 };
