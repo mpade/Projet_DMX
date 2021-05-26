@@ -21,9 +21,10 @@ class IHM_Update_scene :
 	Q_OBJECT
 public:
 	IHM_Update_scene();                // Constructeur (forcément pubic)
-
+    void getAllScene();
+	void getSequence(std::string);
 public slots:               // Slots maison
-	//void getAllScene();
+	void getSelectidScene();
 	//void getDeleteScene();
 private:
 

@@ -22,9 +22,10 @@ class IHM_Update_Sequence :
 	Q_OBJECT
 public:
 	IHM_Update_Sequence();                // Constructeur (forcément pubic)
-
+	void getAllSequence();
 public slots:               // Slots maison
-	//void getAllSequence();
+	
+	//void getSelectidSequence();
 	//void getDeleteEquipement();
 private:
 
