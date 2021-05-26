@@ -5,7 +5,7 @@
 IHMDMX::IHMDMX() : QWidget()																				// spécification du constructeur
 {
 	/* Position de la fenêtre */
-	setGeometry(1000, 100, 500, 500);	
+	setGeometry(1000, 100, 500, 500);
 
 
 	/* Construction des Widgets */
@@ -16,8 +16,8 @@ IHMDMX::IHMDMX() : QWidget()																				// spécification du constructeur
 	refresh = new QPushButton("Actualiser", this);
 	grid1 = new QGridLayout;
 	ListAfficherEquipement = new QListWidget();
-	
-	
+
+
 
 	/* Position des Widgets */
 	grid1->addWidget(m_LConnexionBdd, 0, 0, 1, 3);
@@ -27,13 +27,13 @@ IHMDMX::IHMDMX() : QWidget()																				// spécification du constructeur
 	grid1->addWidget(equipement_delete, 2, 1, 3, 1);
 	grid1->addWidget(refresh, 0, 3, 1, 3);
 	// mieux arranger l'IHM
-	
+
 
 	setLayout(grid1);
 
-	/* Connexions Signal - Slot */																
+	/* Connexions Signal - Slot */
 	QObject::connect(equipement_creat, SIGNAL(clicked()), this, SLOT(creat_equipement()));
-	QObject::connect(equipement_modifier, SIGNAL(clicked()), this, SLOT(modifier_equipement()));	
+	QObject::connect(equipement_modifier, SIGNAL(clicked()), this, SLOT(modifier_equipement()));
 	QObject::connect(equipement_delete, SIGNAL(clicked()), this, SLOT(supprimer_equipement()));
 	QObject::connect(refresh, SIGNAL(clicked()), this, SLOT(Refresh()));
 
@@ -42,20 +42,20 @@ IHMDMX::IHMDMX() : QWidget()																				// spécification du constructeur
 	/* Méthode éxecutée au lancement de l'IHM */
 	ConnexionBdd();
 	getAllEquipement();
-	
+
 }
 
 //============================= Connexion à la BDD =============================================================
 
 void IHMDMX::ConnexionBdd()
 {
-   	mySQL = mysql_init(NULL);
+	mySQL = mysql_init(NULL);
 
-	if (!mysql_real_connect(mySQL, "192.168.64.102", "DMX", "dmx", "Projet_DMX", 0, NULL, 0)) 
+	if (!mysql_real_connect(mySQL, "192.168.64.102", "DMX", "dmx", "Projet_DMX", 0, NULL, 0))
 	{
 		m_LConnexionBdd->setText("Erreur de connexion a la base");
 	}
-	else 
+	else
 	{
 		m_LConnexionBdd->setText("Connexion a la bdd reussi");
 	}
@@ -68,7 +68,7 @@ void IHMDMX::creat_equipement()
 {
 	IHM_Create_Equipement *t = new IHM_Create_Equipement;
 	t->show();
-	
+
 
 	// faire l'IHM création équipement avec tous les champs 
 }
@@ -77,9 +77,10 @@ void IHMDMX::creat_equipement()
 
 void IHMDMX::modifier_equipement()
 {
+
 	IHM_Modifier_Equipement *t = new IHM_Modifier_Equipement;
 	t->show();
-	
+
 	// récupérer toutes les personnalisations de l'équipement puis pouvoir les modifier
 }
 //============== Suppression d'un équipement et de ces composants ==============================================
@@ -93,7 +94,7 @@ void IHMDMX::supprimer_equipement()
 		std::string requetId_equipement = "SELECT `Id_Equipement` FROM `equipement` WHERE `Name` ='" + Name + "'";
 		mysql_query(mySQL, requetId_equipement.c_str());
 
-		
+
 
 		result = mysql_store_result(mySQL);
 
@@ -105,7 +106,7 @@ void IHMDMX::supprimer_equipement()
 
 			results = mysql_store_result(mySQL);
 
-			while((rows = mysql_fetch_row(results))){
+			while ((rows = mysql_fetch_row(results))) {
 
 				std::string requetDelete = "DELETE FROM `sequenceusedequipement` WHERE `Id_AdressEquipement` = '" + std::to_string(atoi(rows[0])) + "'";
 				mysql_query(mySQL, requetDelete.c_str());
@@ -118,7 +119,7 @@ void IHMDMX::supprimer_equipement()
 			std::string requetDelete3 = "DELETE FROM `equipement` WHERE `Id_Equipement` = '" + std::to_string(atoi(row[0])) + "'";
 			mysql_query(mySQL, requetDelete3.c_str());
 		}
-		
+
 	}
 
 
@@ -142,7 +143,7 @@ void IHMDMX::getAllEquipement()
 		ListAfficherEquipement->insertItem(x, e[x]);
 		x++;
 	}
-	
+
 }
 
 //======================= Actualiser la liste d'équipement =======================================================
@@ -151,8 +152,3 @@ void IHMDMX::Refresh()
 {
 	getAllEquipement();
 }
-
-
-
-
-

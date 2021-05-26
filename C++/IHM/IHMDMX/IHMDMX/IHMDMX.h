@@ -1,6 +1,5 @@
 #ifndef MYWINDOW_H
 #define MYWINDOW_H
-
 #include "main.h"
 #include <QWidget>
 #include <QObject>
@@ -57,7 +56,7 @@ private:
 	MYSQL_RES *results = NULL;
 
 	std::vector<QListWidgetItem*>e;
-	
+
 };
 
 #endif // MYWINDOW_H
