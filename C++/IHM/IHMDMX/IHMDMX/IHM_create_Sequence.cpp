@@ -122,10 +122,6 @@ void IHM_Create_Sequence::slidergetEquipement() {
 
 				}
 
-
-
-
-
 			}
 
 		}

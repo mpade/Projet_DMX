@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_IHM_Update_scene_t {
-    QByteArrayData data[1];
-    char stringdata0[17];
+    QByteArrayData data[5];
+    char stringdata0[73];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,10 +32,15 @@ struct qt_meta_stringdata_IHM_Update_scene_t {
     )
 static const qt_meta_stringdata_IHM_Update_scene_t qt_meta_stringdata_IHM_Update_scene = {
     {
-QT_MOC_LITERAL(0, 0, 16) // "IHM_Update_scene"
+QT_MOC_LITERAL(0, 0, 16), // "IHM_Update_scene"
+QT_MOC_LITERAL(1, 17, 16), // "getSelectidScene"
+QT_MOC_LITERAL(2, 34, 0), // ""
+QT_MOC_LITERAL(3, 35, 22), // "getDeletesequencescene"
+QT_MOC_LITERAL(4, 58, 14) // "getUpdatescene"
 
     },
-    "IHM_Update_scene"
+    "IHM_Update_scene\0getSelectidScene\0\0"
+    "getDeletesequencescene\0getUpdatescene"
 };
 #undef QT_MOC_LITERAL
 
@@ -45,21 +50,38 @@ static const uint qt_meta_data_IHM_Update_scene[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       0,    0, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        0,       // signalCount
 
+ // slots: name, argc, parameters, tag, flags
+       1,    0,   29,    2, 0x0a /* Public */,
+       3,    0,   30,    2, 0x0a /* Public */,
+       4,    0,   31,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+
        0        // eod
 };
 
 void IHM_Update_scene::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    Q_UNUSED(_o);
-    Q_UNUSED(_id);
-    Q_UNUSED(_c);
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        auto *_t = static_cast<IHM_Update_scene *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->getSelectidScene(); break;
+        case 1: _t->getDeletesequencescene(); break;
+        case 2: _t->getUpdatescene(); break;
+        default: ;
+        }
+    }
     Q_UNUSED(_a);
 }
 
@@ -89,6 +111,17 @@ void *IHM_Update_scene::qt_metacast(const char *_clname)
 int IHM_Update_scene::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 3)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 3;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 3)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 3;
+    }
     return _id;
 }
 QT_WARNING_POP

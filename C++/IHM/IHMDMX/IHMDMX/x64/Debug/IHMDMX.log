@@ -1,9 +1,3 @@
-﻿  moc IHM_Update_Sequence.h
-  moc IHMDMX2.h
-  IHMDMX2.cpp
-  IHM_Update_Sequence.cpp
+﻿  IHM_Update_Sequence.cpp
   IHM_Update_scene.cpp
-  main.cpp
-  moc_IHMDMX2.cpp
-  moc_IHM_Update_Sequence.cpp
   IHMDMX.vcxproj -> C:\Users\Edouard\Desktop\Projet_DMX\C++\IHM\IHMDMX\x64\Debug\IHMDMX.exe

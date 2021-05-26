@@ -25,7 +25,8 @@ public:
 	void getSequence(std::string);
 public slots:               // Slots maison
 	void getSelectidScene();
-	//void getDeleteScene();
+	void getDeletesequencescene();
+	void getUpdatescene();
 private:
 
 	QPushButton *supSequence;

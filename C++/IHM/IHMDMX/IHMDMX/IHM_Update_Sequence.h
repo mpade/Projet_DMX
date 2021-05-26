@@ -23,10 +23,13 @@ class IHM_Update_Sequence :
 public:
 	IHM_Update_Sequence();                // Constructeur (forcément pubic)
 	void getAllSequence();
+	void getequipement(std::string);
 public slots:               // Slots maison
 	
-	//void getSelectidSequence();
-	//void getDeleteEquipement();
+	void getSelectidSequence();
+	void getDeletequipementsequence();
+	//void getUpdatesequence();
+
 private:
 
 	QPushButton *supequipment;
@@ -39,5 +42,6 @@ private:
 	QListWidget *listSequence;
 	QListWidget * listSequencequipement;
 	QGridLayout *grid;
+	int id_sequence = 0;
 };
 
