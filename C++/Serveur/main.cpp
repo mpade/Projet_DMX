@@ -71,10 +71,8 @@ int main()
                 configurationDMX = interfaceDMX.GetConfiguration();
                 cout << "Interface " << interfaceDMX.GetNomInterface() << " detectee" << std::endl << configurationDMX << std::endl;
 
-            interfaceDMX.ResetCanauxDMX();
-            interfaceDMX.SendDMX();
-            int canal  = 1;
-            int valeur = 127;
+                interfaceDMX.ResetCanauxDMX();
+                interfaceDMX.SendDMX();
             interfaceDMX.SetCanalDMX(canal, valeur);
             interfaceDMX.SendDMX();
             }
