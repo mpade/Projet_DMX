@@ -11,7 +11,7 @@ public:
         cout << "Un client se connecte avec la socket " << csock << " avec l'ip " << inet_ntoa(csinIp.sin_addr) << " sur le port " << htons(csinPort.sin_port) << endl;
     };
 };
-int main(int argc, char *argv[])
+int main()
 {
 
    /* if(argc != 2)
@@ -22,12 +22,11 @@ int main(int argc, char *argv[])
     }
     */
 
-    printf("Peripherique : %s\n\n", argv[1]);
     //EnttecDMXUSB interfaceDMX(DMX_USB_PRO, argv[1]); // ou :
     EnttecDMXUSB interfaceDMX(DMX_USB_PRO, DMXDEVICE);
     string configurationDMX;
 
-    if(interfaceDMX.IsAvailable())
+    /*if(interfaceDMX.IsAvailable())
     {
         configurationDMX = interfaceDMX.GetConfiguration();
         cout << "Interface " << interfaceDMX.GetNomInterface() << " detectee" << std::endl << configurationDMX << std::endl;
@@ -41,7 +40,7 @@ int main(int argc, char *argv[])
     }
     else
         cout << "Interface non detectee !" << endl;
-
+*/
     bool etat = false;
 
     myServerEventListener myEventListener;

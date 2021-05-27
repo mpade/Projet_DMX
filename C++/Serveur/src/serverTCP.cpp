@@ -131,7 +131,8 @@ int serverTCP::readBuffer()
             string sud = s.substr(pos+1);
             std::vector<std::string> lines = serverTCP::explode(sud, ',');
             string configurationDMX;
-
+            int canal  = atoi(lines[0].c_str());
+            int valeur = atoi(lines[1].c_str());
             if(interfaceDMX.IsAvailable())
             {
                 configurationDMX = interfaceDMX.GetConfiguration();
@@ -141,13 +142,14 @@ int serverTCP::readBuffer()
             interfaceDMX.SendDMX();
             int canal  = 1;
             int valeur = 127;
-            interfaceDMX.SetCanalDMX(atoi(lines[0].c_str()), atoi(lines[1].c_str()));
+            interfaceDMX.SetCanalDMX(canal, valeur);
             interfaceDMX.SendDMX();
             }
             else {
-                cout << "Interface non detectee !" << endl;
+                cout << "Interface non detectee !"<< endl;
                 return 0;
                 }
+                return 1;
         }else if(bufferClient[0] == 'T' && bufferClient[1] == 'E' )
         {
             string s = bufferClient;
