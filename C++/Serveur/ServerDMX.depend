@@ -13,11 +13,12 @@
 1613406393 source:/home/debian/Bureau/DMX/ServerDMX/src/serverTCP.cpp
 	"serverTCP.h"
 
-1622112263 source:/home/debian/Bureau/Projet_DMX/C++/Serveur/main.cpp
+1622133559 source:/home/debian/Bureau/Projet_DMX/C++/Serveur/main.cpp
 	<iostream>
 	"serverTCP.h"
+	"enttecdmxusb.h"
 
-1622107101 /home/debian/Bureau/Projet_DMX/C++/Serveur/include/serverTCP.h
+1622133309 /home/debian/Bureau/Projet_DMX/C++/Serveur/include/serverTCP.h
 	<sys/types.h>
 	<sys/socket.h>
 	<netinet/in.h>
@@ -31,8 +32,9 @@
 	<iostream>
 	<vector>
 	<thread>
+	"enttecdmxusb.h"
 
-1622107111 source:/home/debian/Bureau/Projet_DMX/C++/Serveur/src/serverTCP.cpp
+1622133542 source:/home/debian/Bureau/Projet_DMX/C++/Serveur/src/serverTCP.cpp
 	"serverTCP.h"
 
 1622105113 source:/home/debian/Bureau/Projet_DMX/C++/Serveur/src/enttecdmxusb.cpp

@@ -1,8 +1,8 @@
 #include "serverTCP.h"
 
-serverTCP::serverTCP()
+serverTCP::serverTCP(EnttecDMXUSB inter)
 {
-    //ctor
+    interfaceDMX = inter;
 }
 bool serverTCP::createSocket()
 {
@@ -104,6 +104,81 @@ void serverTCP::notifyClientConnected(SOCKET csock, SOCKADDR_IN csinIp, SOCKADDR
     {
         listeners[i]->onClientConnected(csock, csinIp, csinPort);
     }
+}
+
+int serverTCP::readBuffer()
+{
+
+    char bufferClient[50] = {0};
+    int resultReadBuffer;
+
+    resultReadBuffer = recv(this->csock, &bufferClient, sizeof(bufferClient), 0);
+    // Gestion d'erreur du nouveau socket
+    if (resultReadBuffer == -1)
+    {
+        cout << "erreur lors de la reception du message client" << endl;
+        return -1;
+    }
+    else
+    {
+        // Le serveur affiche le message reçu
+        cout << "Chaine reçu : " << bufferClient << endl;
+
+        if (bufferClient[0] == 'C' && bufferClient[1] == 'V' )
+        {
+            string s = bufferClient;
+            int pos = s.find(':');
+            string sud = s.substr(pos+1);
+            std::vector<std::string> lines = serverTCP::explode(sud, ',');
+            string configurationDMX;
+
+            if(interfaceDMX.IsAvailable())
+            {
+                configurationDMX = interfaceDMX.GetConfiguration();
+                cout << "Interface " << interfaceDMX.GetNomInterface() << " detectee" << std::endl << configurationDMX << std::endl;
+
+            interfaceDMX.ResetCanauxDMX();
+            interfaceDMX.SendDMX();
+            int canal  = 1;
+            int valeur = 127;
+            interfaceDMX.SetCanalDMX(atoi(lines[0].c_str()), atoi(lines[1].c_str()));
+            interfaceDMX.SendDMX();
+            }
+            else {
+                cout << "Interface non detectee !" << endl;
+                return 0;
+                }
+        }else if(bufferClient[0] == 'T' && bufferClient[1] == 'E' )
+        {
+            string s = bufferClient;
+            int pos = s.find(':');
+            string sud = s.substr(pos+1);
+
+            sleep(atoi(sud.c_str()));
+        }
+        return 0;
+    }
+
+
+}
+const std::vector<std::string> serverTCP::explode(const std::string& msg, const char& c)
+{
+	std::string buff = "";
+	std::vector<std::string> v;
+	for (int i = 0; i < msg.length(); i++)
+	{
+		char compare = msg[i];
+		if (compare != c) buff += compare;
+		else if (compare == c && buff != "")
+		{
+			v.push_back(buff);
+			buff = "";
+		}
+	}
+	if (buff != "")
+		v.push_back(buff);
+
+	return v;
 }
 serverTCP::~serverTCP()
 {

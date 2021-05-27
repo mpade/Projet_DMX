@@ -20,7 +20,8 @@
 #define SOCKET_ERROR -1
 #define TRUE 1
 #define FALSE 0
-
+#include "enttecdmxusb.h"
+#define DMXDEVICE "/dev/ttyUSB0"
 using namespace std;
 
 typedef int SOCKET;
@@ -35,7 +36,7 @@ public:
 class serverTCP
 {
     public:
-        serverTCP();
+        serverTCP(EnttecDMXUSB);
         virtual ~serverTCP();
         bool createSocket();
         bool connectServer(int port);
@@ -48,6 +49,8 @@ class serverTCP
     protected:
 
     private:
+        static const std::vector<std::string> explode(const std::string& s, const char& c);
+        EnttecDMXUSB interfaceDMX;
         SOCKET sock;
         SOCKADDR_IN sin;
         SOCKET csock;
