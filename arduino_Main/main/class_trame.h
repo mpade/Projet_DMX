@@ -1,10 +1,10 @@
 class trame
 {
   private : 
-    char trame;
     float potaValue;
+    int taille = 0;
+    int trame[];
 
   public :
-    int potaConversion(float);
-    char ecritureTrame();
+    int ecritureTrame(int);
 };
