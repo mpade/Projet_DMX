@@ -25,6 +25,9 @@ class Programme
 
         // Requête SQL, permettant d'ajouter un programme dans la base de données.
         $ajoutprogramme = $this->_bdd->query('INSERT INTO `programme`(`Id_Programme`, `Nom`) VALUES (NULL,"'.$Nom.'")');
+
+
+        // $ajoutscene = $this->_bdd->query("INSERT INTO `sceneprogramme`(`Id_Scene`,`Id_Programme`) VALUES ('".$objectscene->getId()."','".$objetprogramme->getId()."')");
         
         // Requête SQL, permettant d'ajouter une ou des scènes à un programme présent en base de données.
         // $ajoutsceneprogramme =('UPDATE `programme` SET `NbScene`=[?]WHERE Id_Utilisateur = ?');
@@ -35,6 +38,12 @@ class Programme
         
 
     }
+
+    function ModifierProgramme($Email,$Nom)
+    {
+
+    }
+
     function setafficherprogramme($Email)
     {
         $selectprogramme = $this->_bdd->query('SELECT programme.Nom FROM programme INNER JOIN utilisateur WHERE programme.Id_Utilisateur = utilisateur.Id_Utilisateur AND utilisateur.Email = "'.$Email.'"');
@@ -50,14 +59,14 @@ class Programme
     {
         return $this->_AfficherProgramme;
     }
-    function ModifierProgramme()
-    {
-        $modifProgramme = $this->_bdd->query('UPDATE `programme` SET `Id_Programme`=?,`Nom`=?,`Id_Utilisateur`=? WHERE 1 ');
-    }
-    function ajouterscene($Email,$Nom)
-    {
+    // function ModifierProgramme()
+    // {
+    //     // $modifProgramme = $this->_bdd->query('UPDATE `programme` SET `Id_Programme`=?,`Nom`=?,`Id_Utilisateur`=? WHERE 1 ');
+    // }
+    // function ajouterscene($Email,$Nom)
+    // {
 
-    }
+    // }
     
 }
 
