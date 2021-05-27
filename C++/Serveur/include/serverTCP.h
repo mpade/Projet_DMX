@@ -36,21 +36,22 @@ public:
 class serverTCP
 {
     public:
-        serverTCP(EnttecDMXUSB);
+        serverTCP();
         virtual ~serverTCP();
         bool createSocket();
         bool connectServer(int port);
         bool acceptCom();
-        int readBuffer();
+        string readBuffer();
         bool sendBufferToClient(const char *bufferSendToClient);
         bool closeSocketClient();
         bool closeListenSocket();
         void addListener(TCPServerEventListener *);
+        static const std::vector<std::string> explode(const std::string& s, const char& c);
     protected:
 
     private:
-        static const std::vector<std::string> explode(const std::string& s, const char& c);
-        EnttecDMXUSB interfaceDMX;
+
+
         SOCKET sock;
         SOCKADDR_IN sin;
         SOCKET csock;

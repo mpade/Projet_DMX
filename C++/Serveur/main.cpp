@@ -44,7 +44,7 @@ int main()
     bool etat = false;
 
     myServerEventListener myEventListener;
-    serverTCP  tcpServer(interfaceDMX);
+    serverTCP  tcpServer;
 
     tcpServer.addListener(&myEventListener);
 
@@ -56,7 +56,40 @@ int main()
             {
                 if ( tcpServer.acceptCom() == true)
                 {
-                    tcpServer.readBuffer();
+                    string readtcp = tcpServer.readBuffer();
+        if (readtcp[0] == 'C' && readtcp[1] == 'V' )
+        {
+            string s = readtcp;
+            int pos = s.find(':');
+            string sud = s.substr(pos+1);
+            std::vector<std::string> lines = serverTCP::explode(sud, ',');
+            string configurationDMX;
+            int canal  = atoi(lines[0].c_str());
+            int valeur = atoi(lines[1].c_str());
+            if(interfaceDMX.IsAvailable())
+            {
+                configurationDMX = interfaceDMX.GetConfiguration();
+                cout << "Interface " << interfaceDMX.GetNomInterface() << " detectee" << std::endl << configurationDMX << std::endl;
+
+            interfaceDMX.ResetCanauxDMX();
+            interfaceDMX.SendDMX();
+            int canal  = 1;
+            int valeur = 127;
+            interfaceDMX.SetCanalDMX(canal, valeur);
+            interfaceDMX.SendDMX();
+            }
+            else
+                cout << "Interface non detectee !"<< endl;
+
+
+        }else if(readtcp[0] == 'T' && readtcp[1] == 'E' )
+        {
+            string s = readtcp;
+            int pos = s.find(':');
+            string sud = s.substr(pos+1);
+
+            sleep(atoi(sud.c_str()));
+        }
                 }
                 else
                 {

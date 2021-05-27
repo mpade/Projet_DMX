@@ -1,8 +1,8 @@
 #include "../include/serverTCP.h"
 
-serverTCP::serverTCP(EnttecDMXUSB inter)
+serverTCP::serverTCP()
 {
-    interfaceDMX = inter;
+
 }
 bool serverTCP::createSocket()
 {
@@ -106,7 +106,7 @@ void serverTCP::notifyClientConnected(SOCKET csock, SOCKADDR_IN csinIp, SOCKADDR
     }
 }
 
-int serverTCP::readBuffer()
+string serverTCP::readBuffer()
 {
 
     char bufferClient[50] = {0};
@@ -117,48 +117,15 @@ int serverTCP::readBuffer()
     if (resultReadBuffer == -1)
     {
         cout << "erreur lors de la reception du message client" << endl;
-        return -1;
+
     }
     else
     {
         // Le serveur affiche le message reçu
         cout << "Chaine reçu : " << bufferClient << endl;
+return bufferClient;
 
-        if (bufferClient[0] == 'C' && bufferClient[1] == 'V' )
-        {
-            string s = bufferClient;
-            int pos = s.find(':');
-            string sud = s.substr(pos+1);
-            std::vector<std::string> lines = serverTCP::explode(sud, ',');
-            string configurationDMX;
-            int canal  = atoi(lines[0].c_str());
-            int valeur = atoi(lines[1].c_str());
-            if(interfaceDMX.IsAvailable())
-            {
-                configurationDMX = interfaceDMX.GetConfiguration();
-                cout << "Interface " << interfaceDMX.GetNomInterface() << " detectee" << std::endl << configurationDMX << std::endl;
 
-            interfaceDMX.ResetCanauxDMX();
-            interfaceDMX.SendDMX();
-            int canal  = 1;
-            int valeur = 127;
-            interfaceDMX.SetCanalDMX(canal, valeur);
-            interfaceDMX.SendDMX();
-            }
-            else {
-                cout << "Interface non detectee !"<< endl;
-                return 0;
-                }
-                return 1;
-        }else if(bufferClient[0] == 'T' && bufferClient[1] == 'E' )
-        {
-            string s = bufferClient;
-            int pos = s.find(':');
-            string sud = s.substr(pos+1);
-
-            sleep(atoi(sud.c_str()));
-        }
-        return 1;
     }
 
 
