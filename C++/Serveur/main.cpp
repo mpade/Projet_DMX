@@ -1,6 +1,7 @@
 #include <iostream>
 #include "serverTCP.h"
 #include "enttecdmxusb.h"
+#define DMXDEVICE "/dev/ttyUSB0"
 using namespace std;
 class myServerEventListener : public TCPServerEventListener
 {
@@ -13,24 +14,34 @@ public:
 int main(int argc, char *argv[])
 {
 
-    if(argc != 2)
+   /* if(argc != 2)
     {
         printf("Usage : %s peripherique\n", argv[0]);
         printf("Exemple : %s /dev/ttyUSB0\n", argv[0]);
         return 1;
     }
+    */
 
     printf("Peripherique : %s\n\n", argv[1]);
-    EnttecDMXUSB interfaceDMX(DMX_USB_PRO, argv[1]); // ou : EnttecDMXUSB interfaceDMX(DMX_USB_PRO, DMXDEVICE);
+    //EnttecDMXUSB interfaceDMX(DMX_USB_PRO, argv[1]); // ou :
+    EnttecDMXUSB interfaceDMX(DMX_USB_PRO, DMXDEVICE);
     string configurationDMX;
 
     if(interfaceDMX.IsAvailable())
     {
         configurationDMX = interfaceDMX.GetConfiguration();
         cout << "Interface " << interfaceDMX.GetNomInterface() << " detectee" << std::endl << configurationDMX << std::endl;
+
+        interfaceDMX.ResetCanauxDMX();
+        interfaceDMX.SendDMX();
+        int canal  = 1;
+        int valeur = 127;
+        interfaceDMX.SetCanalDMX(canal, valeur);
+        interfaceDMX.SendDMX();
     }
     else
         cout << "Interface non detectee !" << endl;
+
     bool etat = false;
 
     myServerEventListener myEventListener;
