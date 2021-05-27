@@ -46,36 +46,24 @@ void IHM_Delete_Sequence::getDeleteSequence()
 	if (listSequence->selectedItems().count() == 1) {
 		QListWidgetItem *item = listSequence->takeItem(listSequence->currentRow());
 		//requete delete vu ecrie
+		std::string names = item->text().toStdString();
+		std::string requete = "SELECT `Id_Sequence` FROM `sequence` WHERE `name` = '" + names + "'";
+		mysql_query(mysql, requete.c_str());
 
-	}
+		MYSQL_RES *result = NULL;
+		MYSQL_ROW row;
 
-	/*for (int i = 0; i < e.size(); i++) {
-		if (e[i]->checkState()) {
-			//requete pour delete la sequence !!
+		result = mysql_store_result(mysql);
 
-			std::string names = e[i]->objectName().toStdString();
-			std::string requete = "SELECT `Id_Sequence` FROM `sequence` WHERE `name` = '" + names + "'";
-			mysql_query(mysql, requete.c_str());
-
-			//Déclaration des pointeurs de structure
-			MYSQL_RES *result = NULL;
-			MYSQL_ROW row;
-
-
-			//On met le jeu de résultat dans le pointeur result
-			result = mysql_store_result(mysql);
-
-			while ((row = mysql_fetch_row(result)))
-			{
-				std::string requetes = "DELETE FROM `sequenceusedequipement` WHERE `Id_Sequence` = '" + std::to_string(atoi(row[0])) + "'";
-				mysql_query(mysql, requetes.c_str());
-				 requetes = "DELETE FROM `sequence` WHERE `Id_Sequence` =  '" + std::to_string(atoi(row[0])) + "'";
-				mysql_query(mysql, requetes.c_str());
-			}
+		while ((row = mysql_fetch_row(result)))
+		{
+			std::string requetes = "DELETE FROM `sequenceusedequipement` WHERE `Id_Sequence` = '" + std::to_string(atoi(row[0])) + "'";
+			mysql_query(mysql, requetes.c_str());
+			requetes = "DELETE FROM `sequencescene` WHERE `Id_Sequence` = '" + std::to_string(atoi(row[0])) + "'";
+			mysql_query(mysql, requetes.c_str());
+			requetes = "DELETE FROM `sequence` WHERE `Id_Sequence` =  '" + std::to_string(atoi(row[0])) + "'";
+			mysql_query(mysql, requetes.c_str());
 		}
+
 	}
-	IHM_Delete_Sequence *t = new IHM_Delete_Sequence;
-	t->show();
-	this->close();
-	*/
 }

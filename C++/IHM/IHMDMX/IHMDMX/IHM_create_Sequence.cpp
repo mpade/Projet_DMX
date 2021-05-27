@@ -16,19 +16,24 @@ IHM_Create_Sequence::IHM_Create_Sequence() : QWidget()																								//
 	{
 
 	grid = new QGridLayout;
-	/* Connexions Signal - Slot */
-		// this = SLOT de IHMDMX (SLOT MAISON)
-	getAllEquipement();
 	duree = new QLineEdit;
 	duree->setPlaceholderText("Duree en seconde !");
-	grid->addWidget(duree, 1, 1);
+	listequipement = new QListWidget();
+	listsequenceequipement = new QListWidget();
+	getAllEquipement();
+	
+	grid->addWidget(listequipement, 0, 0);
+	grid->addWidget(listsequenceequipement, 0, 1);
+	grid->addWidget(duree, 1, 0);
 	cree = new QPushButton("Cree", this);
-	grid->addWidget(cree, 2, 2);
+	grid->addWidget(cree, 2, 0, 1, 3);
 	name = new QLineEdit;
 	name->setPlaceholderText("entre un nom");
-	grid->addWidget(name, 2, 1);
+	grid->addWidget(name, 1, 1);
 	QObject::connect(cree, SIGNAL(clicked()), this, SLOT(slidergetEquipement()));
-
+	QObject::connect(listequipement, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(gettest()));
+	QObject::connect(listsequenceequipement, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(gettest()));
+	setLayout(grid);
 	}
 }
 //==========================================================================================
@@ -36,36 +41,37 @@ IHM_Create_Sequence::IHM_Create_Sequence() : QWidget()																								//
 
 void IHM_Create_Sequence::getAllEquipement()
 {
-	mysql_query(mysql, "SELECT `Name` FROM `equipement` WHERE 1");
-	//Déclaration des pointeurs de structure
+	mysql_query(mysql, "SELECT  `Name` FROM `equipement` WHERE 1");
+
 	MYSQL_RES *result = NULL;
 	MYSQL_ROW row;
-	unsigned int i = 0, z =0;
-	
-	result = mysql_use_result(mysql);
-	groupBox = new QGroupBox(tr("Equipement"));
-	vbox = new QVBoxLayout;
-	
-	groupBox->setFlat(true);
+
+	result = mysql_store_result(mysql);
+
 	while ((row = mysql_fetch_row(result)))
 	{
+		QListWidgetItem *item = new QListWidgetItem();
+		item->setText(row[0]);
+		listequipement->addItem(item);
 
-			//On ecrit toutes les valeurs
-			e.push_back(new QCheckBox(tr(row[i]), this));
-			for (int x = z; x < e.size(); x++) {
-				e[x]->setObjectName(row[i]);
-				z++;
-			}
-		
 	}
-	for (int i = 0; i < e.size(); i++) {
-		
-		vbox->addWidget(e[i]);
+}
+
+void IHM_Create_Sequence::gettest()
+{
+	int i = 0;
+	if (listequipement->selectedItems().count() == 1) {
+		i = listequipement->currentRow();
+		QListWidgetItem *item = listequipement->takeItem(i);
+		listsequenceequipement->addItem(item);
+		listequipement->clearSelection();
 	}
-	vbox->addStretch(1);
-	groupBox->setLayout(vbox);
-	grid->addWidget(groupBox, 0, 1);
-	setLayout(grid);
+	if (listsequenceequipement->selectedItems().count() == 1) {
+		QListWidgetItem *item = listsequenceequipement->takeItem(listsequenceequipement->currentRow());
+		listequipement->addItem(item);
+		listsequenceequipement->clearSelection();
+	}
+
 }
 
 void IHM_Create_Sequence::slidergetEquipement() {
@@ -73,9 +79,12 @@ void IHM_Create_Sequence::slidergetEquipement() {
 		
 		std::string requete = "INSERT INTO `sequence`(`Id_Sequence`, `Duree`, `name`) VALUES (NULL,'"+ duree->displayText().toStdString() +"','"+ name->displayText().toStdString() +"')";
 		mysql_query(mysql, requete.c_str());
-		for (int d = 0; d < e.size(); d++) {
-			if (e[d]->checkState()) {
-				std::string names = e[d]->objectName().toStdString();
+		int x = listsequenceequipement->count();
+		for (int i = 0; i < x; i++)
+		{
+
+			QListWidgetItem *item = listsequenceequipement->takeItem(0);
+				std::string names = item->text().toStdString();
 				std::string requete = "SELECT `Id_Equipement`, `Nb_voie` FROM `equipement` WHERE `Name` = '" + names + "'";
 
 				mysql_query(mysql, requete.c_str());
@@ -106,21 +115,17 @@ void IHM_Create_Sequence::slidergetEquipement() {
 						while ((rowsd = mysql_fetch_row(resultsd)))
 						{
 							//On ecrit toutes les valeurs
-							IHM_SrolBar_Sequence *t = new IHM_SrolBar_Sequence(e[d]->objectName(), atoi(row[1]), atoi(rows[0]), atoi(rowsd[0]));
+							IHM_SrolBar_Sequence *t = new IHM_SrolBar_Sequence(item->text(), atoi(row[1]), atoi(rows[0]), atoi(rowsd[0]));
 							t->show();
 						}
 					}
 
 				}
 
-
-
-
-
 			}
 
 		}
 	}
 
-}
+
 

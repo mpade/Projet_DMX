@@ -1,1 +1,68 @@
 #include "IHM_Create_Equipement.h"
+#include "IHMDMX.h"
+#include "iostream"
+#include <QLabel>
+
+IHM_Create_Equipement::IHM_Create_Equipement() : QWidget()																				// spécification du constructeur
+{
+	/* Position de la fenêtre */
+	setGeometry(1000, 100, 500, 500);
+
+
+	/* Construction des Widgets */
+	LE_Name = new QLineEdit();
+	LE_Voies = new QLineEdit();
+	LE_AdressEquipement = new QLineEdit();
+	L_Name = new QLabel("Nom de l'equipement :", this);
+	L_Voies = new QLabel("Nombre de voies :", this);
+	L_AdressEquipement = new QLabel("Position sur le bus DMX :", this);
+	Text1 = new QLabel("Creation d'un equipement", this);
+	grid2 = new QGridLayout;
+	B_Valider = new QPushButton("Valider", this);
+
+
+
+	/* Position des Widgets */
+	grid2->addWidget(Text1, 0, 0, 3, 3);
+	grid2->addWidget(LE_Name, 1, 2, 1, 1);
+	grid2->addWidget(LE_Voies, 2, 2, 1, 1);
+	grid2->addWidget(LE_AdressEquipement, 3, 2, 1, 1);
+	grid2->addWidget(L_Name, 1, 1, 1, 1);
+	grid2->addWidget(L_Voies, 2, 1, 1, 1);
+	grid2->addWidget(L_AdressEquipement, 3, 1, 1, 1);
+	grid2->addWidget(B_Valider, 3, 2, 2, 2);
+
+
+	setLayout(grid2);
+
+	/* Connexions Signal - Slot */
+	QObject::connect(B_Valider, SIGNAL(clicked()), this, SLOT(Validation()));
+
+
+	/* Méthode éxecutée au lancement de l'IHM */
+	Connexionbdd();
+
+}
+//==============================================================================================================
+
+void IHM_Create_Equipement::Connexionbdd()
+{
+	mySQL = mysql_init(NULL);
+
+	if (!mysql_real_connect(mySQL, "192.168.64.102", "DMX", "dmx", "Projet_DMX", 0, NULL, 0))
+	{
+		QMessageBox msgBox;
+		msgBox.setText("Erreur de connection a la BDD");
+		msgBox.exec();
+	}
+	else {
+
+	}
+}
+
+//==============================================================================================================
+
+void IHM_Create_Equipement::Validation()
+{
+
+}

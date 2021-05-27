@@ -46,7 +46,9 @@ void IHMDMX2::creat_sequence()
 void IHMDMX2::modifier_sequence()
 {
 
-
+	IHM_Update_Sequence *t = new IHM_Update_Sequence;
+	t->show();
+	this->close();
 
 }
 
@@ -67,7 +69,9 @@ void IHMDMX2::creat_scene()
 
 void IHMDMX2::modifier_scene()
 {
-
+	IHM_Update_scene *t = new IHM_Update_scene;
+	t->show();
+	this->close();
 
 }
 

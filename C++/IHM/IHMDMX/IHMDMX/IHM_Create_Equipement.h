@@ -14,6 +14,11 @@
 #include <vector>
 #include <string>
 #include <QtWidgets/QApplication>
+#include <QGroupBox>
+#include <QVBoxLayout>
+#include <vector>
+#include <string>
+#include <QtWidgets/QApplication>
 
 
 class IHM_Create_Equipement : public QWidget
@@ -21,12 +26,31 @@ class IHM_Create_Equipement : public QWidget
 	Q_OBJECT                    // Nécessaire pour créer un slot maison
 
 public:
-
+	IHM_Create_Equipement();
 
 public slots:					// Slots maison
+
+	void Connexionbdd();
+	void Validation();
 
 
 private:
 
-};
+	QLineEdit *LE_Name;
+	QLineEdit *LE_Voies;
+	QLineEdit *LE_AdressEquipement;
 
+	QLabel *L_Name;
+	QLabel *L_Voies;
+	QLabel *L_AdressEquipement;
+	QLabel *Text1;
+
+	QPushButton * B_Valider;
+
+	QGridLayout *grid2;
+
+	MYSQL *mySQL;
+	MYSQL_ROW row = NULL;
+	MYSQL_RES *result = NULL;
+
+};

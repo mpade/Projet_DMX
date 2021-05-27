@@ -21,19 +21,24 @@ class IHM_Update_scene :
 	Q_OBJECT
 public:
 	IHM_Update_scene();                // Constructeur (forcément pubic)
-
+    void getAllScene();
+	void getSequence(std::string);
 public slots:               // Slots maison
-	//void getAllScene();
-	//void getDeleteScene();
+	void getSelectidScene();
+	void getDeletesequencescene();
+	void getUpdatescene();
 private:
 
-	QPushButton *supprimer;
+	QPushButton *supSequence;
+	QPushButton *modifier;
 	QGroupBox *groupBox;							// pointeur --> il faudra le construire dynamiquement (new)
 	MYSQL *mysql;
 	MYSQL_ROW row = NULL;
 	MYSQL_RES *res = NULL;
-	std::vector<QCheckBox*>e;
-	QVBoxLayout *vbox;
+	QListWidget *listScene;
+	QListWidget * listSceneSequence;	
+	QLabel * nameScene;
 	QGridLayout *grid;
 };
+
 

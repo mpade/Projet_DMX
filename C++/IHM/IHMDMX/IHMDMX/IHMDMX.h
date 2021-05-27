@@ -1,6 +1,5 @@
 #ifndef MYWINDOW_H
 #define MYWINDOW_H
-
 #include "main.h"
 #include <QWidget>
 #include <QObject>
@@ -52,10 +51,12 @@ private:
 
 	MYSQL *mySQL;
 	MYSQL_ROW row = NULL;
+	MYSQL_ROW rows = NULL;
 	MYSQL_RES *result = NULL;
+	MYSQL_RES *results = NULL;
 
 	std::vector<QListWidgetItem*>e;
-	
+
 };
 
 #endif // MYWINDOW_H

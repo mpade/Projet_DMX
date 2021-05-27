@@ -48,23 +48,30 @@ IHM_SrolBar_Sequence::IHM_SrolBar_Sequence(const QString name,int voie, int adre
 void IHM_SrolBar_Sequence::getValide() {
 
 
-	std::string requetes = "SELECT `Id_AdressEquipement` FROM `adressequipement`, equipement WHERE adressequipement.Id_Equipement = equipement.Id_Equipement and equipement.Name = '" + QWidget::windowTitle().toStdString() + "'";
+	std::string requetes = "SELECT `Id_AdressEquipement`, adressequipement.Id_Equipement FROM `adressequipement`, equipement WHERE adressequipement.Id_Equipement = equipement.Id_Equipement and equipement.Name = '" + QWidget::windowTitle().toStdString() + "'";
 	mysql_query(mysql, requetes.c_str());
 	MYSQL_RES *results = NULL;
 	MYSQL_ROW rows;
 	results = mysql_store_result(mysql);
 	while ((rows = mysql_fetch_row(results)))
 	{
-
-		for (int i = 0; i < a.size(); i++) {
-		std::string requetes = "INSERT INTO `sequenceusedequipement`(`Id_SequenceUsedEquipement`, `Valeur`, `Id_AdressEquipement`, `Id_Sequence`, `adress`) VALUES (NULL,"+ std::to_string( a[i]->value())+","+rows[0]+","+std::to_string(idsequence)+","+std::to_string(adress)+")";
+		std::string requetes = "INSERT INTO `sequenceusedequipement`(`Id_SequenceUsedEquipement`,`Id_AdressEquipement`, `Id_Sequence`) VALUES (NULL,"+std::to_string(atoi(rows[0]))+","+std::to_string(idsequence)+")";
 		mysql_query(mysql, requetes.c_str());
-		MYSQL_RES *results = NULL;
-		MYSQL_ROW rows;
-		results = mysql_store_result(mysql);
-		adress++;
+		std::string requetproper = "SELECT `Id_Property` FROM `property` WHERE `Id_Equipement` = " + std::to_string(atoi(rows[1]));
+		mysql_query(mysql, requetproper.c_str());
+		MYSQL_RES *resultss = NULL;
+		MYSQL_ROW rowss;
+		resultss = mysql_store_result(mysql);
+		
+		for (int i = 0; i < a.size(); i++) {
+		while (rowss = mysql_fetch_row(resultss)) {
+			
+			requetes = "INSERT INTO `valueproper`(`value`, `id_property`,`Id_Sequence`) VALUES ('" + std::to_string(a[i]->value()) + "','"+std::to_string(atoi(rowss[0]))+"','"+std::to_string(idsequence)+"')";
+			mysql_query(mysql, requetes.c_str());
+		}
+		
 	}
 	}
 	this->close();
-
+	
 }
