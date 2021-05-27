@@ -19,12 +19,12 @@
             ####################################################
             ################<!-- PARTIE 1 -->###################
             #################################################### 
-    
+            
     // Démarrage des sessions + include des classes + vérification de la session
     session_start(); 
     include('bdd.php');
     include('gestion.php');
-    include('programme.php');
+    include('programme.php');   
     
     $programme = new programme($bdd);
     $user = new user($bdd);
@@ -69,6 +69,7 @@
     // Boucle permettant d'afficher dans la liste déroulante les programmes présents sur la base de données
     while($selectprogramme = $selectprogrammes->fetch()) 
     {
+
         $prog[$programmeindex++] = new gestion($selectprogramme['Id_Programme'], $selectprogramme['Nom']);
     }
 
@@ -86,7 +87,7 @@
                 ]);?>
                 <script> function timedRefresh(timeoutPeriod) {
                     setTimeout("location.reload(true);",timeoutPeriod);
-                }window.onload = timedRefresh(1); </script><?php
+                }window.onload = timedRefresh(0); </script><?php
                 
             }
         }
@@ -110,12 +111,9 @@
                 <?php
                 if(isset($_POST['nommodifie']))
                 {
-                    echo "le nom à bien été modifié";
                     $bdd->query("UPDATE `programme` SET `Nom`='".$_POST['nommodifiee']."'WHERE `Id_Programme` = '".$objetprogramme->getId()."'");
                     
-                ?>   <script> function timedRefresh(timeoutPeriod) {
-                        setTimeout("location.reload(true);",timeoutPeriod);
-                    }onload = timedRefresh(1); </script> <?php
+                ?>   <?php
                 
                 } 
             }
@@ -130,8 +128,9 @@
         {
             
             ?>
-                
+                <!-- <form action="" method="POST"> -->
                 <input type="text" name="nomprogramme" placeholder="Nom du programme" id="nameprog">
+              
                 <select name="modifieprogramme">
                     <?php
                         echo '<option value="0">Choisir les scènes</option>';
@@ -139,9 +138,23 @@
                         { 
                             echo '<option value="' . $objectscene->getId() . '">' . $objectscene->getNom() . '</option>';
                         }
+                        
+                    ?>
+                    <?php
+                        if(isset($_POST['']))
+                        {
+                            echo"la scène a été ajouté";
+                        }
                     ?>
                 </select>   
-                <input type="submit" name="ajoutprogramme" onclick="Programme_creation(nameprog)" value="Ajouter programme">
+                
+                
+                <input type="submit" name="ajoutprogramme" onclick="Programme_creation(nameprog)" value="Ajouter programme">       
+              
+                
+                
+
+                
         <?php 
         }  
             // On appelle la méthode déconnexion pour se déconnecter
@@ -163,6 +176,8 @@
         <form action="" method="POST">
             <input type="submit" name="Programme" value="Crée un programme">
         </form> 
+
+       
 
         <!-- Formulaire permettant de supprimer un programme" -->
         <form action="" methode="GET">
@@ -188,6 +203,7 @@
                     { 
                         echo '<option value="' . $objectprogramme->getId() . '">' . $objectprogramme->getNom() . '</option>';
                     }
+                    
                 ?>
             </select>
             <input type="submit" value=" Modifier programme"></input>
