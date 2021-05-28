@@ -115,6 +115,7 @@ int main()
                 {
                     cout << "Problème lorque le client essaie de se connecter" << endl;
                 }
+                tcpServer.closeSocketClient();
             } while (etat != true);        }    }
 
 
