@@ -71,8 +71,6 @@ int main()
                 configurationDMX = interfaceDMX.GetConfiguration();
                 cout << "Interface " << interfaceDMX.GetNomInterface() << " detectee" << std::endl << configurationDMX << std::endl;
 
-                interfaceDMX.ResetCanauxDMX();
-                interfaceDMX.SendDMX();
             interfaceDMX.SetCanalDMX(canal, valeur);
             interfaceDMX.SendDMX();
             }
@@ -87,6 +85,30 @@ int main()
             string sud = s.substr(pos+1);
 
             sleep(atoi(sud.c_str()));
+            if(interfaceDMX.IsAvailable())
+            {
+                configurationDMX = interfaceDMX.GetConfiguration();
+                cout << "Interface " << interfaceDMX.GetNomInterface() << " detectee" << std::endl << configurationDMX << std::endl;
+
+                interfaceDMX.ResetCanauxDMX();
+                interfaceDMX.SendDMX();
+            }
+            else
+                cout << "Interface non detectee !"<< endl;
+
+        }else
+        {
+            if(interfaceDMX.IsAvailable())
+            {
+                configurationDMX = interfaceDMX.GetConfiguration();
+                cout << "Interface " << interfaceDMX.GetNomInterface() << " detectee" << std::endl << configurationDMX << std::endl;
+
+                interfaceDMX.ResetCanauxDMX();
+                interfaceDMX.SendDMX();
+            }
+            else
+                cout << "Interface non detectee !"<< endl;
+
         }
                 }
                 else
