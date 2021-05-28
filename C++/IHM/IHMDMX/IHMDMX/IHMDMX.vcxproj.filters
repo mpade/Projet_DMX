@@ -98,7 +98,7 @@
     <ClCompile Include="IHM_Update_Sequence.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TCPclient.cpp">
+    <ClCompile Include="IHM_Create_Equipement_Property.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -133,7 +133,7 @@
     <ClInclude Include="main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TCPclient.h">
+    <ClInclude Include="IHM_Create_Equipement_Property.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

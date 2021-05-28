@@ -19,7 +19,7 @@ IHM_Create_Equipement::IHM_Create_Equipement() : QWidget()																				//
 	Text1 = new QLabel("Creation d'un equipement", this);
 	grid2 = new QGridLayout;
 	B_Valider = new QPushButton("Valider", this);
-
+	
 
 	/* Position des Widgets */
 	grid2->addWidget(Text1, 0, 0, 3, 3);
@@ -67,7 +67,7 @@ void IHM_Create_Equipement::Validation()
 	Name = LE_Name->text();
 	Voies = LE_Voies->text();
 	AdressEquipement = LE_AdressEquipement->text();
-
+	
 
 	std::string InsertEquipement = "INSERT INTO `equipement`(`Id_Equipement`, `Name`, `Nb_voie`) VALUES (NULL,'" + Name.toStdString() + "','" + Voies.toStdString() + "')";
 	mysql_query(mySQL, InsertEquipement.c_str());
@@ -78,12 +78,12 @@ void IHM_Create_Equipement::Validation()
 	result = mysql_store_result(mySQL);
 
 	row = mysql_fetch_row(result);
-
+	
 	std::string requetId_adressequipement = "INSERT INTO `adressequipement` (`Id_AdressEquipement`, `Adresse`, `Id_Equipement`) VALUES (NULL, '" + AdressEquipement.toStdString() + "' , '" + std::to_string(atoi(row[0])) + "')";
 	mysql_query(mySQL, requetId_adressequipement.c_str());
-
+	
 	LE_Name->clear();
 	LE_Voies->clear();
 	LE_AdressEquipement->clear();
-
+	
 }

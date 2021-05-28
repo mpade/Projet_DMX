@@ -18,6 +18,7 @@
 #include <QVBoxLayout>
 #include <vector>
 #include <string>
+#include "IHM_Create_Equipement_Property.h"
 #include <QtWidgets/QApplication>
 
 
@@ -44,6 +45,11 @@ private:
 	QLabel *L_Voies;
 	QLabel *L_AdressEquipement;
 	QLabel *Text1;
+	QLabel *test;
+
+	QString Name;
+	QString Voies;
+	QString AdressEquipement;
 
 	QPushButton * B_Valider;
 

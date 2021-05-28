@@ -122,26 +122,26 @@ void IHM_Modifier_Equipement::Placeholder()
 
 		results = mysql_store_result(mySQL);
 
-		while ((rows = mysql_fetch_row(results))) {
+			while ((rows = mysql_fetch_row(results))) {
 
-			std::string A_AdressEquipement = std::to_string(atoi(rows[1]));
-			Old_AdressEquipement = A_AdressEquipement.c_str();
+				std::string A_AdressEquipement = std::to_string(atoi(rows[1]));
+				Old_AdressEquipement = A_AdressEquipement.c_str() ;
+				
+				LE_Modif_AdressEquipement->setPlaceholderText(Old_AdressEquipement);
+			};
 
-			LE_Modif_AdressEquipement->setPlaceholderText(Old_AdressEquipement);
-		};
+			std::string RequetProperty = "SELECT * FROM `property` WHERE `Id_Equipement` = '" + std::to_string(atoi(row[0])) + "'";
+			mysql_query(mySQL, RequetProperty.c_str());
 
-		std::string RequetProperty = "SELECT * FROM `property` WHERE `Id_Equipement` = '" + std::to_string(atoi(row[0])) + "'";
-		mysql_query(mySQL, RequetProperty.c_str());
+			/*
+			result1 = mysql_store_result(mySQL);
 
-		/*
-		result1 = mysql_store_result(mySQL);
+			while ((row1 = mysql_fetch_row(result1))) {
 
-		while ((row1 = mysql_fetch_row(result1))) {
-
-		};
-		*/
-	}
-
+			};
+			*/			
+	}	
+		
 	mysql_close(mySQL);
 }
 
@@ -153,31 +153,31 @@ void IHM_Modifier_Equipement::Modif_Validation()
 	mySQL = mysql_init(NULL);
 
 	(!mysql_real_connect(mySQL, "192.168.64.102", "DMX", "dmx", "Projet_DMX", 0, NULL, 0));
+	
 
-
-	Name = LE_Modif_Name->text();
+ 	Name = LE_Modif_Name->text();
 	Voies = LE_Modif_Voies->text();
 	AdressEquipement = LE_Modif_AdressEquipement->text();
-	/*
-		// UPDATE `equipement` SET `Id_Equipement`='[value-1]',`Name`='[value-2]',`Nb_voie`='[value-3]' WHERE 1
-		std::string Select_equipement = "SELECT `Id_Equipement` FROM `equipement` WHERE `Name` ='" + Old_Name.toStdString() + "'";
-		mysql_query(mySQL, Select_equipement.c_str());
-		result = mysql_store_result(mySQL);
+/*
+	// UPDATE `equipement` SET `Id_Equipement`='[value-1]',`Name`='[value-2]',`Nb_voie`='[value-3]' WHERE 1
+	std::string Select_equipement = "SELECT `Id_Equipement` FROM `equipement` WHERE `Name` ='" + Old_Name.toStdString() + "'";
+	mysql_query(mySQL, Select_equipement.c_str());
+	result = mysql_store_result(mySQL);
 
-		row = mysql_fetch_row(result);
+	row = mysql_fetch_row(result);
 
-		std::string Update_equipement = "UPDATE `equipement` SET `Name` = '" + Name.toStdString() + "', `Nb_voie` = '" + Voies.toStdString() + "' WHERE `Id_Equipement`= '" + std::to_string(atoi(row[0])) + "'";
-		mysql_query(mySQL, Update_equipement.c_str());
+	std::string Update_equipement = "UPDATE `equipement` SET `Name` = '" + Name.toStdString() + "', `Nb_voie` = '" + Voies.toStdString() + "' WHERE `Id_Equipement`= '" + std::to_string(atoi(row[0])) + "'";
+	mysql_query(mySQL, Update_equipement.c_str());
 
-		std::string Select_adressequipement = "SELECT `Id_AdressEquipement` FROM `adressequipement` WHERE `Id_Equipement` ='" + std::to_string(atoi(row[0])) + "'";
-		mysql_query(mySQL, Select_adressequipement.c_str());
-		results = mysql_store_result(mySQL);
+	std::string Select_adressequipement = "SELECT `Id_AdressEquipement` FROM `adressequipement` WHERE `Id_Equipement` ='" + std::to_string(atoi(row[0])) + "'";
+	mysql_query(mySQL, Select_adressequipement.c_str());
+	results = mysql_store_result(mySQL);
 
-		rows = mysql_fetch_row(results);
+	rows = mysql_fetch_row(results);
 
-		//std::string Update_adressequipement = "UPDATE `adressequipement` SET `Adresse` = '" + AdressEquipement.toStdString() + "'  WHERE `Id_Equipement` = '" + std::to_string(atoi(row[0]))"' AND `Id_AdressEquipement` '" + std::to_string(atoi(row[0])) + "'";
-		//mysql_query(mySQL, Update_adressequipement.c_str());
-	*/
+	//std::string Update_adressequipement = "UPDATE `adressequipement` SET `Adresse` = '" + AdressEquipement.toStdString() + "'  WHERE `Id_Equipement` = '" + std::to_string(atoi(row[0]))"' AND `Id_AdressEquipement` '" + std::to_string(atoi(row[0])) + "'";
+	//mysql_query(mySQL, Update_adressequipement.c_str());
+*/
 
 	std::string update_equipement = "UPDATE `equipement` SET `Name`= '" + Name.toStdString() + "', `Nb_voie` = '" + Voies.toStdString() + "' WHERE `Id_Equipement` = '" + std::to_string(atoi(row[0])) + "'";
 	mysql_query(mySQL, update_equipement.c_str());
@@ -193,3 +193,4 @@ void IHM_Modifier_Equipement::Modif_Validation()
 	LE_Modif_AdressEquipement->clear();
 	mysql_close(mySQL);
 };
+

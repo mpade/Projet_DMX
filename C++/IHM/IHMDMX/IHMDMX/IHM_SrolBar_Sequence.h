@@ -16,8 +16,6 @@
 #include <QtWidgets/QApplication>
 #include <QSlider>
 #include "mysql.h"
-#include "TCPclient.h"
-
 class IHM_SrolBar_Sequence :
 	public QWidget
 {

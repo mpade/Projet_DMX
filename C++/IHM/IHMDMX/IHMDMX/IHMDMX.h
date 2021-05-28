@@ -51,12 +51,13 @@ private:
 
 	MYSQL *mySQL;
 	MYSQL_ROW row = NULL;
-	MYSQL_ROW rows = NULL;
+	MYSQL_ROW row1 = NULL;
+	MYSQL_ROW row2 = NULL;
 	MYSQL_RES *result = NULL;
-	MYSQL_RES *results = NULL;
+	MYSQL_RES *result1 = NULL;
+	MYSQL_RES *result2 = NULL;
 
 	std::vector<QListWidgetItem*>e;
-
 };
 
 #endif // MYWINDOW_H

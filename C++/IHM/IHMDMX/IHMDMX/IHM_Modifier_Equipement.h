@@ -30,7 +30,7 @@ public slots:					// Slots maison
 	void Placeholder();
 	void getAllEquipement();
 	void Refresh();
-
+	
 
 private:
 
@@ -72,3 +72,4 @@ private:
 	MYSQL_RES *result2 = NULL;
 
 };
+

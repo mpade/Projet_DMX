@@ -104,11 +104,11 @@ void IHMDMX::supprimer_equipement()
 			std::string requetId_adressequipement = "SELECT `Id_AdressEquipement` FROM `adressequipement` WHERE `Id_Equipement` ='" + std::to_string(atoi(row[0])) + "'";
 			mysql_query(mySQL, requetId_adressequipement.c_str());
 
-			results = mysql_store_result(mySQL);
+			result1 = mysql_store_result(mySQL);
 
-			while ((rows = mysql_fetch_row(results))) {
+			while ((row1 = mysql_fetch_row(result1))) {
 
-				std::string requetDelete = "DELETE FROM `sequenceusedequipement` WHERE `Id_AdressEquipement` = '" + std::to_string(atoi(rows[0])) + "'";
+				std::string requetDelete = "DELETE FROM `sequenceusedequipement` WHERE `Id_AdressEquipement` = '" + std::to_string(atoi(row1[0])) + "'";
 				mysql_query(mySQL, requetDelete.c_str());
 
 			}
@@ -152,3 +152,4 @@ void IHMDMX::Refresh()
 {
 	getAllEquipement();
 }
+
