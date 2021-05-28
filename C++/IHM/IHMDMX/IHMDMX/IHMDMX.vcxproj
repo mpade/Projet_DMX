@@ -112,6 +112,7 @@
     <ClCompile Include="Sequence.cpp" />
     <ClCompile Include="SequenceUsedEquipement.cpp" />
     <ClCompile Include="IHMDMX2.cpp" />
+    <ClCompile Include="TCPclient.cpp" />
     <ClCompile Include="TrameManager.cpp" />
     <ClCompile Include="User.cpp" />
     <QtRcc Include="IHMDMX.qrc" />
@@ -133,6 +134,7 @@
     <QtMoc Include="IHM_Delete_scene.h" />
     <QtMoc Include="IHM_Update_scene.h" />
     <QtMoc Include="IHM_Update_Sequence.h" />
+    <ClInclude Include="TCPclient.h" />
     <ClInclude Include="User.h" />
     <QtMoc Include="IHMDMX2.h" />
     <ClInclude Include="main.h" />

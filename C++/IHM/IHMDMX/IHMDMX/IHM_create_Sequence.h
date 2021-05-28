@@ -14,7 +14,7 @@
 #include <vector>
 #include <string>
 #include <QtWidgets/QApplication>
-
+#include "TCPclient.h"
 class IHM_Create_Sequence : public QWidget // On hérite de QWidget (IMPORTANT)
 {
 	Q_OBJECT                    // Nécessaire pour créer un slot maison
