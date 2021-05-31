@@ -22,7 +22,8 @@ function Programme_Suppresion(prog) {
 
 function Programme_creation(nomprog) {
     var newCreation = {
-        name_prog : document.getElementById('nameprog').value
+        name_prog : document.getElementById('nameprog').value,
+        name_scene : document.getElementById('namescene').value
     };
     var tab = new FormData();
     tab.append("json", JSON.stringify(newCreation));
