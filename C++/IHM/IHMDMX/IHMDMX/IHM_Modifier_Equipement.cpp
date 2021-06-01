@@ -50,7 +50,7 @@ IHM_Modifier_Equipement::IHM_Modifier_Equipement() : QWidget()																		
 	getAllEquipement();
 
 }
-//==============================================================================================================
+//===================== Connexion à la BDD ==============================================
 
 void IHM_Modifier_Equipement::Connexionbdd()
 {
@@ -67,7 +67,7 @@ void IHM_Modifier_Equipement::Connexionbdd()
 
 }
 
-//==============================================================================================================
+//==================== Récupération des noms de tous les équipements et affichage =======================================
 
 void IHM_Modifier_Equipement::getAllEquipement()
 {
@@ -88,14 +88,14 @@ void IHM_Modifier_Equipement::getAllEquipement()
 
 }
 
-//==============================================================================================================
+//============================ Refresh la liste d'équipement ===========================
 
 void IHM_Modifier_Equipement::Refresh()
 {
 	getAllEquipement();
 }
 
-//==============================================================================================================
+//======================== Place les anciennes valeurs dans les Line Edit =======================================
 
 void IHM_Modifier_Equipement::Placeholder()
 {
@@ -131,22 +131,14 @@ void IHM_Modifier_Equipement::Placeholder()
 			};
 
 			std::string RequetProperty = "SELECT * FROM `property` WHERE `Id_Equipement` = '" + std::to_string(atoi(row[0])) + "'";
-			mysql_query(mySQL, RequetProperty.c_str());
-
-			/*
-			result1 = mysql_store_result(mySQL);
-
-			while ((row1 = mysql_fetch_row(result1))) {
-
-			};
-			*/			
+			mysql_query(mySQL, RequetProperty.c_str());		
 	}	
 		
 	mysql_close(mySQL);
 }
 
 
-//==============================================================================================================
+//======================== Enregiste en base les nouvelles valeurs pour l'équipement ====================================
 
 void IHM_Modifier_Equipement::Modif_Validation()
 {
@@ -158,26 +150,6 @@ void IHM_Modifier_Equipement::Modif_Validation()
  	Name = LE_Modif_Name->text();
 	Voies = LE_Modif_Voies->text();
 	AdressEquipement = LE_Modif_AdressEquipement->text();
-/*
-	// UPDATE `equipement` SET `Id_Equipement`='[value-1]',`Name`='[value-2]',`Nb_voie`='[value-3]' WHERE 1
-	std::string Select_equipement = "SELECT `Id_Equipement` FROM `equipement` WHERE `Name` ='" + Old_Name.toStdString() + "'";
-	mysql_query(mySQL, Select_equipement.c_str());
-	result = mysql_store_result(mySQL);
-
-	row = mysql_fetch_row(result);
-
-	std::string Update_equipement = "UPDATE `equipement` SET `Name` = '" + Name.toStdString() + "', `Nb_voie` = '" + Voies.toStdString() + "' WHERE `Id_Equipement`= '" + std::to_string(atoi(row[0])) + "'";
-	mysql_query(mySQL, Update_equipement.c_str());
-
-	std::string Select_adressequipement = "SELECT `Id_AdressEquipement` FROM `adressequipement` WHERE `Id_Equipement` ='" + std::to_string(atoi(row[0])) + "'";
-	mysql_query(mySQL, Select_adressequipement.c_str());
-	results = mysql_store_result(mySQL);
-
-	rows = mysql_fetch_row(results);
-
-	//std::string Update_adressequipement = "UPDATE `adressequipement` SET `Adresse` = '" + AdressEquipement.toStdString() + "'  WHERE `Id_Equipement` = '" + std::to_string(atoi(row[0]))"' AND `Id_AdressEquipement` '" + std::to_string(atoi(row[0])) + "'";
-	//mysql_query(mySQL, Update_adressequipement.c_str());
-*/
 
 	std::string update_equipement = "UPDATE `equipement` SET `Name`= '" + Name.toStdString() + "', `Nb_voie` = '" + Voies.toStdString() + "' WHERE `Id_Equipement` = '" + std::to_string(atoi(row[0])) + "'";
 	mysql_query(mySQL, update_equipement.c_str());

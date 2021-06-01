@@ -31,7 +31,7 @@ IHM_Test_En_Directe::IHM_Test_En_Directe(int voies, int adresse, int Id_Equipeme
 	TestDirecte();
 
 }
-//==============================================================================================================
+//=================================== Connexion à la bdd ====================================================
 
 void IHM_Test_En_Directe::ConnexionBdd() 
 {
@@ -45,7 +45,7 @@ void IHM_Test_En_Directe::ConnexionBdd()
 	}
 }
 
-//==============================================================================================================
+//==================== création des scrollbars en fonction du nombre de voie ==================================
 
 void IHM_Test_En_Directe::TestDirecte()
 {
@@ -84,7 +84,7 @@ void IHM_Test_En_Directe::TestDirecte()
 
 }
 
-//==============================================================================================================
+//==================================== Test en directe =====================================================
 
 void IHM_Test_En_Directe::getTcpTest() {
 	tcp = new QTcpSocket();

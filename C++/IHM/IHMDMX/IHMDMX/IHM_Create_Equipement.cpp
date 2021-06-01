@@ -44,7 +44,7 @@ IHM_Create_Equipement::IHM_Create_Equipement() : QWidget()																				//
 	Connexionbdd();
 
 }
-//==============================================================================================================
+//============================ Connexion à la BDD ===============================================
 
 void IHM_Create_Equipement::Connexionbdd()
 {
@@ -58,7 +58,7 @@ void IHM_Create_Equipement::Connexionbdd()
 	}
 }
 
-//==============================================================================================================
+//============== Création du nouvel équipement et envoie en base ===============
 
 void IHM_Create_Equipement::Validation()
 {

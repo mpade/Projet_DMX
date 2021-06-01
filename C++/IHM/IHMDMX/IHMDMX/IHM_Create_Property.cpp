@@ -29,7 +29,7 @@ IHM_Create_Property::IHM_Create_Property(int nb_voies, QString name) : QWidget()
 	NbVoie();
 
 }
-//==============================================================================================================
+//=========================== Connexion à la BDD ==========================================
 
 void IHM_Create_Property::Connexionbdd()
 {
@@ -44,7 +44,7 @@ void IHM_Create_Property::Connexionbdd()
 }
 
 
-//==============================================================================================================
+//========= Création des nouvelles propriétées de l'équipement et envoie en base ==================
 
 void IHM_Create_Property::Validation2()
 {
@@ -69,7 +69,7 @@ void IHM_Create_Property::Validation2()
 	this->close();
 }
 
-//==============================================================================================================
+//=========== Récupération du nombre de voies et affichage des Line Edit =================
 
 void IHM_Create_Property::NbVoie()
 {

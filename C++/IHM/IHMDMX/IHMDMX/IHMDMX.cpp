@@ -73,8 +73,6 @@ void IHMDMX::creat_equipement()
 	IHM_Create_Equipement *t = new IHM_Create_Equipement;
 	t->show();
 
-
-	// faire l'IHM création équipement avec tous les champs 
 }
 
 //============= Ouverture fenêtre de modification d'équipement====================================================
@@ -85,7 +83,6 @@ void IHMDMX::modifier_equipement()
 	IHM_Modifier_Equipement *t = new IHM_Modifier_Equipement;
 	t->show();
 
-	// récupérer toutes les personnalisations de l'équipement puis pouvoir les modifier
 }
 //============== Suppression d'un équipement et de ces composants ==============================================
 
