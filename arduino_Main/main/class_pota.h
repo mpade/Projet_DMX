@@ -5,7 +5,5 @@ class pota
     float PotaValue;
 
   public :
-  
-    float getPotaValue(int, int);
-
+    int getPotaValue(int);
 };
