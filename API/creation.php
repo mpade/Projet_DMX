@@ -6,11 +6,11 @@ $tabReturn = json_decode($_POST['json'],true);
 echo json_encode($tabReturn);
 $tabReturn['mail'];
 $tabReturn['name_prog'];
-// $tabReturn['name_scene'];
+$tabReturn['name_scene'];
 include "../programme.php";
 $programme = new programme($bdd);
-$programme->CreeProgramme($_SESSION['email'],$tabReturn['name_prog']);
-
+$programme->CreeProgramme($_SESSION['email'],$tabReturn['name_prog'],$tabReturn['name_scene']);
+$selectscenes = $this->_bdd->query("INSERT INTO `sceneprogramme`(`Id_Scene`, `Id_Programme`) VALUES ('".$objectscene."','".$objetprogramme."')");
 
 
 

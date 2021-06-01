@@ -20,7 +20,8 @@
 #define SOCKET_ERROR -1
 #define TRUE 1
 #define FALSE 0
-
+#include "enttecdmxusb.h"
+#define DMXDEVICE "/dev/ttyUSB0"
 using namespace std;
 
 typedef int SOCKET;
@@ -40,14 +41,17 @@ class serverTCP
         bool createSocket();
         bool connectServer(int port);
         bool acceptCom();
-        int readBuffer();
+        string readBuffer();
         bool sendBufferToClient(const char *bufferSendToClient);
         bool closeSocketClient();
         bool closeListenSocket();
         void addListener(TCPServerEventListener *);
+        static const std::vector<std::string> explode(const std::string& s, const char& c);
     protected:
 
     private:
+
+
         SOCKET sock;
         SOCKADDR_IN sin;
         SOCKET csock;

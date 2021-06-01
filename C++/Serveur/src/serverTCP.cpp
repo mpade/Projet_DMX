@@ -1,8 +1,8 @@
-#include "serverTCP.h"
+#include "../include/serverTCP.h"
 
 serverTCP::serverTCP()
 {
-    //ctor
+
 }
 bool serverTCP::createSocket()
 {
@@ -104,6 +104,50 @@ void serverTCP::notifyClientConnected(SOCKET csock, SOCKADDR_IN csinIp, SOCKADDR
     {
         listeners[i]->onClientConnected(csock, csinIp, csinPort);
     }
+}
+
+string serverTCP::readBuffer()
+{
+
+    char bufferClient[50] = {0};
+    int resultReadBuffer;
+
+    resultReadBuffer = recv(this->csock, &bufferClient, sizeof(bufferClient), 0);
+    // Gestion d'erreur du nouveau socket
+    if (resultReadBuffer == -1)
+    {
+        cout << "erreur lors de la reception du message client" << endl;
+
+    }
+    else
+    {
+        // Le serveur affiche le message reçu
+        cout << "Chaine reçu : " << bufferClient << endl;
+return bufferClient;
+
+
+    }
+
+
+}
+const std::vector<std::string> serverTCP::explode(const std::string& msg, const char& c)
+{
+	std::string buff = "";
+	std::vector<std::string> v;
+	for (int i = 0; i < msg.length(); i++)
+	{
+		char compare = msg[i];
+		if (compare != c) buff += compare;
+		else if (compare == c && buff != "")
+		{
+			v.push_back(buff);
+			buff = "";
+		}
+	}
+	if (buff != "")
+		v.push_back(buff);
+
+	return v;
 }
 serverTCP::~serverTCP()
 {

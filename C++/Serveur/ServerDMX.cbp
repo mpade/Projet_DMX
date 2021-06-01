@@ -34,8 +34,14 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/enttecdmxusb.h" />
+		<Unit filename="include/errcode.h" />
+		<Unit filename="include/rs232.h" />
 		<Unit filename="include/serverTCP.h" />
+		<Unit filename="include/types.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/enttecdmxusb.cpp" />
+		<Unit filename="src/rs232.cpp" />
 		<Unit filename="src/serverTCP.cpp" />
 		<Extensions>
 			<code_completion />
