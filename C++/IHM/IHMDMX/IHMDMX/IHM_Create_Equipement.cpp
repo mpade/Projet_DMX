@@ -94,4 +94,5 @@ void IHM_Create_Equipement::Validation()
 	IHM_Create_Property *t = new IHM_Create_Property((atoi(row1[2])), Name);
 	t->show();
 
+	this->close();
 }

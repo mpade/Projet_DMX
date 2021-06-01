@@ -17,7 +17,7 @@ IHM_Create_Property::IHM_Create_Property(int nb_voies, QString name) : QWidget()
 
 
 	/* Position des Widgets */
-
+	valider->move(140, 0);
 
 
 	/* Connexions Signal - Slot */
@@ -48,27 +48,25 @@ void IHM_Create_Property::Connexionbdd()
 
 void IHM_Create_Property::Validation2()
 {
-/*
 
-	std::string requet_id = "SELECT * FROM `equipement` WHERE `Name`= '" + Name.toStdString + "'";
+
+	std::string requet_id = "SELECT * FROM `equipement` WHERE `Name`= '" + Name.toStdString() + "'";
 	mysql_query(mySQL, requet_id.c_str());
 
 	result2 = mysql_store_result(mySQL);
-
 	row2 = mysql_fetch_row(result2);
 
 	for (int i = 0; i < NbVoies; i++) {
-		while (row2 = mysql_fetch_row(result2)) {
-
+		
 			Order0 = a[i]->text();
 			Description0 = b[i]->text();
 
-			std::string insert_property = "INSERT INTO `property`(`id_property`, `Order`,`Description`,`Id_Equipement`) VALUES (NULL,'" + Order0.toStdString + "','" + Description0.toStdString + "','" + std::to_string(atoi(row2[0])) + "')";
+			std::string insert_property = "INSERT INTO `property`(`id_property`, `Order`,`Description`,`Id_Equipement`) VALUES (NULL,'" + Order0.toStdString() + "','" + Description0.toStdString() + "','" + std::to_string(atoi(row2[0])) + "')";
 			mysql_query(mySQL, insert_property.c_str());
 		}
 
-	}
-*/
+
+	this->close();
 }
 
 //==============================================================================================================
@@ -76,7 +74,7 @@ void IHM_Create_Property::Validation2()
 void IHM_Create_Property::NbVoie()
 {
 
-	int x = 0, y = 20;
+	int x = 0, y = 50;
 
 	for (int i = 0; i < NbVoies; i++) {
 		a.push_back(new QLineEdit(this));
@@ -93,14 +91,14 @@ void IHM_Create_Property::NbVoie()
 		Description++;
 	}
 
-	y = 20;
+	y = 50;
 
 	for (int i = 0; i < a.size(); i++) {
 		a[i]->move(20, y);
 		y += 50;
 	}
 
-	y = 20;
+	y = 50;
 
 	for (int i = 0; i < b.size(); i++) {
 		b[i]->move(200, y);
