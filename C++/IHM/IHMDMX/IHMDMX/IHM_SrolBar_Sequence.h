@@ -16,6 +16,8 @@
 #include <QtWidgets/QApplication>
 #include <QSlider>
 #include "mysql.h"
+#include <qtcpsocket.h>
+
 class IHM_SrolBar_Sequence :
 	public QWidget
 {
@@ -26,6 +28,7 @@ public:
 
 public slots:               // Slots maison
 	void getValide();
+	void getTcpTest();
 private:
 	int idsequence;
 	int adress;
@@ -34,6 +37,8 @@ private:
 	MYSQL_RES *res = NULL;
 	std::vector<QSlider*>e;
 	std::vector< QLCDNumber*>a;
+	std::vector <std::string> tramemou;
 	QPushButton *Valid;
+	QTcpSocket *tcp;
 };
 

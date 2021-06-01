@@ -18,7 +18,7 @@
 #include <QVBoxLayout>
 #include <vector>
 #include <string>
-#include "IHM_Create_Equipement_Property.h"
+#include "IHM_Create_Property.h"
 #include <QtWidgets/QApplication>
 
 
@@ -57,6 +57,8 @@ private:
 
 	MYSQL *mySQL;
 	MYSQL_ROW row = NULL;
+	MYSQL_ROW row1 = NULL;
 	MYSQL_RES *result = NULL;
+	MYSQL_RES *result1 = NULL;
 
 };
