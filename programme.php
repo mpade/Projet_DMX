@@ -17,28 +17,24 @@ class Programme
         $this->_bdd = $bdd;
      }
     // Fonction permettant de crée un programme.
-    function CreeProgramme($Email,$Nom)
+    function CreeProgramme($Email,$Nom,$Scene) 
     {
-        // Requête SQL, permettant de sélectionner l'utilisateur connecté.
-        // $selectutilisateur = $this->_bdd->query('SELECT `Email`FROM `utilisateur` WHERE Email = "'.$Email.'"');
-        // $selectutilisateur = $selectutilisateur->fetch();
+
+        
 
         // Requête SQL, permettant d'ajouter un programme dans la base de données.
+
         $ajoutprogramme = $this->_bdd->query('INSERT INTO `programme`(`Id_Programme`, `Nom`) VALUES (NULL,"'.$Nom.'")');
-        // $ajoutscene = $this->_bdd->query('INSERT INTO `sceneprogramme`(`Id_SceneProgramme`, `Id_Scene`, `Id_Programme`) VALUES (NULL,"'.$objectscene->getId().'",'.$objetprogramme->getId().')')
-        
-        // $ajoutscene = $this->_bdd->query("INSERT INTO `sceneprogramme`(`Id_Scene`,`Id_Programme`) VALUES ('".$objectscene->getId()."','".$objetprogramme->getId()."')");
-        
-        // Requête SQL, permettant d'ajouter une ou des scènes à un programme présent en base de données.
-        // $ajoutsceneprogramme =('UPDATE `programme` SET `NbScene`=[?]WHERE Id_Utilisateur = ?');
+        $SelectId_Programme = $this->_bdd->query("SELECT `Id_Programme` FROM `programme` WHERE `Nom` = '".$Nom."'");
+        $select = $SelectId_Programme->fetch();
 
-
-        // $clients = $this->$client->query('SELECT * FROM utilisateur');
-    
+        $ajoutprogrammes = $this->_bdd->query('INSERT INTO `sceneprogramme`(`Id_SceneProgramme`, `Id_Scene`, `Id_Programme`) VALUES (NULL,'.$Scene.','.$select["Id_Programme"].')');
         
+       
 
     }
 
+   
     function ModifierProgramme($Email,$Nom)
     {
 
@@ -68,6 +64,35 @@ class Programme
 
     // }
     
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+ // Permet de stocker en com les test des fonctions
+ function M(){
+    // $ajoutscene = $this->_bdd->query('INSERT INTO `sceneprogramme`(`Id_SceneProgramme`, `Id_Scene`, `Id_Programme`) VALUES (NULL,"'.$objectscene->getId().'",'.$objetprogramme->getId().')')
+  
+  // $ajoutscene = $this->_bdd->query("INSERT INTO `sceneprogramme`(`Id_Scene`,`Id_Programme`) VALUES ('".$objectscene->getId()."','".$objetprogramme->getId()."')");
+  
+  // Requête SQL, permettant d'ajouter une ou des scènes à un programme présent en base de données.
+  // $ajoutsceneprogramme =('UPDATE `programme` SET `NbScene`=[?]WHERE Id_Utilisateur = ?');
+
+
+  // $clients = $this->$client->query('SELECT * FROM utilisateur');
+
+   // Requête SQL, permettant de sélectionner l'utilisateur connecté.
+  // $selectutilisateur = $this->_bdd->query('SELECT `Email`FROM `utilisateur` WHERE Email = "'.$Email.'"');
+  // $selectutilisateur = $selectutilisateur->fetch();
 }
 
 

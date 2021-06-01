@@ -147,7 +147,6 @@
                     ?>
                 </select> 
                 <input type="submit" name="ajoutprogramme" onclick="Programme_creation(nameprog)" value="Ajouter programme">
-
         <?php 
         }  
             // On appelle la méthode déconnexion pour se déconnecter
