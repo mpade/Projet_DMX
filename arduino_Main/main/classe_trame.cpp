@@ -1,16 +1,18 @@
 #include <Arduino.h>
 #include "class_trame.h"
+#include "class_pota.h"
 
-int trame::potaConversion(float valPota)
-{
-  //on converti la valeur de Pota en numérique
-  int convPota = map(valPota, 0, 1023, 0, 255);
-  Serial.print("la valeur est : ");
-  Serial.println(convPota);
-  delay(100);
-}
+pota value;
 
-char trame::ecritureTrame()
+int trame::ecritureTrame(int numSpot)
 {
-  
+  Serial.print(numSpot);
+  Serial.print("::");
+  for (int i=0; i<=9; i++)
+  { 
+    Serial.print(value.getPotaValue(i));
+    Serial.print(":");
+  }
+
+  Serial.println(" ");
 }

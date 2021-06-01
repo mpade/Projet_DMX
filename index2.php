@@ -36,6 +36,7 @@
     if(empty($_SESSION['Email']))
     {
         ?><script>window.location.replace("index.php");</script><?php
+        
     }
 ?>
 
@@ -72,6 +73,10 @@
 
         $prog[$programmeindex++] = new gestion($selectprogramme['Id_Programme'], $selectprogramme['Nom']);
     }
+
+
+
+   
 
     // Permet de supprimer les programmes présents dans la base de données
     if (isset($_GET["voirprogramme"])) 
@@ -130,8 +135,8 @@
             ?>
                 <!-- <form action="" method="POST"> -->
                 <input type="text" name="nomprogramme" placeholder="Nom du programme" id="nameprog">
-              
-                <select name="modifieprogramme">
+                
+                <select name="modifieprogramme" id="namescene">
                     <?php
                         echo '<option value="0">Choisir les scènes</option>';
                         foreach ($scene as $objectscene)
@@ -140,21 +145,9 @@
                         }
                         
                     ?>
-                    <?php
-                        if(isset($_POST['']))
-                        {
-                            echo"la scène a été ajouté";
-                        }
-                    ?>
-                </select>   
-                
-                
-                <input type="submit" name="ajoutprogramme" onclick="Programme_creation(nameprog)" value="Ajouter programme">       
-              
-                
-                
+                </select> 
+                <input type="submit" name="ajoutprogramme" onclick="Programme_creation(nameprog)" value="Ajouter programme">
 
-                
         <?php 
         }  
             // On appelle la méthode déconnexion pour se déconnecter
@@ -176,6 +169,8 @@
         <form action="" method="POST">
             <input type="submit" name="Programme" value="Crée un programme">
         </form> 
+
+      
 
        
 

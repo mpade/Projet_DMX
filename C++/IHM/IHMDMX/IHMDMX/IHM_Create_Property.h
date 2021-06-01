@@ -18,47 +18,40 @@
 #include <QVBoxLayout>
 #include <vector>
 #include <string>
-#include "IHM_Create_Property.h"
 #include <QtWidgets/QApplication>
 
 
-class IHM_Create_Equipement : public QWidget
+class IHM_Create_Property : public QWidget
 {
 	Q_OBJECT                    // Nécessaire pour créer un slot maison
 
 public:
-	IHM_Create_Equipement();
+	IHM_Create_Property(int, QString);
 
 public slots:					// Slots maison
 
 	void Connexionbdd();
-	void Validation();
-
+	void Validation2();
+	void NbVoie();
 
 private:
 
-	QLineEdit *LE_Name;
-	QLineEdit *LE_Voies;
-	QLineEdit *LE_AdressEquipement;
-
-	QLabel *L_Name;
-	QLabel *L_Voies;
-	QLabel *L_AdressEquipement;
-	QLabel *Text1;
-	QLabel *test;
+	int NbVoies;
+	int Order;
+	int Description;
+	int Voies;
 
 	QString Name;
-	QString Voies;
-	QString AdressEquipement;
+	QString Order0;
+	QString Description0;
 
-	QPushButton * B_Valider;
-
-	QGridLayout *grid2;
+	std::vector<QLineEdit*>a;
+	std::vector<QLineEdit*>b;
 
 	MYSQL *mySQL;
-	MYSQL_ROW row = NULL;
-	MYSQL_ROW row1 = NULL;
-	MYSQL_RES *result = NULL;
-	MYSQL_RES *result1 = NULL;
+	MYSQL_ROW row2 = NULL;
+	MYSQL_RES *result2 = NULL;
+
+	QPushButton *valider;
 
 };
