@@ -43,7 +43,7 @@
 <!DOCTYPE html>
     <html lang="fr">
         <head>
-            <link rel="stylesheet" href="CSS/style.css">
+            <link rel="stylesheet" href="CSS/style2.css">
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -81,31 +81,19 @@
     // Permet de supprimer les programmes présents dans la base de données
     if (isset($_GET["voirprogramme"])) 
     {
-
-        foreach ($prog as $objetprogramme) 
-        {
-            if ($objetprogramme->getId() == $_GET["voirprogramme"]) 
-            {
-                $deleteprogrammes = $bdd->prepare("DELETE FROM programme WHERE Id_Programme =:id");
-                $deleteprogrammes->execute([
-                'id' => $objetprogramme->getId()
-                ]);?>
-                <script> function timedRefresh(timeoutPeriod) {
-                    setTimeout("location.reload(true);",timeoutPeriod);
-                }window.onload = timedRefresh(0); </script><?php
-                
-            }
-        }
+                    $req = $bdd->prepare("DELETE FROM sceneprogramme WHERE Id_Programme =:id; DELETE FROM programme WHERE Id_Programme =:id");
+                    $req->bindParam("id",$_GET["voirprogramme"],PDO::PARAM_INT);
+                    $req->execute();     
     }    
     
     // Permet de modifié le nom des programme présent dans la base de données
-    if (isset($_GET["modifieprogramme"])) 
+    if (isset($_POST["modifieprogramme"])) 
     {
     
         
         foreach ($prog as $objetprogramme) 
         {
-            if ($objetprogramme->getId() == $_GET["modifieprogramme"]) 
+            if ($objetprogramme->getId() == $_POST["modifieprogramme"]) 
             {
                 
                 ?>
@@ -139,8 +127,6 @@
                 Choisir les scènes
                
                     <?php
-                       
-                            echo "toto";
                             foreach ($scene as $objectscene)
                             {    echo  $objectscene->getNom();
                                 ?><input type="checkbox" name="modifieprogramme[]" id="namescene" value="<?php echo  $objectscene->getId() ?>"/>
@@ -213,7 +199,7 @@
        
 
         <!-- Formulaire permettant de supprimer un programme" -->
-        <form action="" methode="GET">
+        <form action="" method="GET">
             <select name="voirprogramme">
                 <?php
                     echo '<option value="0">Choisir un programme</option>';
@@ -240,12 +226,7 @@
                 ?>
             </select>
             <input type="submit" value=" Modifier programme"></input>
-        </form>  
-
-        <!-- Formulaire permettant d'accéder aux listes drag'n drop -->
-        <form action="drag.js" method="POST">
-            <input type="submit" name="drag" value="Drag'n Drop">
-        </form> 
+        </form>   
     </body>
 </html>
 

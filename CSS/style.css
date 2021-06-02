@@ -1,7 +1,26 @@
-.creer,.modifie{
-    text-align: center;
-}
-input [type=submit]{
-    text-align: center;
+body{
+    background:  url("../image/bg.jpg") no-repeat center fixed; 
+    margin:0;
+    padding:0;
     
+    -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+    background-size: cover; /* version standardisée */
 }
+.connexion,.boxform{
+    text-align: center;
+    margin-top: 22%;
+
+}
+input{
+    width: 20%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    background-color: orange;
+    color: black;
+}
+.echo{
+    text-align: center;
+}
+    
+  
