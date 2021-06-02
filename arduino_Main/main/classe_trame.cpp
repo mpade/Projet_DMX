@@ -6,8 +6,11 @@ pota value;
 
 int trame::ecritureTrame(int numSpot)
 {
+  //récupération et écriture du Spot
   Serial.print(numSpot);
   Serial.print("::");
+
+  //écriture des valeurs des pota
   for (int i=0; i<=9; i++)
   { 
     Serial.print(value.getPotaValue(i));
