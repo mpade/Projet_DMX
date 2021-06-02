@@ -1,4 +1,4 @@
- #include <Arduino.h>
+#include <Arduino.h>
 #include "class_menu.h"
 #include "class_joystick.h"
 #include "class_trame.h"
@@ -7,11 +7,14 @@ int menu::Menu(int nbSpots)
 {
 
   joystick Y;
+  joystick X;
   joystick Button;
   trame trame;
-  int valY = Y.getYValue();        
+  int valY = Y.getYValue();      
   int valB = Button.getBValue(); 
   int choixSpot = 1;
+
+  
   Serial.print("sélectionner le spot ");
   Serial.println(choixSpot);
   
@@ -19,6 +22,7 @@ int menu::Menu(int nbSpots)
     {
       valY = Y.getYValue();        
       valB = Button.getBValue(); 
+
         if (valB == 0)
           {   
             trame.ecritureTrame(choixSpot);
