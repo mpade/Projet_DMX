@@ -1,4 +1,33 @@
 body{
-    background-color: crimson;
+    background:  url("../image/bg.jpg") no-repeat center fixed; 
+    margin:0;
+    padding:0;
     
+    -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+    background-size: cover; /* version standardisée */
+}
+.centrage{
+    text-align: center;
+}
+.creer{
+    text-align: center;
+    margin-top: 1%;
+}
+.deconnexion{
+    text-align: right;
+    margin-top: 1%;
+    margin-right: 1%;
+}
+.supprimer{
+    text-align: center;
+    margin-top: 1%;
+}
+.modifie{
+    text-align: center;
+    margin-top: 1%;
+}
+.ajoutprog{
+    text-align: center;
+    margin-top: 10%;
+    color : white;
 }

@@ -53,6 +53,12 @@
             </script>
         </head>
     <body>
+    <div class="deconnexion">
+            <!-- Formulaire de déconnexion "bouton se déconecter" -->
+            <form action="" method="POST">
+                <input type="submit" name="deconnexion" value="Se déconnecter">
+            </form> 
+        </div>
     <?php
 
     // Requête permettant d'aller chercher tous les programmes en base de données 
@@ -87,13 +93,13 @@
     }    
     
     // Permet de modifié le nom des programme présent dans la base de données
-    if (isset($_POST["modifieprogramme"])) 
+    if (isset($_GET["modifieprogramme"])) 
     {
     
         
         foreach ($prog as $objetprogramme) 
         {
-            if ($objetprogramme->getId() == $_POST["modifieprogramme"]) 
+            if ($objetprogramme->getId() == $_GET["modifieprogramme"]) 
             {
                 
                 ?>
@@ -102,6 +108,7 @@
                     <input type="submit"  name="nommodifie" value="Valider" >
                 </form>
                 <?php
+                
                 if(isset($_POST['nommodifie']))
                 {
                     $bdd->query("UPDATE `programme` SET `Nom`='".$_POST['nommodifiee']."'WHERE `Id_Programme` = '".$objetprogramme->getId()."'");
@@ -113,34 +120,37 @@
         }
     }
         ?>
-    <div class="creer">
+    
     <?php 
       
+        
         // Permet de créer des programme et enregistrer dans la base de données
         if(isset($_POST['Programme']))
         {
             
             ?>
-                <!-- <form action="" method="POST"> -->
-                <form action="" method="POST">
-                <input type="text" name="nomprogramme" placeholder="Nom du programme" id="nameprog">
-                Choisir les scènes
-               
-                    <?php
-                            foreach ($scene as $objectscene)
-                            {    echo  $objectscene->getNom();
-                                ?><input type="checkbox" name="modifieprogramme[]" id="namescene" value="<?php echo  $objectscene->getId() ?>"/>
-                               
-                                <?php 
-                            }
-                        
-                        
-                    ?>
-                 
+                <div class="ajoutprog">
+                    <!-- <form action="" method="POST"> -->
+                    <form action="" method="POST">
+                    <input type="text" name="nomprogramme" placeholder="Nom du programme" id="nameprog">
+                    Choisir les scènes à ajouter : 
+                
+                        <?php
+                                foreach ($scene as $objectscene)
+                                {    echo  $objectscene->getNom();
+                                    ?><input type="checkbox" name="modifieprogramme[]" id="namescene" value="<?php echo  $objectscene->getId() ?>"/>
+                                
+                                    <?php 
+                                }
+                            
+                            
+                        ?>
+                    
 
-                <input type="submit" name="ajoutprogramme" value="Ajouter programme">
-                </form> 
-        </div>                        
+                    <input type="submit" name="ajoutprogramme" value="Ajouter programme">
+                    </form> 
+                </div>
+                             
 
 
         <?php 
@@ -166,11 +176,6 @@
                     $checkoptions .= ",".$idScene;
                 }
             }
-
-           
-           
-
-
             echo "voici les id scenes : ".$checkoptions;
         }
 
@@ -184,49 +189,51 @@
             ################<!-- PARTIE 2 -->###################
             ####################################################   
         ?> 
-        <!-- Formulaire de déconnexion "bouton se déconecter" -->
-        <form action="" method="POST">
-            <input type="submit" name="deconnexion" value="Se déconnecter">
-        </form> 
 
-        <!-- Formulaire permettant de crée un programme" -->
-        <form action="" method="POST">
-            <input type="submit" name="Programme" value="Crée un programme">
-        </form> 
-
-      
-
-       
-
-        <!-- Formulaire permettant de supprimer un programme" -->
-        <form action="" method="GET">
-            <select name="voirprogramme">
-                <?php
-                    echo '<option value="0">Choisir un programme</option>';
-                    foreach ($prog as $objectprogramme)
-                    { 
-                        echo '<option value="' . $objectprogramme->getId() . '">' . $objectprogramme->getNom() . '</option>';
-                    }
-                ?>
-            </select>
-            <input type="submit" value="Supprimer programme"></input>
-            
-        </form>
+        <div class="creer">
+            <!-- Formulaire permettant de crée un programme" -->
+            <form action="" method="POST">
+                <input type="submit" name="Programme" value="Crée un programme">
+            </form> 
+        </div>
         
-        <!-- Formulaire permettant de modifié le nom du programme -->
-        <form action="" methode="GET">
-            <select name="modifieprogramme">
-                <?php
-                    echo '<option value="0">Choisir un programme</option>';
-                    foreach ($prog as $objectprogramme)
-                    { 
-                        echo '<option value="' . $objectprogramme->getId() . '">' . $objectprogramme->getNom() . '</option>';
-                    }
-                    
-                ?>
-            </select>
-            <input type="submit" value=" Modifier programme"></input>
-        </form>   
+
+        
+        <div class="supprimer">
+            <!-- Formulaire permettant de supprimer un programme" -->
+            <form action="" method="GET">
+                <select name="voirprogramme">
+                    <?php
+                        echo '<option value="0">Choisir un programme</option>';
+                        foreach ($prog as $objectprogramme)
+                        { 
+                            echo '<option value="' . $objectprogramme->getId() . '">' . $objectprogramme->getNom() . '</option>';
+                        }
+                    ?>
+                </select>
+                <input type="submit" value="Supprimer programme"></input>
+                
+            </form>
+        </div>
+        
+        <div class="modifie">
+            <!-- Formulaire permettant de modifié le nom du programme -->
+            <form action="" methode="GET">
+                <select name="modifieprogramme">
+                    <?php
+                        echo '<option value="0">Choisir un programme</option>';
+                        foreach ($prog as $objectprogramme)
+                        { 
+                            echo '<option value="' . $objectprogramme->getId() . '">' . $objectprogramme->getNom() . '</option>';
+                        }
+                        
+                    ?>
+                </select>
+                <input type="submit" value=" Modifier programme"></input>
+            </form>
+        </div>
+          
+        
     </body>
 </html>
 
