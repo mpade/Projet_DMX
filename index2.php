@@ -43,6 +43,7 @@
 <!DOCTYPE html>
     <html lang="fr">
         <head>
+            <link rel="stylesheet" href="CSS/style.css">
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,7 +66,6 @@
      while($selectscenes = $selectscene->fetch())
      {
          $scene[$sceneindex++] = new gestion($selectscenes['Id_Scene'], $selectscenes['Nom']);
-         
      }
     // Boucle permettant d'afficher dans la liste déroulante les programmes présents sur la base de données
     while($selectprogramme = $selectprogrammes->fetch()) 
@@ -97,7 +97,7 @@
             }
         }
     }    
-
+    
     // Permet de modifié le nom des programme présent dans la base de données
     if (isset($_GET["modifieprogramme"])) 
     {
@@ -125,30 +125,69 @@
         }
     }
         ?>
-
+    <div class="creer">
     <?php 
-            
+      
         // Permet de créer des programme et enregistrer dans la base de données
         if(isset($_POST['Programme']))
         {
             
             ?>
                 <!-- <form action="" method="POST"> -->
+                <form action="" method="POST">
                 <input type="text" name="nomprogramme" placeholder="Nom du programme" id="nameprog">
-                
-                <select name="modifieprogramme" id="namescene">
+                Choisir les scènes
+               
                     <?php
-                        echo '<option value="0">Choisir les scènes</option>';
-                        foreach ($scene as $objectscene)
-                        { 
-                            echo '<option value="' . $objectscene->getId() . '">' . $objectscene->getNom() . '</option>';
-                        }
+                       
+                            echo "toto";
+                            foreach ($scene as $objectscene)
+                            {    echo  $objectscene->getNom();
+                                ?><input type="checkbox" name="modifieprogramme[]" id="namescene" value="<?php echo  $objectscene->getId() ?>"/>
+                               
+                                <?php 
+                            }
+                        
                         
                     ?>
-                </select> 
-                <input type="submit" name="ajoutprogramme" onclick="Programme_creation(nameprog)" value="Ajouter programme">
+                 
+
+                <input type="submit" name="ajoutprogramme" value="Ajouter programme">
+                </form> 
+        </div>                        
+
+
         <?php 
         }  
+
+
+        if(isset($_POST['ajoutprogramme']))
+        { 
+            $Program = new Programme($bdd);
+            $Program-> CreeProgramme($_SESSION['email'],$_POST['nomprogramme']) ;
+            foreach ($_POST['modifieprogramme'] as $idScene)
+            {   
+
+
+                //Requet d'ajout dse idScene dans la tablescne programme
+                $Program->AddSceneByID($idScene);
+
+                if(!isset($checkoptions)){
+                    $checkoptions = $idScene;
+
+                }else{
+
+                    $checkoptions .= ",".$idScene;
+                }
+            }
+
+           
+           
+
+
+            echo "voici les id scenes : ".$checkoptions;
+        }
+
             // On appelle la méthode déconnexion pour se déconnecter
             if(isset($_POST['deconnexion']))
             {

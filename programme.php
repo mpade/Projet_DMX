@@ -9,7 +9,7 @@ class Programme
 {
     
     private $_AfficherProgramme;
-    
+    private $_id;
     
      // Constructeur
      public function __construct($bdd)
@@ -17,20 +17,34 @@ class Programme
         $this->_bdd = $bdd;
      }
     // Fonction permettant de crée un programme.
-    function CreeProgramme($Email,$Nom,$Scene) 
+    function CreeProgramme($Email,$Nom) 
     {
 
         
 
         // Requête SQL, permettant d'ajouter un programme dans la base de données.
-
+        $this->_bdd->beginTransaction();
         $ajoutprogramme = $this->_bdd->query('INSERT INTO `programme`(`Id_Programme`, `Nom`) VALUES (NULL,"'.$Nom.'")');
-        $SelectId_Programme = $this->_bdd->query("SELECT `Id_Programme` FROM `programme` WHERE `Nom` = '".$Nom."'");
-        $select = $SelectId_Programme->fetch();
 
-        $ajoutprogrammes = $this->_bdd->query('INSERT INTO `sceneprogramme`(`Id_SceneProgramme`, `Id_Scene`, `Id_Programme`) VALUES (NULL,'.$Scene.','.$select["Id_Programme"].')');
-        
+        $Result = $this->_bdd->query($ajoutprogramme);
+        $lastID = $this->_bdd->lastInsertId();
+        if($lastID){ 
+            $this->_id = $lastID;
+            $this->_bdd->commit();
+           
+        }else{
+            $this->_bdd->rollback();
+            echo "erreur anormal create programe.php ".$req;
+            return null;
+        }
+      
        
+
+    }
+
+    function AddSceneByID($idScene){
+
+      $this->_bdd->query('INSERT INTO `sceneprogramme`(`Id_SceneProgramme`, `Id_Scene`, `Id_Programme`) VALUES (NULL,'.$idScene.','.$this->_id.')');
 
     }
 
