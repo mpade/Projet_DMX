@@ -11,7 +11,7 @@ int trame::ecritureTrame(int numSpot)
   Serial.print("::");
 
   //écriture des valeurs des pota
-  for (int i=0; i<=9; i++)
+  for (int i=0; i<=8; i++)
   { 
     Serial.print(value.getPotaValue(i));
     Serial.print(":");
