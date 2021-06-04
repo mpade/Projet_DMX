@@ -20,21 +20,17 @@ IHM_Modifier_Equipement::IHM_Modifier_Equipement() : QWidget()																		
 	B_Modif_Valider = new QPushButton("Valider", this);
 	ListAfficherEquipement = new QListWidget();
 	refresh = new QPushButton("Actualiser", this);
-	m_LConnexionBdd = new QLabel("Resultat Liaison BDD", this);
 
 
 
 	/* Position des Widgets */
 	grid2->addWidget(ListAfficherEquipement, 1, 1, 1, 1);
 	grid2->addWidget(LE_Modif_Name, 2, 2, 1, 1);
-	grid2->addWidget(LE_Modif_Voies, 3, 2, 1, 1);
-	grid2->addWidget(LE_Modif_AdressEquipement, 4, 2, 1, 1);
+	grid2->addWidget(LE_Modif_AdressEquipement, 3, 2, 1, 1);
 	grid2->addWidget(L_Name, 2, 1, 1, 1);
-	grid2->addWidget(L_Voies, 3, 1, 1, 1);
-	grid2->addWidget(L_AdressEquipement, 4, 1, 1, 1);
+	grid2->addWidget(L_AdressEquipement, 3, 1, 1, 1);
 	grid2->addWidget(B_Modif_Valider, 5, 2, 2, 2);
 	grid2->addWidget(refresh, 0, 3, 1, 3);
-	grid2->addWidget(m_LConnexionBdd, 6, 2, 2, 2);
 
 
 	setLayout(grid2);
@@ -43,6 +39,7 @@ IHM_Modifier_Equipement::IHM_Modifier_Equipement() : QWidget()																		
 	/* Connexions Signal - Slot */
 	QObject::connect(B_Modif_Valider, SIGNAL(clicked()), this, SLOT(Modif_Validation()));
 	QObject::connect(ListAfficherEquipement, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(Placeholder()));
+	QObject::connect(refresh, SIGNAL(clicked()), this, SLOT(Refresh()));
 
 
 	/* Méthode éxecutée au lancement de l'IHM */
@@ -59,10 +56,6 @@ void IHM_Modifier_Equipement::Connexionbdd()
 	if (!mysql_real_connect(mySQL, "192.168.64.102", "DMX", "dmx", "Projet_DMX", 0, NULL, 0))
 	{
 		m_LConnexionBdd->setText("Erreur de connexion a la base");
-	}
-	else
-	{
-		m_LConnexionBdd->setText("Connexion a la bdd reussi");
 	}
 
 }
@@ -113,9 +106,7 @@ void IHM_Modifier_Equipement::Placeholder()
 		Old_Name = Name.c_str();
 		LE_Modif_Name->setPlaceholderText(Old_Name);
 
-		std::string A_Voies = std::to_string(atoi(row[2]));
-		Old_Voies = A_Voies.c_str();
-		LE_Modif_Voies->setPlaceholderText(Old_Voies);
+
 
 		std::string RequetAdressequipement = "SELECT * FROM `adressequipement` WHERE `Id_Equipement` = '" + std::to_string(atoi(row[0])) + "'";
 		mysql_query(mySQL, RequetAdressequipement.c_str());
@@ -125,15 +116,10 @@ void IHM_Modifier_Equipement::Placeholder()
 			while ((rows = mysql_fetch_row(results))) {
 
 				std::string A_AdressEquipement = std::to_string(atoi(rows[1]));
-				Old_AdressEquipement = A_AdressEquipement.c_str() ;
-				
+				Old_AdressEquipement = A_AdressEquipement.c_str();
 				LE_Modif_AdressEquipement->setPlaceholderText(Old_AdressEquipement);
-			};
-
-			std::string RequetProperty = "SELECT * FROM `property` WHERE `Id_Equipement` = '" + std::to_string(atoi(row[0])) + "'";
-			mysql_query(mySQL, RequetProperty.c_str());		
+			};	
 	}	
-		
 	mysql_close(mySQL);
 }
 
@@ -146,12 +132,11 @@ void IHM_Modifier_Equipement::Modif_Validation()
 
 	(!mysql_real_connect(mySQL, "192.168.64.102", "DMX", "dmx", "Projet_DMX", 0, NULL, 0));
 	
-
  	Name = LE_Modif_Name->text();
 	Voies = LE_Modif_Voies->text();
 	AdressEquipement = LE_Modif_AdressEquipement->text();
 
-	std::string update_equipement = "UPDATE `equipement` SET `Name`= '" + Name.toStdString() + "', `Nb_voie` = '" + Voies.toStdString() + "' WHERE `Id_Equipement` = '" + std::to_string(atoi(row[0])) + "'";
+	std::string update_equipement = "UPDATE `equipement` SET `Name`= '" + Name.toStdString() + "' WHERE `Id_Equipement` = '" + std::to_string(atoi(row[0])) + "'";
 	mysql_query(mySQL, update_equipement.c_str());
 	result1 = mysql_store_result(mySQL);
 
@@ -163,6 +148,7 @@ void IHM_Modifier_Equipement::Modif_Validation()
 	LE_Modif_Name->clear();
 	LE_Modif_Voies->clear();
 	LE_Modif_AdressEquipement->clear();
-	mysql_close(mySQL);
+
+	this->close();
 };
 

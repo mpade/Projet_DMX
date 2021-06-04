@@ -56,7 +56,7 @@ void IHM_Test_En_Directe::TestDirecte()
 	row = mysql_fetch_row(result);
 
 	int x = 65, y = 20;
-
+	
 	for (int i = 0; i < NbVoies; i++) {
 		e.push_back(new QSlider(Qt::Vertical, this));
 		a.push_back(new QLCDNumber(this));
