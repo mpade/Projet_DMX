@@ -17,12 +17,17 @@ bool Client::writeData(QByteArray data)
 {
 	if (socket->state() == QAbstractSocket::ConnectedState)
 	{
-		socket->write(IntToArray(data.size())); //write size of data
+		//socket->write(IntToArray(data.size())); //write size of data
 		socket->write(data); //write the data itself
 		return socket->waitForBytesWritten();
 	}
 	else
 		return false;
+}
+
+void Client::closeToHost()
+{
+	socket->close();
 }
 
 QByteArray IntToArray(qint32 source) //Use qint32 to ensure that the number have 4 bytes

@@ -3,7 +3,7 @@
 IHM_Delete_Sequence::IHM_Delete_Sequence() : QWidget()																								// spécification du constructeur
 {
 	mysql = mysql_init(NULL);
-	tcp = new QTcpSocket();
+	tcp = new Client();
 	if (!mysql_real_connect(mysql, "192.168.64.102", "DMX", "dmx", "Projet_DMX", 0, NULL, 0))
 	{
 		QMessageBox msgBox;
@@ -74,6 +74,13 @@ void IHM_Delete_Sequence::getDeleteSequence()
 
 void IHM_Delete_Sequence::gettcptest()
 {
+	if (tcp->connectToHost("192.168.65.67"))
+	{
+
+		tcp->writeData("t");
+		tcp->closeToHost();
+	}
+
 	if (listSequence->selectedItems().count() == 1) {
 		trame.clear();
 		QListWidgetItem *item = listSequence->currentItem();
@@ -126,16 +133,16 @@ void IHM_Delete_Sequence::gettcptest()
 					}
 				}
 			}
-			for(int i = 0; i < trame.size(); i++){
-				Sleep(3);
-			tcp->connectToHost("192.168.65.67", 9012);
-			if (tcp->waitForConnected(1000))
-			{
-				tcp->write((char*)trame[i].c_str());
-				tcp->write((char*)trame[i].c_str());
-			}
-			tcp->write((char*)trame[i].c_str());
-			tcp->close();
+			for (int i = 0; i < trame.size(); i++) {
+				
+				QString tradata = trame[i].c_str();
+				if(tcp->connectToHost("192.168.65.67"))
+				{
+
+					tcp->writeData(tradata.toUtf8());
+					tcp->closeToHost();
+				}
+
 			}
 	}
 }

@@ -1,8 +1,9 @@
 #include "IHM_Create_Scene.h"
+
 IHM_Create_Scene::IHM_Create_Scene() {
 
 	mysql = mysql_init(NULL);
-
+	tcps = new Client();
 	if (!mysql_real_connect(mysql, "192.168.64.102", "DMX", "dmx", "Projet_DMX", 0, NULL, 0))
 	{
 		QMessageBox msgBox;
@@ -11,6 +12,7 @@ IHM_Create_Scene::IHM_Create_Scene() {
 	}
 	else
 	{
+		
 		grid = new QGridLayout;
 		listWidgetSequence = new QListWidget();
 		listWidgetSequenceScene = new QListWidget();
@@ -78,13 +80,84 @@ void IHM_Create_Scene::gettest()
 		if (listWidgetSequence->selectedItems().count() == 1) {
 			i = listWidgetSequence->currentRow();
 			QListWidgetItem *item= listWidgetSequence->takeItem(i);
+			std::string name = item->text().toStdString();
 			listWidgetSequenceScene->addItem(item);
+			if (tcps->connectToHost("192.168.65.67"))
+			{
+
+				tcps->writeData("t");
+				tcps->closeToHost();
+			}
+			trame.clear();
+			std::string requete = "SELECT `Id_Sequence`, `Duree` FROM `sequence` WHERE `name` = '" + name + "'";
+			mysql_query(mysql, requete.c_str());
+
+			MYSQL_RES *result = NULL;
+			MYSQL_ROW row;
+			MYSQL_RES *results = NULL;
+			MYSQL_ROW rows;
+			MYSQL_RES *resultss = NULL;
+			MYSQL_ROW rowss;
+			MYSQL_RES *resultsss = NULL;
+			MYSQL_ROW rowsss;
+			result = mysql_store_result(mysql);
+
+			row = mysql_fetch_row(result);
+			int idsequence = atoi(row[0]);
+			int duree = atoi(row[1]);
+			requete = "SELECT `Id_AdressEquipement` FROM `sequenceusedequipement` WHERE `Id_Sequence` =  '" + std::to_string(idsequence) + "'";
+			mysql_query(mysql, requete.c_str());
+			result = mysql_store_result(mysql);
+
+			while ((row = mysql_fetch_row(result)))
+			{
+
+				requete = "SELECT `Adresse`,`Id_Equipement` FROM `adressequipement` WHERE `Id_AdressEquipement` = '" + std::to_string(atoi(row[0])) + "'";
+				mysql_query(mysql, requete.c_str());
+				results = mysql_store_result(mysql);
+				int addresss = 0;
+				while ((rows = mysql_fetch_row(results)))
+				{
+					addresss = atoi(rows[0]);
+					requete = "SELECT `Id_Property`,`Order` FROM `property` WHERE `Id_Equipement` = '" + std::to_string(atoi(rows[1])) + "' ORDER BY `property`.`Order` ASC ";
+					mysql_query(mysql, requete.c_str());
+					resultss = mysql_store_result(mysql);
+					while ((rowss = mysql_fetch_row(resultss)))
+					{
+						requete = "SELECT `value` FROM `valueproper` WHERE `id_property` = '" + std::to_string(atoi(rowss[0])) + "' and `id_sequence` =  '" + std::to_string(idsequence) + "'";
+						mysql_query(mysql, requete.c_str());
+						resultsss = mysql_store_result(mysql);
+						rowsss = mysql_fetch_row(resultsss);
+
+						addresss += atoi(rowss[1]) - 1;
+						std::string tramemou = "CV:" + std::to_string(addresss) + "," + std::to_string(atoi(rowsss[0]));
+						trame.push_back(tramemou);
+
+						addresss = atoi(rows[0]);
+
+					}
+				}
+			}
+			trame.push_back("TE:"+std::to_string(duree));
+			for (int i = 0; i < trame.size(); i++) {
+
+				QString tradata = trame[i].c_str();
+				if (tcps->connectToHost("192.168.65.67"))
+				{
+
+					tcps->writeData(tradata.toUtf8());
+					tcps->closeToHost();
+				}
+
+			}
 			listWidgetSequence->clearSelection();
 			
 		}
 		if (listWidgetSequenceScene->selectedItems().count() == 1) {
 			QListWidgetItem *item = listWidgetSequenceScene->takeItem(listWidgetSequenceScene->currentRow());
+			
 			listWidgetSequence->addItem(item);
+			
 			listWidgetSequenceScene->clearSelection();
 		}
 

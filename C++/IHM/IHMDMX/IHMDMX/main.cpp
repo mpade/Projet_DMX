@@ -1,8 +1,11 @@
+
 #include "IHMDMX.h"
 #include "IHMDMX2.h"
 #include <QtWidgets/QApplication>
 #include "main.h"
 #include <QPushButton>
+#include "Client.h"
+
 int main(int argc, char *argv[])
 {
 

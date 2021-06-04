@@ -76,6 +76,7 @@ void IHM_SrolBar_Sequence::getValide() {
 	tcp->connectToHost("192.168.65.67", 9012);
 	tcp->write("t");
 	tcp->close();
+	tramemou.clear();
 	this->close();
 	
 }
