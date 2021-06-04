@@ -117,6 +117,9 @@ void IHMDMX::supprimer_equipement()
 
 			std::string requetDelete3 = "DELETE FROM `equipement` WHERE `Id_Equipement` = '" + std::to_string(atoi(row[0])) + "'";
 			mysql_query(mySQL, requetDelete3.c_str());
+
+			std::string requetDelete4 = "DELETE FROM `property` WHERE `Id_Equipement` =  '" + std::to_string(atoi(row[0])) + "'";
+			mysql_query(mySQL, requetDelete4.c_str());
 		}
 
 	}
