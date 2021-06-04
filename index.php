@@ -15,15 +15,13 @@
         <title>Accueil</title>
     </head>
     <body>
-        <div class="boxform">
-            <div class="connexion">
-                <!-- Formulaire de connexion -->
-                <form action="index.php" method="POST">
-                    <input type="text" name="email" placeholder="Adresse e-mail">
-                    <input type="password" name="pass" placeholder="Mot de passe">
-                    <input type="submit" name="connexion" value="Se connecter">
-                </form>
-            </div>
+        <div class="connexion">
+            <!-- Formulaire de connexion -->
+            <form action="index.php" method="POST">
+                <input type="text" name="email" placeholder="Adresse e-mail">
+                <input type="password" name="pass" placeholder="Mot de passe">
+                <input type="submit" name="connexion" value="Se connecter">
+            </form>
         </div>
     </body>
 </html>

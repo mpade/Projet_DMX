@@ -76,9 +76,19 @@
     // Boucle permettant d'afficher dans la liste déroulante les programmes présents sur la base de données
     while($selectprogramme = $selectprogrammes->fetch()) 
     {
-
         $prog[$programmeindex++] = new gestion($selectprogramme['Id_Programme'], $selectprogramme['Nom']);
     }
+
+    // BOUCLES PERMETTANT DE DE RECUPERER LES SCENES FAISANT PARTIT DU PROGRAMME SELECTIONNE.
+
+            // Boucle permettant d'afficher dans la liste déroulante les programmes présents sur la base de données
+            // while($selectprogramme = $selectprogrammes->fetch()) 
+            // {
+
+            //     $prog[$programmeindex++] = new gestion($selectprogramme['Id_Programme'], $selectprogramme['Nom']);
+            // }
+        
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -89,7 +99,8 @@
     {
                     $req = $bdd->prepare("DELETE FROM sceneprogramme WHERE Id_Programme =:id; DELETE FROM programme WHERE Id_Programme =:id");
                     $req->bindParam("id",$_GET["voirprogramme"],PDO::PARAM_INT);
-                    $req->execute();     
+                    $req->execute(); 
+                    echo"programme supprimé avec succès";    
     }    
     
     // Permet de modifié le nom des programme présent dans la base de données
@@ -103,21 +114,26 @@
             {
                 
                 ?>
+                <div class="modifier">
                 <form action="" method="POST">
                     <input type="text" name="nommodifiee" placeholder="Nouveau nom du programme">
-                    <input type="submit"  name="nommodifie" value="Valider" >
+                    <input type="submit"  name="nommodifie" value="Valider la modification" >
                 </form>
+                </div>
                 <?php
                 
+                // FOREACH POUR RECUPERER LES SCENES DANS UN PROGRAMME. 
+
                 if(isset($_POST['nommodifie']))
                 {
                     $bdd->query("UPDATE `programme` SET `Nom`='".$_POST['nommodifiee']."'WHERE `Id_Programme` = '".$objetprogramme->getId()."'");
-                    
+                    echo"Le nom du programme a été modifié avec succès";
                 ?>   <?php
                 
                 } 
             }
         }
+     
     }
         ?>
     
@@ -177,6 +193,7 @@
                 }
             }
             echo "voici les id scenes : ".$checkoptions;
+            echo "Le programme à été crée avec succès";
         }
 
             // On appelle la méthode déconnexion pour se déconnecter
