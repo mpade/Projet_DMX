@@ -15,7 +15,8 @@
 #include <string>
 #include <QtWidgets/QApplication>
 #include <QSlider>
-#include <qtcpsocket.h>
+
+#include "Client.h"
 class IHM_Delete_Sequence : public QWidget
 {
 	Q_OBJECT                    // Nécessaire pour créer un slot maison
@@ -37,7 +38,8 @@ private:
 	QListWidget *listSequence;
 	QVBoxLayout *vbox;
 	QGridLayout *grid;
-	QTcpSocket *tcp;
+	
 	std::vector<std::string> trame;
+	Client *tcp;
 };
 

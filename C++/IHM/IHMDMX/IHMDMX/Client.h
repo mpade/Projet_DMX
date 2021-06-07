@@ -1,6 +1,6 @@
 #include <QtCore>
 #include <QtNetwork>
-
+#pragma once
 class Client : public QObject
 {
 	Q_OBJECT
@@ -10,7 +10,7 @@ public:
 public slots:
 	bool connectToHost(QString host);
 	bool writeData(QByteArray data);
-
+	void closeToHost();
 private:
 	QTcpSocket *socket;
 };

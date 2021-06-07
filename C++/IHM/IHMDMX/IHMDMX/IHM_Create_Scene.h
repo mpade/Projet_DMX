@@ -7,6 +7,7 @@
 #include <QMessageBox>
 #include "mysql.h"
 #include <QLineEdit>
+#include "Client.h"
 class IHM_Create_Scene :
 	public QWidget
 {
@@ -31,5 +32,7 @@ private:
 	MYSQL *mysql;
 	MYSQL_ROW row = NULL;
 	MYSQL_RES *res = NULL;
+	Client *tcps;
+	std::vector <std::string>trame;
 };
 
