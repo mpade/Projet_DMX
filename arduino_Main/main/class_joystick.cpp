@@ -1,5 +1,5 @@
- #include <Arduino.h>
- #include "class_joystick.h"
+#include <Arduino.h>
+#include "class_joystick.h"
 
  float joystick::getYValue()
   {
