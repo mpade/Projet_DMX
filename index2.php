@@ -82,10 +82,10 @@
     // BOUCLES PERMETTANT DE DE RECUPERER LES SCENES FAISANT PARTIT DU PROGRAMME SELECTIONNE.
 
             // Boucle permettant d'afficher dans la liste déroulante les programmes présents sur la base de données
-            // while($selectprogramme = $selectprogrammes->fetch()) 
+            // while($modifieprogramme = $modifieprogrammes->fetch()) 
             // {
 
-            //     $prog[$programmeindex++] = new gestion($selectprogramme['Id_Programme'], $selectprogramme['Nom']);
+            //     $progs[$programmeindex++] = new gestion($selectprogramme['Id_Programme'], $selectprogramme['Nom']);
             // }
         
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -172,11 +172,14 @@
         <?php 
         }  
 
-
+        
         if(isset($_POST['ajoutprogramme']))
         { 
+            
             $Program = new Programme($bdd);
-            $Program-> CreeProgramme($_SESSION['email'],$_POST['nomprogramme']) ;
+            
+            $Program->CreeProgramme($_SESSION['Email'],$_POST['nomprogramme']);
+            
             foreach ($_POST['modifieprogramme'] as $idScene)
             {   
 
@@ -192,6 +195,7 @@
                     $checkoptions .= ",".$idScene;
                 }
             }
+            
             echo "voici les id scenes : ".$checkoptions;
             echo "Le programme à été crée avec succès";
         }

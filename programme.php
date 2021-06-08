@@ -19,13 +19,15 @@ class Programme
     // Fonction permettant de crée un programme.
     function CreeProgramme($Email,$Nom) 
     { 
-
-        
-
+      
         // Requête SQL, permettant d'ajouter un programme dans la base de données.
         $this->_bdd->beginTransaction();
-        $ajoutprogramme = $this->_bdd->query('INSERT INTO `programme`(`Id_Programme`, `Nom`) VALUES (NULL,"'.$Nom.'")');
-
+        $selectid = $this->_bdd->query("SELECT * FROM `utilisateur` WHERE `Email`= '".$Email."'");
+        
+        $id = $selectid->fetch();
+        
+        $ajoutprogramme = $this->_bdd->query('INSERT INTO `programme`(`Id_Programme`, `Nom`,`Id_Utilisateur`) VALUES (NULL,"'.$Nom.'","'.$id['Id_Utilisateur'].'")');
+        
         $Result = $this->_bdd->query($ajoutprogramme);
         $lastID = $this->_bdd->lastInsertId();
         if($lastID){ 
@@ -37,9 +39,6 @@ class Programme
             echo "erreur anormal create programe.php ".$req;
             return null;
         }
-      
-       
-
     }
 
     function AddSceneByID($idScene){
@@ -47,7 +46,7 @@ class Programme
       $this->_bdd->query('INSERT INTO `sceneprogramme`(`Id_SceneProgramme`, `Id_Scene`, `Id_Programme`) VALUES (NULL,'.$idScene.','.$this->_id.')');
 
     }
-
+    
    
     function ModifierProgramme($Email,$Nom)
     {
