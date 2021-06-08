@@ -12,5 +12,5 @@ void setup() {
 
 void loop() {
   //déclaration des fonctions
-  menu.Menu(12);
+  menu.MenuSpots(12);
 }

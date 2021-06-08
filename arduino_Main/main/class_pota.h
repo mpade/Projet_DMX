@@ -1,7 +1,6 @@
 class pota
 {
   private :
-    int input;
     float PotaValue;
 
   public :
