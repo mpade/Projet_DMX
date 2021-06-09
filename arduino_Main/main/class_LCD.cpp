@@ -19,35 +19,47 @@ int LCD::displaySpot(int SpotNb)
 
 int LCD::displayParameters(int channel, int PotaNb)
   {
+
       lcd.setCursor(1, 0);
       lcd.print("                ");
       switch (channel)
       { 
         case 1 :
+          return(3);
           switch(PotaNb)
           {
+            
             case 1 :
+              Serial.print("valY : ");
+              Serial.println(PotaNb); 
               lcd.setCursor(1, 0);
               lcd.print(PotaNb);
               lcd.print(": HUE");
               break;
               
             case 2 :
+              Serial.print("valY : ");
+              Serial.println(PotaNb); 
               lcd.setCursor(1, 0);
               lcd.print(PotaNb);
-              lcd.print(": SAT");
+              lcd.print(": SATURATION");
               break;
             
             case 3 :
+              Serial.print("valY : ");
+              Serial.println(PotaNb); 
               lcd.setCursor(1, 0);
               lcd.print(PotaNb);
               lcd.print(": INT");
               break;
           }
+          break;
               
         case 2 :
+          return(4);
           switch(PotaNb) 
           {
+            
             case 1 :
               lcd.setCursor(1, 0);
               lcd.print(PotaNb);
@@ -72,10 +84,13 @@ int LCD::displayParameters(int channel, int PotaNb)
               lcd.print(": WHITE");
               break;
           }
+          break;
 
         case 3 :
+          return(4);
           switch(PotaNb) 
           {
+            
             case 1 :
               lcd.setCursor(1, 0);
               lcd.print(PotaNb);
@@ -100,6 +115,7 @@ int LCD::displayParameters(int channel, int PotaNb)
               lcd.print(": DIMMER");
               break;
           }
+          break;
         }
       }
   
