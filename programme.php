@@ -47,65 +47,19 @@ class Programme
 
     }
     
-   
-    function ModifierProgramme($Email,$Nom)
-    {
-
-    }
-
     function setafficherprogramme($Email)
     {
+      
         $selectprogramme = $this->_bdd->query('SELECT programme.Nom FROM programme INNER JOIN utilisateur WHERE programme.Id_Utilisateur = utilisateur.Id_Utilisateur AND utilisateur.Email = "'.$Email.'"');
         $i=0;
-        while($selectprogrammes= $selectprogramme->fetch())
-        {
+        while($selectprogrammes = $selectprogramme->fetch())
+        { 
           $this->_AfficherProgramme[$i] = $selectprogrammes['Nom']; 
-          $i++; 
-          
+          $i++;  
         }
     }
     function getNomProgramme()
     {
-        return $this->_AfficherProgramme;
+      return $this->_AfficherProgramme;
     }
-    // function ModifierProgramme()
-    // {
-    //     // $modifProgramme = $this->_bdd->query('UPDATE `programme` SET `Id_Programme`=?,`Nom`=?,`Id_Utilisateur`=? WHERE 1 ');
-    // }
-    // function ajouterscene($Email,$Nom)
-    // {
-
-    // }
-    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
- // Permet de stocker en com les test des fonctions
- function M(){
-    // $ajoutscene = $this->_bdd->query('INSERT INTO `sceneprogramme`(`Id_SceneProgramme`, `Id_Scene`, `Id_Programme`) VALUES (NULL,"'.$objectscene->getId().'",'.$objetprogramme->getId().')')
-  
-  // $ajoutscene = $this->_bdd->query("INSERT INTO `sceneprogramme`(`Id_Scene`,`Id_Programme`) VALUES ('".$objectscene->getId()."','".$objetprogramme->getId()."')");
-  
-  // Requête SQL, permettant d'ajouter une ou des scènes à un programme présent en base de données.
-  // $ajoutsceneprogramme =('UPDATE `programme` SET `NbScene`=[?]WHERE Id_Utilisateur = ?');
-
-
-  // $clients = $this->$client->query('SELECT * FROM utilisateur');
-
-   // Requête SQL, permettant de sélectionner l'utilisateur connecté.
-  // $selectutilisateur = $this->_bdd->query('SELECT `Email`FROM `utilisateur` WHERE Email = "'.$Email.'"');
-  // $selectutilisateur = $selectutilisateur->fetch();
-}
-
-
