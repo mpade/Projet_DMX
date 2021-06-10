@@ -6,6 +6,7 @@ class TrameManager
 
 private: 
 	std::vector<AdressEquipement*> trame;
+
 	char* dmx[512];
 
 public:
@@ -19,4 +20,3 @@ public:
 
 	std::vector<AdressEquipement*> getAdressEquipement();		// Récupérer l'AdresseEquipement, l'Equipement, La Property
 };
-

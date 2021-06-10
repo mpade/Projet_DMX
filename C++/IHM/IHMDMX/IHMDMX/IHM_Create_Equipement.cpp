@@ -91,6 +91,11 @@ void IHM_Create_Equipement::Validation()
 
 	row1 = mysql_fetch_row(result1);
 
+	AdressEquipement += Voies;
+	
+
+	
+
 	IHM_Create_Property *t = new IHM_Create_Property((atoi(row1[2])), Name);
 	t->show();
 

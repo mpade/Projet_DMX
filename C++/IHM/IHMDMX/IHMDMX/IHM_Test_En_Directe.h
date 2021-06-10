@@ -42,10 +42,13 @@ private:
 
 	int NbVoies;
 	int Adresse;
-	QString Id_Eq;
+
+	int Id_Eq;
+	char *Description;
 
 	std::vector<QSlider*>e;
 	std::vector< QLCDNumber*>a;
+	std::vector< QLabel*>b;
 	std::vector <std::string> tramemou;
 
 	MYSQL *mySQL;
