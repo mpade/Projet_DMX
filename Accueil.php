@@ -24,11 +24,15 @@
     session_start(); 
     include('bdd.php');
     include('gestion.php');
-    include('programme.php');   
+    include('programme.php');
+    include('ClientTCP.php');  
     
     $programme = new programme($bdd);
     $user = new user($bdd);
-    
+    $TCPclients = new TCPclient("192.168.65.67", "9012", $bdd);
+           
+    $TCPclients->getWrite("48");
+
     // $user->setinformations($_SESSION['Email']);
     // echo $user->getNom();
     // echo $user->getPrenom();
@@ -54,12 +58,19 @@
             </script>
         </head>
     <body>
-
+    
     <div class="deconnexion">
         <!-- Formulaire de déconnexion "bouton se déconecter" -->
         <form action="" method="POST">
             <input type="submit" name="deconnexion" value="Se déconnecter">
         </form> 
+    </div>
+
+    <div class ="retour">
+            <!-- Formulaire permettant d'ajouter des scènes dans un programme -->
+            <form action="" method="POST">
+                <input type="submit" name="retour" value="Mettre à jour les données">
+            </form> 
     </div>
 
     <?php
@@ -86,7 +97,7 @@
    
     $selectsceneprogramme = $bdd->query('SELECT * FROM programme INNER JOIN sceneprogramme ON programme.Id_Programme = sceneprogramme.Id_Programme INNER JOIN scene ON sceneprogramme.Id_Scene = scene.Id_Scene WHERE programme.Id_Programme = "'.$_GET['modifieprogramme'].'" ');
     $selectsceneprogrammeindex = 0;
-    
+
     // Boucle permettant d'afficher les scènes faisant du programme sélectionner lors de la modification
     while($selectsceneprogrammes = $selectsceneprogramme->fetch())
     {
@@ -149,8 +160,8 @@
                 $checkoptions .= ",".$idScene;
             }
         }   
-        echo "voici les id scenes : ".$checkoptions;
-        echo "Le programme à été crée avec succès";
+        // echo "voici les id scenes : ".$checkoptions;
+        // echo "Le programme à été crée avec succès";
     }
 
         // Permet de supprimer les programmes présents dans la base de données
@@ -192,7 +203,7 @@
                     if(isset($_POST['nommodifie']))
                     {
                         $bdd->query("UPDATE `programme` SET `Nom`='".$_POST['nommodifiee']."'WHERE `Id_Programme` = '".$objetprogramme->getId()."'");
-                        echo"Le nom du programme a été modifié avec succès";      
+                        // echo"Le nom du programme a été modifié avec succès";      
                     } 
                 }
             } 
@@ -224,8 +235,27 @@
         if(isset($_POST['ajouterscenesprogramme']))
         {
             ?>
-                
+                <!-- rajouter la méthode d'ajout de scène en bdd sans le nom du programme -->
             <?php
+        }
+
+        if(isset($_POST['supprimersceneprogramme']))
+        {
+            ?>
+                <!-- rajouter la méthode de suppresion de scènes dans la bdd sans supprimer le programme -->
+            <?php
+        }
+
+        if(isset($_POST['lancerprogramme']))
+        {
+            $TCPclients = new TCPclient("192.168.65.103", "9012", $bdd);
+            $TCPclients->setConnexion();
+            $TCPclients->getWrite(48);
+        }
+        
+        if(isset($_POST['retour']))
+        {
+            ?> <script>window.location.replace("Accueil.php");</script> <?php
         }
         // On appelle la méthode déconnexion pour se déconnecter
         if(isset($_POST['deconnexion']))
@@ -291,6 +321,21 @@
                 <input type="submit" name="ajouterscenesprogramme" value="Ajouter des scènes">
             </form> 
         </div>
+
+        <div class ="supprimersceneprogramme">
+            <!-- Formulaire permettant d'ajouter des scènes dans un programme -->
+            <form action="" method="POST">
+                <input type="submit" name="supprimersceneprogramme" value="Supprimer des scènes">
+            </form> 
+        </div>
+
+        <div class ="lancerprogramme">
+            <!-- Formulaire permettant d'ajouter des scènes dans un programme -->
+            <form action="" method="POST">
+                <input type="submit" name="lancerprogramme" value="Lancer le programme">
+            </form> 
+        </div>
+        
     </body>
 </html>
 
