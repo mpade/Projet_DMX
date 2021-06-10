@@ -29,8 +29,8 @@
     
     $programme = new programme($bdd);
     $user = new user($bdd);
-    $TCPclients = new TCPclient("192.168.65.67", "9012", $bdd);
-           
+    $TCPclients = new TCPclient("192.168.65.103", "9012", $bdd);
+    $TCPclients->setConnexion();
     $TCPclients->getWrite("48");
 
     // $user->setinformations($_SESSION['Email']);

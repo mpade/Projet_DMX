@@ -66,29 +66,20 @@ class TCPclient{
                             $selectValues = $selectValue->fetch();
                             $adresse += $selectIdPropertyOrders['Order'] -1;
                             
-                            $trame[$i] =  "CV:".$adresse.",".$selectValues['value'];
+                            $trame .=  "CV:".$adresse.",".$selectValues['value'];
                             $i++;
                         }
                     }
                 }
                 $selectduree = $this->_bdd->query("SELECT `Duree` FROM `sequence` WHERE `Id_Sequence` = '".$selectIdSequences['Id_Sequence']."'");
                 $selectdurees = $selectduree->fetch();
-                $trame[$i] =  "TE:".$selectdurees['Duree'];
+                $trame .=  "TE:".$selectdurees['Duree'];
                 $i++;
             }
         }
+        // echo $trame;
+        socket_write($this->socket, $trame, strlen($trame));
 
-        for($x = 0; $x < count($trame); $x++)
-        {
-            
-            $this->setConnexion();
-            socket_write($this->socket, $trame[$x], strlen($trame[$x]));
-            print_r($trame[$x]);
-            $this->setClose();
-           
-        }
-        
-        
     }
     public function getRecv(){
         socket_recv($this->socket, $donnes,2048,0);
