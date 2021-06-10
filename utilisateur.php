@@ -1,6 +1,4 @@
-
-<?php 
-    include("bdd.php");  ?>
+<?php include('bdd.php'); ?>
 <?php
 
     // Déclaration de la classe user
@@ -11,12 +9,13 @@
         private $_Prenom;
         private $_Email;
         private $_Pass;
-        private $_Grade;
+        
+        // private $_Grade;
         
         
         
         // Constructeur
-        public function __construct($bdd)
+        function __construct($bdd)
         {      
             $this->_bdd = $bdd;
         }
@@ -42,6 +41,19 @@
             {
                 echo "Identifiant ou mot de passe incorrect";
             }
+        }
+
+        function Inscription($Nom,$Prenom,$Email,$Pass)
+        {
+            // Ajoute un utilisateur dans la Base de données
+            $inscription = $this->_bdd->prepare("INSERT INTO `utilisateur` (`Id_Utilisateur`, `Nom`, `Prenom`, `Email`, `MotDePasse`) VALUES (NULL, :nom, :prenom, :email, :pass);"); // Requête qui insert en base les informations de l'utilisateur
+            $inscription->execute([
+                'nom' => $Nom,
+                'prenom' => $Prenom,
+                'email' => $Email,
+                'pass' => $Pass
+            ]);
+            
         }
 
         function setinformations($Email)

@@ -1,5 +1,5 @@
 body{
-    background:  url("../image/bg.jpg") no-repeat center fixed; 
+    /* background:  url("../image/bg.jpg") no-repeat center fixed;  */
     margin:0;
     padding:0;
     
@@ -16,7 +16,8 @@ body{
 .deconnexion{
     text-align: right;
     margin-top: 1%;
-    margin-right: 1%;
+    margin-left: 2%;
+    display: table;
 }
 .supprimer{
     text-align: center;
@@ -26,6 +27,7 @@ body{
     text-align: center;
     margin-top: 1%;
 }
+
 .ajoutprog{
     text-align: center;
     margin-top: 10%;
@@ -35,3 +37,29 @@ body{
     text-align: center;
     margin-top: 10%;
 }
+.ajoutersceneprog{
+    text-align: center;
+    margin-top: 1%;
+    color : red;
+}
+.voirprogramme{
+    text-align: center;
+    margin-top: 1%;
+    color : white;
+}
+.ajouterscenesprogramme{
+    text-align: center;
+    margin-top: 1%;
+    color : white;
+}
+.retour{
+    margin-top: 1%;
+    margin-left: 2%;
+    display: table;
+}
+.supprimersceneprogramme{
+    text-align: center;
+    margin-top: 1%;
+    color : white;
+}
+
