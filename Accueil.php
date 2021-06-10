@@ -65,7 +65,7 @@
     <?php
 
     // Requête permettant d'aller chercher tous les programmes en base de données 
-    $selectprogrammes = $bdd->query("SELECT * FROM programme");
+    $selectprogrammes = $bdd->query("SELECT * FROM programme WHERE Id_Utilisateur = (SELECT `Id_Utilisateur` FROM `utilisateur` WHERE `Email` = '".$_SESSION['Email']."' )");
     $programmeindex = 0;
     
     // Boucle permettant d'afficher dans la liste déroulante les programmes présents sur la base de données
@@ -77,18 +77,17 @@
     $selectscene = $bdd->query("SELECT * FROM scene");
     $sceneindex = 0;
 
-    // Boucle permettant d'afficher les scène dans une liste déroulante
+    // Boucle permettant d'afficher les scènes dans une liste déroulante
     while($selectscenes = $selectscene->fetch())
     {
         $scene[$sceneindex++] = new gestion($selectscenes['Id_Scene'], $selectscenes['Nom']);
     }
 
-    // FAIRE UNE JOINTURE SQL ENTRE LES TABLES SCENE PROGRAMME ET SCENEPROGRAMME POUR RECUPERER LES SCENES FAISANT PARTIE DU PROGRAMME A MODIFIER.
-
-    // SELECT * FROM programme INNER JOIN sceneprogramme WHERE programme.Id_Programme  = "'.$_GET['modifieprogramme'].'"
+   
     $selectsceneprogramme = $bdd->query('SELECT * FROM programme INNER JOIN sceneprogramme ON programme.Id_Programme = sceneprogramme.Id_Programme INNER JOIN scene ON sceneprogramme.Id_Scene = scene.Id_Scene WHERE programme.Id_Programme = "'.$_GET['modifieprogramme'].'" ');
     $selectsceneprogrammeindex = 0;
-
+    
+    // Boucle permettant d'afficher les scènes faisant du programme sélectionner lors de la modification
     while($selectsceneprogrammes = $selectsceneprogramme->fetch())
     {
         $sceneprogramme[$selectsceneprogrammeindex++] = new gestion($selectsceneprogrammes['Id_SceneProgramme'],$selectsceneprogrammes['Nom']);
@@ -198,15 +197,36 @@
                 }
             } 
         }
+        ?>
+        <div class ="voirprogramme">
+            <?php
+                if(isset($_POST['voirprogramme']))
+                {
+                
+                    $programme = new programme($bdd);
+                    $programme->setafficherprogramme($_SESSION['Email']);
+                    $programme->getNomProgramme();
+            ?>
+                    Vos programmes, sont le :
+            <?php
+                    foreach($programme->getNomProgramme() as $objectprogramme)
+                    {
+                        echo $objectprogramme,'    /    ';
+                    }
+                    
+                }
+            ?>  
+        </div>
 
-        if(isset($_POST['voirprogramme']))
-        {
-            $programme = new programme($bdd);
-            $programme->setafficherprogramme($Email);
-            $programme->getNomProgramme();
-        }
-    ?>
+        
     <?php 
+
+        if(isset($_POST['ajouterscenesprogramme']))
+        {
+            ?>
+                
+            <?php
+        }
         // On appelle la méthode déconnexion pour se déconnecter
         if(isset($_POST['deconnexion']))
         {
@@ -262,6 +282,13 @@
             <!-- Formulaire permettant de crée un programme" -->
             <form action="" method="POST">
                 <input type="submit" name="voirprogramme" value="Voir mes programmes">
+            </form> 
+        </div>
+
+        <div class ="ajouterscenesprogramme">
+            <!-- Formulaire permettant d'ajouter des scènes dans un programme -->
+            <form action="" method="POST">
+                <input type="submit" name="ajouterscenesprogramme" value="Ajouter des scènes">
             </form> 
         </div>
     </body>
