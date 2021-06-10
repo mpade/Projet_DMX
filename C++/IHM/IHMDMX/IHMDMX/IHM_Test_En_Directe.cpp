@@ -2,7 +2,7 @@
 #include "IHMDMX.h"
 #include "iostream"
 #include <QLabel>
-
+#include <string>
 IHM_Test_En_Directe::IHM_Test_En_Directe(int voies, int adresse, int Id_Equipement) : QWidget()																				// spécification du constructeur
 {
 	NbVoies = voies;
@@ -49,7 +49,7 @@ void IHM_Test_En_Directe::ConnexionBdd()
 
 void IHM_Test_En_Directe::TestDirecte()
 {
-	std::string requId_equipement = "SELECT * FROM `property` WHERE `Id_Equipement` ='" + Id_Eq.toStdString() + "'";
+	std::string requId_equipement = "SELECT * FROM `property` WHERE `Id_Equipement` ='" + std::to_string(Id_Eq) + "'";
 	mysql_query(mySQL, requId_equipement.c_str());
 
 	result = mysql_store_result(mySQL);
@@ -60,6 +60,7 @@ void IHM_Test_En_Directe::TestDirecte()
 	for (int i = 0; i < NbVoies; i++) {
 		e.push_back(new QSlider(Qt::Vertical, this));
 		a.push_back(new QLCDNumber(this));
+		b.push_back(new QLabel(row[2]));
 	}
 
 	for (int i = 0; i < e.size(); i++) {
@@ -72,6 +73,12 @@ void IHM_Test_En_Directe::TestDirecte()
 		e[i]->move(x, y);
 		x += 75;
 	}
+	
+	for (int i = 0; i < b.size(); i++) {
+		b[i]->move(x, y);
+		x += 75;
+	}
+	
 	x = 40, y = 120;
 	for (int i = 0; i < a.size(); i++) {
 		a[i]->move(x, y);

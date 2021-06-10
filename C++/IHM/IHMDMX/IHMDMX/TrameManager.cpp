@@ -2,6 +2,7 @@
 
 void TrameManager::insertEquipement(Equipement *, int)
 {
+
 }
 
 void TrameManager::removeEquipement(int)

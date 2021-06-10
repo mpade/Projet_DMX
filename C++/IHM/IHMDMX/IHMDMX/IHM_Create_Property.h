@@ -41,6 +41,10 @@ private:
 	int Description;
 	int Voies;
 
+	QLabel *L_Order;
+	QLabel *L_Description;
+
+	QString NOrder;
 	QString Name;
 	QString Order0;
 	QString Description0;

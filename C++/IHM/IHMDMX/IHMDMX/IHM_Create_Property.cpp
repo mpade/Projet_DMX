@@ -14,10 +14,15 @@ IHM_Create_Property::IHM_Create_Property(int nb_voies, QString name) : QWidget()
 
 	/* Construction des Widgets */
 	valider = new QPushButton("Valider", this);
+	L_Order = new QLabel("Order", this);
+	L_Description = new QLabel("Description", this);
+
 
 
 	/* Position des Widgets */
 	valider->move(140, 0);
+	L_Order->move(40,50);
+	L_Description->move(220,50);
 
 
 	/* Connexions Signal - Slot */
@@ -74,7 +79,7 @@ void IHM_Create_Property::Validation2()
 void IHM_Create_Property::NbVoie()
 {
 
-	int x = 0, y = 50;
+	int x = 0, y = 75;
 
 	for (int i = 0; i < NbVoies; i++) {
 		a.push_back(new QLineEdit(this));
@@ -91,19 +96,20 @@ void IHM_Create_Property::NbVoie()
 		Description++;
 	}
 
-	y = 50;
+	y = 75;
 
 	for (int i = 0; i < a.size(); i++) {
 		a[i]->move(20, y);
 		y += 50;
 	}
 
-	y = 50;
+	y = 75;
 
 	for (int i = 0; i < b.size(); i++) {
 		b[i]->move(200, y);
 		y += 50;
 	}
+
 
 }
 
