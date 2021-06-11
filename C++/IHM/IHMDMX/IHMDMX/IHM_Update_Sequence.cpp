@@ -15,12 +15,15 @@ IHM_Update_Sequence::IHM_Update_Sequence(){
 		grid = new QGridLayout;
 		listSequence = new QListWidget();
 		listSequencequipement = new QListWidget();
+		m_sequence = new QLabel;
 		nameSequence = new QLabel();
 		supequipment = new QPushButton();
 		supequipment->setText("Supprimer");
 		modifier = new QPushButton();
 		modifier->setText("Quitter");
 		getAllSequence();
+		m_sequence->setText("Sequence ");
+		grid->addWidget(m_sequence, 0, 0);
 		grid->addWidget(nameSequence,0,1,1,3);
 		grid->addWidget(listSequence,1,0);
 		grid->addWidget(listSequencequipement, 1, 1);
@@ -49,7 +52,7 @@ void IHM_Update_Sequence::getSelectidSequence()
 
 	if (listSequence->selectedItems().count() == 1) {
 		QListWidgetItem *item = listSequence->currentItem();
-		nameSequence->setText(item->text());
+		nameSequence->setText("Equipement Sequence : "+item->text());
 		listSequence->clearSelection();
 		getequipement(item->text().toStdString());
 	}

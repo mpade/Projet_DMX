@@ -61,16 +61,18 @@ void IHM_Delete_Sequence::gettcptest()
 		QListWidgetItem *item = listSequence->currentItem();
 		std::string names = item->text().toStdString();
 		std::vector<std::string> trame = bdd->getValueSequence(names);
-		for (int i = 0; i < trame.size(); i++) {
-
-			QString tradata = trame[i].c_str();
-			if (tcp->connectToHost("192.168.65.67"))
-			{
-				tcp->writeData(tradata.toUtf8());
-				tcp->closeToHost();
-			}
-
-
+		std::string sendtrame;
+		for (int i = 0; i < trame.size(); i++)
+		{
+			sendtrame += trame[i];
 		}
+		
+		QString tradata = sendtrame.c_str();
+		if (tcp->connectToHost("192.168.65.67"))
+		{
+			tcp->writeData(tradata.toUtf8());
+			tcp->closeToHost();
+		}
+
 	}
 }

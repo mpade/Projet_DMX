@@ -5,6 +5,7 @@ IHM_SrolBar_Sequence::IHM_SrolBar_Sequence(const QString name,int voie, int adre
 	adress = adresse;
 	tcp = new QTcpSocket();
 	mysql = mysql_init(NULL);
+	QWidget::setWindowTitle(name);
 	int adressmodifi = adresse;
 	if (!mysql_real_connect(mysql, "192.168.64.102", "DMX", "dmx", "Projet_DMX", 0, NULL, 0))
 	{
@@ -14,12 +15,26 @@ IHM_SrolBar_Sequence::IHM_SrolBar_Sequence(const QString name,int voie, int adre
 	}
 	else
 	{
+		std::string requId_equipement = "SELECT * FROM `property` WHERE `Id_Equipement` =(SELECT `Id_Equipement`FROM `equipement` WHERE `Name` ='"+ QWidget::windowTitle().toStdString() +"')";
+		mysql_query(mysql, requId_equipement.c_str());
+		MYSQL_RES *result;
+		MYSQL_ROW row;
+		result = mysql_store_result(mysql);
+
+		std::vector<QString> names;
+
+		while (row = mysql_fetch_row(result))
+		{
+			names.push_back(row[2]);
+		}
+
 		int x = 65, y = 20;
-		QWidget::setWindowTitle(name);
+		
 
 		for (int i = 0; i < voie; i++) {
 			e.push_back(new QSlider(Qt::Vertical, this));
 			a.push_back(new QLCDNumber(this));
+			b.push_back(new QLabel(names[i], this));
 		}
 
 		for (int i = 0; i < e.size(); i++) {
@@ -30,12 +45,18 @@ IHM_SrolBar_Sequence::IHM_SrolBar_Sequence(const QString name,int voie, int adre
 		for (int i = 0; i < e.size(); i++) {
 			e[i]->setMaximum(255);
 			e[i]->move(x, y);
-			x += 75;
+			x += 100;
 		}
+		x = 40, y = 150;
+		for (int i = 0; i < b.size(); i++) {
+			b[i]->move(x, y);
+			x += 100;
+		}
+
 		x = 40, y = 120;
 		for (int i = 0; i < a.size(); i++) {
 			a[i]->move(x, y);
-			x += 75;
+			x += 100;
 		}
 		for (int i = 0; i < a.size(); i++) {
 			QObject::connect(e[i], SIGNAL(valueChanged(int)), a[i], SLOT(display(int)));
@@ -84,7 +105,7 @@ void IHM_SrolBar_Sequence::getTcpTest() {
 	
 	std::vector<std::string> trame;
 	for (int i = 0; i < e.size(); i++) {
-		trame.push_back("CV:" + e[i]->objectName().toStdString() + "," + std::to_string(e[i]->value()));
+		trame.push_back("CV:" + e[i]->objectName().toStdString() + "," + std::to_string(e[i]->value())+";");
 	}
 	if (tramemou.size() == 0) {
 		for(int x = 0; x < trame.size(); x++){

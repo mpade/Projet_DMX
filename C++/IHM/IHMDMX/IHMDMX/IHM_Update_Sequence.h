@@ -37,6 +37,7 @@ private:
 	QLabel * nameSequence;
 	QGroupBox *groupBox;							// pointeur --> il faudra le construire dynamiquement (new)
 	mysql_bdd * bdd;
+	QLabel *m_sequence;
 	QListWidget *listSequence;
 	QListWidget * listSequencequipement;
 	QGridLayout *grid;

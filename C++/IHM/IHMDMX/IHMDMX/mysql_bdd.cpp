@@ -246,7 +246,7 @@ int mysql_bdd::deletesupdatescene(std::string names)
 std::vector<std::string> mysql_bdd::getValueSequence(std::string names)
 {
 	std::vector<std::string> trame;
-	std::string requete = "SELECT `Id_Sequence` FROM `sequence` WHERE `name` = '" + names + "'";
+	std::string requete = "SELECT `Id_Sequence`, `Duree` FROM `sequence` WHERE `name` = '" + names + "'";
 	mysql_query(mysql, requete.c_str());
 
 	MYSQL_RES *result = NULL;
@@ -258,8 +258,10 @@ std::vector<std::string> mysql_bdd::getValueSequence(std::string names)
 	MYSQL_RES *resultsss = NULL;
 	MYSQL_ROW rowsss;
 	result = mysql_store_result(mysql);
-
+	
 	row = mysql_fetch_row(result);
+	int duree = atoi(row[1]);
+	
 	int idsequence = atoi(row[0]);
 	requete = "SELECT `Id_AdressEquipement` FROM `sequenceusedequipement` WHERE `Id_Sequence` =  '" + std::to_string(idsequence) + "'";
 	mysql_query(mysql, requete.c_str());
@@ -286,14 +288,16 @@ std::vector<std::string> mysql_bdd::getValueSequence(std::string names)
 				rowsss = mysql_fetch_row(resultsss);
 
 				addresss += atoi(rowss[1]) - 1;
-				std::string tramemou = "CV:" + std::to_string(addresss) + "," + std::to_string(atoi(rowsss[0]));
+				std::string tramemou = "CV:" + std::to_string(addresss) + "," + std::to_string(atoi(rowsss[0]))+";";
 				trame.push_back(tramemou);
 
 				addresss = atoi(rows[0]);
 
 			}
 		}
+
 	}
+	trame.push_back("TE:" + std::to_string(duree) + ";");
 	
 	return trame;
 }

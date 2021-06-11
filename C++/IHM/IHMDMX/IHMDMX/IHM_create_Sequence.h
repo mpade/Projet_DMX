@@ -35,7 +35,8 @@ private:
 	QListWidget *listsequenceequipement;
 	QPushButton *cree;
 	QGroupBox *groupBox;							// pointeur --> il faudra le construire dynamiquement (new)
-	QLabel *m_label;
+	QLabel *m_equipement;
+	QLabel *m_equipementsequence;
 	QVBoxLayout *vbox;
 	QGridLayout *grid;
 };

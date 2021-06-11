@@ -37,6 +37,7 @@ private:
 	MYSQL_RES *res = NULL;
 	std::vector<QSlider*>e;
 	std::vector< QLCDNumber*>a;
+	std::vector< QLabel*>b;
 	std::vector <std::string> tramemou;
 	QPushButton *Valid;
 	QTcpSocket *tcp;
