@@ -1,14 +1,38 @@
 #include <Arduino.h>
 #include "spotData.h"
+#include "class_LCD.h" 
+  LCD displayValue;
+  
+int spotData::GetNb()
+ {
+      while (!Serial.available()); 
+      String NbSpots = "";
+      while (Serial.available()) 
+          {
+          NbSpots += (char) Serial.read();
+          delay(1);  
+          }
+      return atoi(NbSpots.c_str());          
+ }
 
-int spotData::getData()
+
+byte spotData::GetData()
   {
-    int nbRead = Serial.read();
-    int Data[nbRead];
-
-      for (i = 0; i <= nbRead; i++)
-        {
-          int Data[i] = Serial.read();
-          Serial.println(data[i]);
-        }
+      while (!Serial.available()); 
+      String DataSpots = "";
+      byte data[32];
+      byte buffer[10];
+      int i = 0;
+      while (Serial.available()) 
+          {  
+            DataSpots += (char)Serial.read();
+            DataSpots.toCharArray(buffer, 10);
+            data[i] = buffer;
+            displayValue.displayAdr(buffer);
+            return (data[i]);
+            i++;
+            
+          }
+          
+    
   }

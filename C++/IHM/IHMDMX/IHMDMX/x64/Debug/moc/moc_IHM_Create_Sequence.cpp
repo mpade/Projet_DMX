@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_IHM_Create_Sequence_t {
     QByteArrayData data[5];
-    char stringdata0[66];
+    char stringdata0[69];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,13 +33,13 @@ struct qt_meta_stringdata_IHM_Create_Sequence_t {
 static const qt_meta_stringdata_IHM_Create_Sequence_t qt_meta_stringdata_IHM_Create_Sequence = {
     {
 QT_MOC_LITERAL(0, 0, 19), // "IHM_Create_Sequence"
-QT_MOC_LITERAL(1, 20, 16), // "getAllEquipement"
-QT_MOC_LITERAL(2, 37, 0), // ""
-QT_MOC_LITERAL(3, 38, 19), // "slidergetEquipement"
-QT_MOC_LITERAL(4, 58, 7) // "gettest"
+QT_MOC_LITERAL(1, 20, 19), // "getAlllistEquipemnt"
+QT_MOC_LITERAL(2, 40, 0), // ""
+QT_MOC_LITERAL(3, 41, 19), // "slidergetEquipement"
+QT_MOC_LITERAL(4, 61, 7) // "gettest"
 
     },
-    "IHM_Create_Sequence\0getAllEquipement\0"
+    "IHM_Create_Sequence\0getAlllistEquipemnt\0"
     "\0slidergetEquipement\0gettest"
 };
 #undef QT_MOC_LITERAL
@@ -76,7 +76,7 @@ void IHM_Create_Sequence::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
         auto *_t = static_cast<IHM_Create_Sequence *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->getAllEquipement(); break;
+        case 0: _t->getAlllistEquipemnt(); break;
         case 1: _t->slidergetEquipement(); break;
         case 2: _t->gettest(); break;
         default: ;

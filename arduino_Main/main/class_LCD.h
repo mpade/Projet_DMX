@@ -3,7 +3,8 @@ class LCD
   private : 
 
   public :
-
-  displaySpot(int);
-  displayParameters(int, int);
+  int displaySpotvalue(int);
+  int displaySpot(int);
+  int displayAdr(String);
+  
 };

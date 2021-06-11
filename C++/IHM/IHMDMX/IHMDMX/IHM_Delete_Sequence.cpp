@@ -2,9 +2,9 @@
 #include "synchapi.h"
 IHM_Delete_Sequence::IHM_Delete_Sequence() : QWidget()																								// spécification du constructeur
 {
-	mysql = mysql_init(NULL);
+	bdd = new mysql_bdd();
 	tcp = new Client();
-	if (!mysql_real_connect(mysql, "192.168.64.102", "DMX", "dmx", "Projet_DMX", 0, NULL, 0))
+	if (bdd->connectmysql() == 0)
 	{
 		QMessageBox msgBox;
 		msgBox.setText("Eror de connection a la BDD");
@@ -26,19 +26,11 @@ IHM_Delete_Sequence::IHM_Delete_Sequence() : QWidget()																								//
 }
 void IHM_Delete_Sequence::getAllSequence() {
 
-	mysql_query(mysql, "SELECT `name` FROM `sequence` WHERE 1");
-
-	MYSQL_RES *result = NULL;
-	MYSQL_ROW row;
-
-	result = mysql_store_result(mysql);
-
-	while ((row = mysql_fetch_row(result)))
-	{
+	std::vector<std::string> s = bdd->getAllSequence();
+	for (int i = 0; i < s.size(); i++) {
 		QListWidgetItem *item = new QListWidgetItem();
-		item->setText(row[0]);
+		item->setText(s[i].c_str());
 		listSequence->addItem(item);
-
 	}
 }
 
@@ -49,26 +41,11 @@ void IHM_Delete_Sequence::getDeleteSequence()
 		QListWidgetItem *item = listSequence->takeItem(listSequence->currentRow());
 		//requete delete vu ecrie
 		std::string names = item->text().toStdString();
-		std::string requete = "SELECT `Id_Sequence` FROM `sequence` WHERE `name` = '" + names + "'";
-		mysql_query(mysql, requete.c_str());
-
-		MYSQL_RES *result = NULL;
-		MYSQL_ROW row;
-
-		result = mysql_store_result(mysql);
-
-		while ((row = mysql_fetch_row(result)))
-		{
-			std::string requetes = "DELETE FROM `sequenceusedequipement` WHERE `Id_Sequence` = '" + std::to_string(atoi(row[0])) + "'";
-			mysql_query(mysql, requetes.c_str());
-			requetes = "DELETE FROM `sequencescene` WHERE `Id_Sequence` = '" + std::to_string(atoi(row[0])) + "'";
-			mysql_query(mysql, requetes.c_str());
-			requetes = "DELETE FROM `valueproper` WHERE `id_sequence` = '" + std::to_string(atoi(row[0])) + "'";
-			mysql_query(mysql, requetes.c_str());
-			requetes = "DELETE FROM `sequence` WHERE `Id_Sequence` =  '" + std::to_string(atoi(row[0])) + "'";
-			mysql_query(mysql, requetes.c_str());
+		if (bdd->deleteSequence(names) == 0) {
+			QMessageBox msgBox;
+			msgBox.setText("probleme lors du delete");
+			msgBox.exec();
 		}
-
 	}
 }
 
@@ -76,73 +53,24 @@ void IHM_Delete_Sequence::gettcptest()
 {
 	if (tcp->connectToHost("192.168.65.67"))
 	{
-
 		tcp->writeData("t");
 		tcp->closeToHost();
 	}
 
 	if (listSequence->selectedItems().count() == 1) {
-		trame.clear();
 		QListWidgetItem *item = listSequence->currentItem();
 		std::string names = item->text().toStdString();
-		std::string requete = "SELECT `Id_Sequence` FROM `sequence` WHERE `name` = '" + names + "'";
-		mysql_query(mysql, requete.c_str());
+		std::vector<std::string> trame = bdd->getValueSequence(names);
+		for (int i = 0; i < trame.size(); i++) {
 
-		MYSQL_RES *result = NULL;
-		MYSQL_ROW row;
-		MYSQL_RES *results = NULL;
-		MYSQL_ROW rows;
-		MYSQL_RES *resultss = NULL;
-		MYSQL_ROW rowss;
-		MYSQL_RES *resultsss = NULL;
-		MYSQL_ROW rowsss;
-		result = mysql_store_result(mysql);
-
-		row = mysql_fetch_row(result);
-		int idsequence = atoi(row[0]);
-			requete = "SELECT `Id_AdressEquipement` FROM `sequenceusedequipement` WHERE `Id_Sequence` =  '" + std::to_string(idsequence) + "'";
-			mysql_query(mysql, requete.c_str());
-			result = mysql_store_result(mysql);
-
-			while ((row = mysql_fetch_row(result)))
+			QString tradata = trame[i].c_str();
+			if (tcp->connectToHost("192.168.65.67"))
 			{
-
-				requete = "SELECT `Adresse`,`Id_Equipement` FROM `adressequipement` WHERE `Id_AdressEquipement` = '" + std::to_string(atoi(row[0])) + "'";
-				mysql_query(mysql, requete.c_str());
-				results = mysql_store_result(mysql);
-				int addresss = 0;
-				while ((rows = mysql_fetch_row(results)))
-				{
-					addresss = atoi(rows[0]);
-					requete = "SELECT `Id_Property`,`Order` FROM `property` WHERE `Id_Equipement` = '" + std::to_string(atoi(rows[1])) + "' ORDER BY `property`.`Order` ASC ";
-					mysql_query(mysql, requete.c_str());
-					resultss = mysql_store_result(mysql);
-					while ((rowss = mysql_fetch_row(resultss)))
-					{
-						requete = "SELECT `value` FROM `valueproper` WHERE `id_property` = '"+std::to_string(atoi(rowss[0]))+"' and `id_sequence` =  '" + std::to_string(idsequence)+ "'";
-						mysql_query(mysql, requete.c_str());
-						resultsss = mysql_store_result(mysql);
-						rowsss = mysql_fetch_row(resultsss); 
-						
-						addresss+=atoi(rowss[1]) -1;
-							std::string tramemou = "CV:" +std::to_string( addresss )+ "," + std::to_string(atoi(rowsss[0]));
-							trame.push_back(tramemou);
-							
-							addresss = atoi(rows[0]);
-						
-					}
-				}
+				tcp->writeData(tradata.toUtf8());
+				tcp->closeToHost();
 			}
-			for (int i = 0; i < trame.size(); i++) {
-				
-				QString tradata = trame[i].c_str();
-				if(tcp->connectToHost("192.168.65.67"))
-				{
 
-					tcp->writeData(tradata.toUtf8());
-					tcp->closeToHost();
-				}
 
-			}
+		}
 	}
 }

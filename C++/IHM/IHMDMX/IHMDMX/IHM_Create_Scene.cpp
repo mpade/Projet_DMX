@@ -128,7 +128,7 @@ void IHM_Create_Scene::gettest()
 						mysql_query(mysql, requete.c_str());
 						resultsss = mysql_store_result(mysql);
 						rowsss = mysql_fetch_row(resultsss);
-
+						
 						addresss += atoi(rowss[1]) - 1;
 						std::string tramemou = "CV:" + std::to_string(addresss) + "," + std::to_string(atoi(rowsss[0]));
 						trame.push_back(tramemou);

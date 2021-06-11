@@ -1,9 +1,9 @@
 #include "IHM_Delete_scene.h"
 IHM_Delete_scene::IHM_Delete_scene() {
 	
-	mysql = mysql_init(NULL);
-
-	if (!mysql_real_connect(mysql, "192.168.64.102", "DMX", "dmx", "Projet_DMX", 0, NULL, 0))
+	
+	bdd = new mysql_bdd();
+	if (bdd->connectmysql() == 0)
 	{
 		QMessageBox msgBox;
 		msgBox.setText("Eror de connection a la BDD");
@@ -23,20 +23,12 @@ IHM_Delete_scene::IHM_Delete_scene() {
 }
 void IHM_Delete_scene::getAllScene()
 {
-	std::string requet = "SELECT `Nom` FROM `scene` WHERE 1";
-	mysql_query(mysql, requet.c_str());
-	
-	MYSQL_RES *result = NULL;
-	MYSQL_ROW row;
+	std::vector<std::string> Scene = bdd->getAllScene();
 
-	result = mysql_store_result(mysql);
-
-	while ((row = mysql_fetch_row(result)))
-	{
+	for(int i = 0; i < Scene.size(); i++){
 		QListWidgetItem *item = new QListWidgetItem();
-		item->setText(row[0]);
+		item->setText(Scene[i].c_str());
 		listScene->addItem(item);
-		
 	}
 
 }
@@ -48,22 +40,11 @@ void IHM_Delete_scene::getDeleteScene()
 		//requete delete vu ecrie
 		
 		std::string names = item->text().toStdString();
-		std::string requete = "SELECT `Id_Scene` FROM `scene` WHERE `Nom` = '" + names + "'";
-		mysql_query(mysql, requete.c_str());
-
-		MYSQL_RES *result = NULL;
-		MYSQL_ROW row;
-
-		result = mysql_store_result(mysql);
-
-		while ((row = mysql_fetch_row(result)))
+		if (bdd->deleteScene(names) == 0)
 		{
-			std::string requetes = "DELETE FROM `sequencescene` WHERE `Id_Scene` = '" + std::to_string(atoi(row[0])) + "'";
-			mysql_query(mysql, requetes.c_str());
-			requetes = "DELETE FROM `sceneprogramme` WHERE `Id_Scene` ='" + std::to_string(atoi(row[0])) + "'";
-			mysql_query(mysql, requetes.c_str());
-			requetes = "DELETE FROM `scene` WHERE `Id_Scene` =  '" + std::to_string(atoi(row[0])) + "'";
-			mysql_query(mysql, requetes.c_str());
+			QMessageBox msgBox;
+			msgBox.setText("Probleme au niveau du delete");
+			msgBox.exec();
 		}
 
 	}
