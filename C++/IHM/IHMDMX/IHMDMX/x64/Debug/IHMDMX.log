@@ -1,2 +1,8 @@
-﻿  IHM_Create_Scene.cpp
+﻿  IHM_create_Sequence.cpp
+  moc_IHMDMX2.cpp
+  moc_IHM_Delete_Sequence.cpp
+  moc_IHM_Delete_scene.cpp
+  moc_IHM_Update_Sequence.cpp
+  moc_IHM_Update_scene.cpp
+  moc_IHM_create_Sequence.cpp
   IHMDMX.vcxproj -> C:\Users\Edouard\Desktop\Projet_DMX\C++\IHM\IHMDMX\x64\Debug\IHMDMX.exe

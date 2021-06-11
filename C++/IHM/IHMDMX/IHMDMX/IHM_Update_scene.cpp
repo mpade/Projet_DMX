@@ -3,9 +3,8 @@
 IHM_Update_scene::IHM_Update_scene() 
 {
 
-	mysql = mysql_init(NULL);
-
-	if (!mysql_real_connect(mysql, "192.168.64.102", "DMX", "dmx", "Projet_DMX", 0, NULL, 0))
+	bdd = new mysql_bdd();
+	if (bdd->connectmysql() == 0)
 	{
 		QMessageBox msgBox;
 		msgBox.setText("Eror de connection a la BDD");
@@ -43,21 +42,13 @@ IHM_Update_scene::IHM_Update_scene()
 void IHM_Update_scene::getAllScene() 
 {
 
-	std::string requet = "SELECT `Nom` FROM `scene` WHERE 1";
-	mysql_query(mysql, requet.c_str());
-
-	MYSQL_RES *result = NULL;
-	MYSQL_ROW row;
-
-	result = mysql_store_result(mysql);
-
-	while ((row = mysql_fetch_row(result)))
-	{
+	std::vector<std::string> scene = bdd->getAllScene();
+	for (int i = 0; i < scene.size(); i++) {
 		QListWidgetItem *item = new QListWidgetItem();
-		item->setText(row[0]);
+		item->setText(scene[i].c_str());
 		listScene->addItem(item);
-
 	}
+	
 
 }
 void IHM_Update_scene::getSelectidScene()
@@ -76,31 +67,14 @@ void IHM_Update_scene::getSequence(std::string name)
 
 	listSceneSequence->clear();
 
-	std::string request = "SELECT `Id_Scene` FROM `scene` WHERE `Nom` ='" + name + "'";
-	mysql_query(mysql, request.c_str());
-	MYSQL_RES *result = NULL;
-	MYSQL_ROW row;
+	std::vector < std::string> sequence = bdd->getSequenceForScene(name);
 
-	result = mysql_store_result(mysql);
-	row = mysql_fetch_row(result);
-	result = NULL;
-
-	request = "SELECT `Id_Sequence`, `Order` FROM `sequencescene` WHERE `Id_Scene` = " + std::to_string(atoi(row[0]));
-	mysql_query(mysql, request.c_str());
-	result = mysql_store_result(mysql);
-	while (row = mysql_fetch_row(result))
+	for (int i = 0; i < sequence.size(); i++) 
 	{
-		MYSQL_RES *results = NULL;
-		MYSQL_ROW rows;
-		request = "SELECT `Id_Sequence`, `Duree`, `name` FROM `sequence` WHERE `Id_Sequence` = '" + std::to_string(atoi(row[0])) +"'";
-		mysql_query(mysql, request.c_str());
-		results = mysql_store_result(mysql);
-		rows = mysql_fetch_row(results);
-		QListWidgetItem * item = new QListWidgetItem();
-		item->setText(rows[2]);
+		QListWidgetItem *item = new QListWidgetItem();
+		item->setText(sequence[i].c_str());
 		listSceneSequence->addItem(item);
 	}
-
 }
 void IHM_Update_scene::getDeletesequencescene() 
 {
@@ -109,55 +83,25 @@ void IHM_Update_scene::getDeletesequencescene()
 	{
 
 		QListWidgetItem *item = listSceneSequence->takeItem(listSceneSequence->currentRow());
-		std::string requestt = "SELECT `Id_Scene` FROM `scene` WHERE `Nom` ='" + nameScene->text().toStdString() + "'";
-		std::string request = "SELECT `Id_Sequence` FROM `sequence` WHERE `name` = '" + item->text().toStdString() +"'";
-		mysql_query(mysql, request.c_str());
-		mysql_query(mysql, requestt.c_str());
-		MYSQL_RES *results = NULL;
-		MYSQL_ROW rows;
-
-		MYSQL_RES *result = NULL;
-		MYSQL_ROW row;
-
-		result = mysql_store_result(mysql);
-		row = mysql_fetch_row(result);
-		results = mysql_store_result(mysql);
-		rows = mysql_fetch_row(results);
-
-		request = "DELETE FROM `sequencescene` WHERE `Id_Sequence` ="+std::to_string(atoi(row[0]))+" and `Id_Scene` = " + std::to_string(atoi(rows[0])) ;
+		
 	}
 
 }
 void IHM_Update_scene::getUpdatescene() 
 {
-	std::string request = "SELECT `Id_Scene` FROM `scene` WHERE `Nom` ='" + nameScene->text().toStdString() + "'";
-	mysql_query(mysql, request.c_str());
-	MYSQL_RES *results = NULL;
-	MYSQL_ROW rows;
-	results = mysql_store_result(mysql);
-	rows = mysql_fetch_row(results);
-	results = NULL;
-	std::string requet = "DELETE FROM `sequencescene` WHERE `Id_Scene` = " + std::to_string(atoi(rows[0]));
-	mysql_query(mysql, requet.c_str());
+	std::string name = nameScene->text().toStdString();
+	if (bdd->deletesupdatescene(name) == 1) {
 
-	int x = listSceneSequence->count(), y=0;
-	for (int i = 0; i < x; i++) {
-		QListWidgetItem *item = listSceneSequence->takeItem(0);
 
-		requet = "SELECT `Id_Sequence` FROM `sequence` WHERE `name` = '" + item->text().toStdString() + "'";
-		mysql_query(mysql, requet.c_str());
-		MYSQL_RES *result = NULL;
-		MYSQL_ROW row;
 
-		result = mysql_store_result(mysql);
+		int x = listSceneSequence->count(), y = 0;
+		for (int i = 0; i < x; i++) {
+			QListWidgetItem *item = listSceneSequence->takeItem(0);
+			std::string name = item->text().toStdString();
+			bdd->getUpdateScene(name, y);
+			y++;
 
-		row = mysql_fetch_row(result);
-		int id_sequence = atoi(row[0]);
-		
-		requet = "INSERT INTO `sequencescene`(`Id_SequenceScene`, `Id_Sequence`, `Id_Scene`, `Order`) VALUES (NULL," + std::to_string(id_sequence) + "," + std::to_string(atoi(rows[0])) + "," + std::to_string(y) + ")";
-		mysql_query(mysql, requet.c_str());
-		y++;
-	
+		}
 	}
 
 }

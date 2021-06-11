@@ -106,8 +106,10 @@
     <ClCompile Include="IHM_Delete_Sequence.cpp" />
     <ClCompile Include="IHM_Modifier_Equipement.cpp" />
     <ClCompile Include="IHM_SrolBar_Sequence.cpp" />
+    <ClCompile Include="IHM_Test_En_Directe.cpp" />
     <ClCompile Include="IHM_Update_scene.cpp" />
     <ClCompile Include="IHM_Update_Sequence.cpp" />
+    <ClCompile Include="mysql_bdd.cpp" />
     <ClCompile Include="Programme.cpp" />
     <ClCompile Include="Property.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -137,6 +139,8 @@
     <QtMoc Include="IHM_Update_scene.h" />
     <QtMoc Include="IHM_Update_Sequence.h" />
     <QtMoc Include="IHM_Create_Property.h" />
+    <QtMoc Include="IHM_Test_En_Directe.h" />
+    <ClInclude Include="mysql_bdd.h" />
     <ClInclude Include="User.h" />
     <QtMoc Include="IHMDMX2.h" />
     <ClInclude Include="main.h" />

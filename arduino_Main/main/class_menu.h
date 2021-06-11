@@ -5,5 +5,5 @@ class menu
     int choixMenu;
 
   public :
-    int MenuSpots(int);
+    int MenuSpots();
 };

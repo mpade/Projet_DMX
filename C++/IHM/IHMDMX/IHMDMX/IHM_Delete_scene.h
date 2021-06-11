@@ -5,7 +5,7 @@
 #include <QObject>
 #include <QPushButton>
 #include <QMessageBox>
-#include "mysql.h"
+#include "mysql_bdd.h"
 #include <QLineEdit>
 #include <QLabel>
 #include <Qcheckbox>
@@ -30,9 +30,7 @@ private:
 
 	QPushButton *supprimer;
 	QGroupBox *groupBox;							// pointeur --> il faudra le construire dynamiquement (new)
-	MYSQL *mysql;
-	MYSQL_ROW row = NULL;
-	MYSQL_RES *res = NULL;
+	mysql_bdd * bdd;
 	QListWidget *listScene;
 	QVBoxLayout *vbox;
 	QGridLayout *grid;

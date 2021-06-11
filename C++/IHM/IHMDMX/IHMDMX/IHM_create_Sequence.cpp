@@ -4,9 +4,9 @@
 IHM_Create_Sequence::IHM_Create_Sequence() : QWidget()																								// spécification du constructeur
 {	
 
-	mysql = mysql_init(NULL);
-
-	if (!mysql_real_connect(mysql, "192.168.64.102", "DMX", "dmx", "Projet_DMX", 0, NULL, 0))
+	
+	bdd = new mysql_bdd();
+	if (bdd->connectmysql() == 0)
 	{
 		QMessageBox msgBox;
 		msgBox.setText("Eror de connection a la BDD");
@@ -20,7 +20,7 @@ IHM_Create_Sequence::IHM_Create_Sequence() : QWidget()																								//
 	duree->setPlaceholderText("Duree en seconde !");
 	listequipement = new QListWidget();
 	listsequenceequipement = new QListWidget();
-	getAllEquipement();
+	getAlllistEquipemnt();
 	
 	grid->addWidget(listequipement, 0, 0);
 	grid->addWidget(listsequenceequipement, 0, 1);
@@ -39,21 +39,14 @@ IHM_Create_Sequence::IHM_Create_Sequence() : QWidget()																								//
 //==========================================================================================
 
 
-void IHM_Create_Sequence::getAllEquipement()
+void IHM_Create_Sequence::getAlllistEquipemnt()
 {
-	mysql_query(mysql, "SELECT  `Name` FROM `equipement` WHERE 1");
-
-	MYSQL_RES *result = NULL;
-	MYSQL_ROW row;
-
-	result = mysql_store_result(mysql);
-
-	while ((row = mysql_fetch_row(result)))
-	{
+	
+	std::vector<std::string> e = bdd->getAllEquipement();
+	for(int i = 0; i < e.size(); i++){
 		QListWidgetItem *item = new QListWidgetItem();
-		item->setText(row[0]);
+		item->setText(e[i].c_str());
 		listequipement->addItem(item);
-
 	}
 }
 
@@ -78,7 +71,7 @@ void IHM_Create_Sequence::slidergetEquipement() {
 	if (name->displayText() != "" || duree->displayText() != "") {
 		
 		std::string requete = "INSERT INTO `sequence`(`Id_Sequence`, `Duree`, `name`) VALUES (NULL,'"+ duree->displayText().toStdString() +"','"+ name->displayText().toStdString() +"')";
-		mysql_query(mysql, requete.c_str());
+		mysql_query(bdd->getmysql(), requete.c_str());
 		int x = listsequenceequipement->count();
 		for (int i = 0; i < x; i++)
 		{
@@ -87,31 +80,31 @@ void IHM_Create_Sequence::slidergetEquipement() {
 				std::string names = item->text().toStdString();
 				std::string requete = "SELECT `Id_Equipement`, `Nb_voie` FROM `equipement` WHERE `Name` = '" + names + "'";
 
-				mysql_query(mysql, requete.c_str());
+				mysql_query(bdd->getmysql(), requete.c_str());
 
 				//Déclaration des pointeurs de structure
 				MYSQL_RES *result = NULL;
-				MYSQL_ROW row;
+				MYSQL_ROW row = NULL;
 
 
 				//On met le jeu de résultat dans le pointeur result
-				result = mysql_store_result(mysql);
+				result = mysql_store_result(bdd->getmysql());
 
 				while ((row = mysql_fetch_row(result)))
 				{
 
 					std::string requetes = "SELECT `Adresse` FROM `adressequipement` WHERE `Id_Equipement` = " + std::to_string(atoi(row[0]));
-					mysql_query(mysql, requetes.c_str());
+					mysql_query(bdd->getmysql(), requetes.c_str());
 					MYSQL_RES *results = NULL;
 					MYSQL_ROW rows;
-					results = mysql_store_result(mysql);
+					results = mysql_store_result(bdd->getmysql());
 					while ((rows = mysql_fetch_row(results)))
 					{
 						std::string requetesd = "SELECT `Id_Sequence` FROM `sequence` WHERE name = '"+ name->displayText().toStdString()+"'";
-						mysql_query(mysql, requetesd.c_str());
+						mysql_query(bdd->getmysql(), requetesd.c_str());
 						MYSQL_RES *resultsd = NULL;
 						MYSQL_ROW rowsd;
-						resultsd = mysql_store_result(mysql);
+						resultsd = mysql_store_result(bdd->getmysql());
 						while ((rowsd = mysql_fetch_row(resultsd)))
 						{
 							//On ecrit toutes les valeurs

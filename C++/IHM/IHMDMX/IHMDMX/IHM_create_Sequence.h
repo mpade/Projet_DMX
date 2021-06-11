@@ -5,7 +5,7 @@
 #include <QObject>
 #include <QPushButton>
 #include <QMessageBox>
-#include "mysql.h"
+#include "mysql_bdd.h"
 #include <QLineEdit>
 #include <QLabel>
 #include <Qcheckbox>
@@ -24,10 +24,11 @@ public:
 
 public slots:               // Slots maison
 
-	void getAllEquipement();
+	void getAlllistEquipemnt();
 	void slidergetEquipement();
 	void gettest();
 private:
+	mysql_bdd * bdd;
 	QLineEdit *duree;
 	QLineEdit *name;
 	QListWidget *listequipement;
@@ -35,10 +36,6 @@ private:
 	QPushButton *cree;
 	QGroupBox *groupBox;							// pointeur --> il faudra le construire dynamiquement (new)
 	QLabel *m_label;
-	MYSQL *mysql;
-	MYSQL_ROW row = NULL;
-	MYSQL_RES *res = NULL;
-	std::vector<QCheckBox*>e;
 	QVBoxLayout *vbox;
 	QGridLayout *grid;
 };

@@ -104,6 +104,12 @@
     <ClCompile Include="IHM_Create_Property.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="mysql_bdd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IHM_Test_En_Directe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TrameManager.h">
@@ -134,6 +140,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mysql_bdd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -172,6 +181,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="IHM_Create_Property.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="IHM_Test_En_Directe.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

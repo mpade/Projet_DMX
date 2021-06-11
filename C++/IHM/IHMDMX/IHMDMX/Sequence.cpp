@@ -1,6 +1,6 @@
 #include "Sequence.h"
 
-Sequence::Sequence(int, int, TrameManager *, int)
+Sequence::Sequence(int, int, int)
 {
 }
 
