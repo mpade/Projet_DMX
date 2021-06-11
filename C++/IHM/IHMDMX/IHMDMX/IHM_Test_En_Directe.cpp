@@ -12,7 +12,7 @@ IHM_Test_En_Directe::IHM_Test_En_Directe(int voies, int adresse, int Id_Equipeme
 	
 
 	/* Position de la fenêtre */
-	setGeometry(1000, 100, 500, 500);
+	setGeometry(600, 100, 950, 200);
 
 
 	/* Construction des Widgets */
@@ -53,14 +53,20 @@ void IHM_Test_En_Directe::TestDirecte()
 	mysql_query(mySQL, requId_equipement.c_str());
 
 	result = mysql_store_result(mySQL);
-	row = mysql_fetch_row(result);
+
+	std::vector<QString> names;
+
+	while (row = mysql_fetch_row(result))
+	{
+		names.push_back(row[2]);
+	}
 
 	int x = 65, y = 20;
-	
+
 	for (int i = 0; i < NbVoies; i++) {
 		e.push_back(new QSlider(Qt::Vertical, this));
 		a.push_back(new QLCDNumber(this));
-		b.push_back(new QLabel(row[2]));
+		b.push_back(new QLabel(names[i], this));
 	}
 
 	for (int i = 0; i < e.size(); i++) {
@@ -71,24 +77,23 @@ void IHM_Test_En_Directe::TestDirecte()
 	for (int i = 0; i < e.size(); i++) {
 		e[i]->setMaximum(255);
 		e[i]->move(x, y);
-		x += 75;
+		x += 100;
 	}
-	
+	x = 40, y = 150;
 	for (int i = 0; i < b.size(); i++) {
 		b[i]->move(x, y);
-		x += 75;
+		x += 100;
 	}
-	
+
 	x = 40, y = 120;
 	for (int i = 0; i < a.size(); i++) {
 		a[i]->move(x, y);
-		x += 75;
+		x += 100;
 	}
 	for (int i = 0; i < a.size(); i++) {
 		QObject::connect(e[i], SIGNAL(valueChanged(int)), a[i], SLOT(display(int)));
 		QObject::connect(e[i], SIGNAL(valueChanged(int)), this, SLOT(getTcpTest()));
 	}
-
 }
 
 //==================================== Test en directe =====================================================

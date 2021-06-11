@@ -37,7 +37,6 @@ public slots:					// Slots maison
 private:
 
 	int NbVoies;
-	int Order;
 	int Description;
 	int Voies;
 

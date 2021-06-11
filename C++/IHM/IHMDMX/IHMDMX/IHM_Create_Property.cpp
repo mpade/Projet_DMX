@@ -9,7 +9,7 @@ IHM_Create_Property::IHM_Create_Property(int nb_voies, QString name) : QWidget()
 	Name = name;
 
 	/* Position de la fenêtre */
-	setGeometry(1000, 100, 350, 700);
+	setGeometry(1000, 100, 350, 550);
 
 
 	/* Construction des Widgets */
@@ -78,7 +78,7 @@ void IHM_Create_Property::Validation2()
 
 void IHM_Create_Property::NbVoie()
 {
-
+	int Order = 1;
 	int x = 0, y = 75;
 
 	for (int i = 0; i < NbVoies; i++) {
@@ -88,6 +88,7 @@ void IHM_Create_Property::NbVoie()
 
 	for (int i = 0; i < a.size(); i++) {
 		a[i]->setObjectName(QString::number(Order));
+		a[i]->setText(QString::number(Order));
 		Order++;
 	}
 
@@ -109,8 +110,6 @@ void IHM_Create_Property::NbVoie()
 		b[i]->move(200, y);
 		y += 50;
 	}
-
-
 }
 
 //==============================================================================================================
