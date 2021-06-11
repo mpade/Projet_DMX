@@ -109,7 +109,7 @@ void serverTCP::notifyClientConnected(SOCKET csock, SOCKADDR_IN csinIp, SOCKADDR
 string serverTCP::readBuffer()
 {
 
-    char bufferClient[50] = {0};
+    char bufferClient[2004] = {0};
     int resultReadBuffer;
 
     resultReadBuffer = recv(this->csock, &bufferClient, sizeof(bufferClient), 0);
@@ -123,6 +123,7 @@ string serverTCP::readBuffer()
     {
         // Le serveur affiche le message reçu
         cout << "Chaine reçu : " << bufferClient << endl;
+
 return bufferClient;
 
 

@@ -57,7 +57,9 @@ int main()
                 if ( tcpServer.acceptCom() == true)
                 {
                     string readtcp = tcpServer.readBuffer();
-        if (readtcp[0] == 'C' && readtcp[1] == 'V' )
+                    std::vector<std::string> trame = serverTCP::explode(readtcp,';');
+                    for(int i = 0; i < trame.size();i++){
+        if (trame[i][0] == 'C' && trame[i][1] == 'V' )
         {
             string s = readtcp;
             int pos = s.find(':');
@@ -78,7 +80,7 @@ int main()
                 cout << "Interface non detectee !"<< endl;
 
 
-        }else if(readtcp[0] == 'T' && readtcp[1] == 'E' )
+        }else if(trame[i][0] == 'T' && trame[i][1] == 'E' )
         {
             string s = readtcp;
             int pos = s.find(':');
@@ -114,6 +116,7 @@ int main()
                 else
                 {
                     cout << "Problème lorque le client essaie de se connecter" << endl;
+                }
                 }
                 tcpServer.closeSocketClient();
             } while (etat != true);        }    }
