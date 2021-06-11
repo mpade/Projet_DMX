@@ -1,8 +1,55 @@
-﻿  IHM_create_Sequence.cpp
-  moc_IHMDMX2.cpp
-  moc_IHM_Delete_Sequence.cpp
-  moc_IHM_Delete_scene.cpp
-  moc_IHM_Update_Sequence.cpp
-  moc_IHM_Update_scene.cpp
+﻿  moc IHMDMX.h
+  moc Client.h
+  moc IHM_create_Sequence.h
+  moc IHM_SrolBar_Sequence.h
+  moc IHM_Delete_Sequence.h
+  moc IHM_Create_Equipement.h
+  moc IHM_Modifier_Equipement.h
+  moc IHM_Create_Scene.h
+  moc IHM_Delete_scene.h
+  moc IHM_Update_scene.h
+  moc IHM_Update_Sequence.h
+  moc IHM_Create_Property.h
+  moc IHM_Test_En_Directe.h
+  moc IHMDMX2.h
+  AdressEquipement.cpp
+  Client.cpp
+  Equipement.cpp
+  IHM_Create_Equipement.cpp
+  IHM_Create_Property.cpp
+  IHM_Create_Scene.cpp
+  IHM_create_Sequence.cpp
+  IHM_Delete_scene.cpp
+  IHM_Delete_Sequence.cpp
+  IHM_Modifier_Equipement.cpp
+  IHM_SrolBar_Sequence.cpp
+  IHM_Test_En_Directe.cpp
+  IHM_Update_scene.cpp
+  IHM_Update_Sequence.cpp
+  mysql_bdd.cpp
+  Programme.cpp
+  Property.cpp
+  Scene.cpp
+  Sequence.cpp
+  SequenceUsedEquipement.cpp
+  IHMDMX2.cpp
+  TrameManager.cpp
+  User.cpp
+  IHMDMX.cpp
+  main.cpp
+  qrc_IHMDMX.cpp
+  moc_IHMDMX.cpp
+  moc_Client.cpp
   moc_IHM_create_Sequence.cpp
-  IHMDMX.vcxproj -> C:\Users\Edouard\Desktop\Projet_DMX\C++\IHM\IHMDMX\x64\Debug\IHMDMX.exe
+  moc_IHM_SrolBar_Sequence.cpp
+  moc_IHM_Delete_Sequence.cpp
+  moc_IHM_Create_Equipement.cpp
+  moc_IHM_Modifier_Equipement.cpp
+  moc_IHM_Create_Scene.cpp
+  moc_IHM_Delete_scene.cpp
+  moc_IHM_Update_scene.cpp
+  moc_IHM_Update_Sequence.cpp
+  moc_IHM_Create_Property.cpp
+  moc_IHM_Test_En_Directe.cpp
+  moc_IHMDMX2.cpp
+  IHMDMX.vcxproj -> C:\Users\Thomas\Desktop\Projet_DMX\Projet_DMX\C++\IHM\IHMDMX\x64\Debug\IHMDMX.exe

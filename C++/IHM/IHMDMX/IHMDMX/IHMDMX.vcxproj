@@ -48,10 +48,10 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Edouard\Desktop\Projet_DMX\C++\IHM\IHMDMX\IHMDMX\mysql-connector-c-6.1.11-winx64\include;C:\Users\Lecouflet\Desktop\Nouveau dossier %283%29\Projet_DMX\C++\IHM\IHMDMX\IHMDMX\mysql-connector-c-6.1.11-winx64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\IHMDMX\mysql-connector-c-6.1.11-winx64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\Users\Edouard\Desktop\Projet_DMX\C++\IHM\IHMDMX\IHMDMX\mysql-connector-c-6.1.11-winx64\lib;C:\Users\Lecouflet\Desktop\Nouveau dossier %283%29\Projet_DMX\C++\IHM\IHMDMX\IHMDMX\mysql-connector-c-6.1.11-winx64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\IHMDMX\mysql-connector-c-6.1.11-winx64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
