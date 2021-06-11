@@ -50,7 +50,7 @@ void IHM_Create_Equipement::Connexionbdd()
 {
 	mySQL = mysql_init(NULL);
 
-	if (!mysql_real_connect(mySQL, "192.168.64.102", "DMX", "dmx", "Projet_DMX", 0, NULL, 0))
+	if (!mysql_real_connect(mySQL, "localhost", "root", "", "Projet_DMX", 0, NULL, 0))
 	{
 		QMessageBox msgBox;
 		msgBox.setText("Erreur de connection a la BDD");

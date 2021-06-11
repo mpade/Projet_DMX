@@ -8,7 +8,7 @@ mysql_bdd::mysql_bdd()
 int mysql_bdd::connectmysql()
 {
 	
-	if (!mysql_real_connect(this->mysql, "192.168.64.102", "DMX", "dmx", "Projet_DMX", 0, NULL, 0)){
+	if (!mysql_real_connect(this->mysql, "localhost", "root", "", "Projet_DMX", 0, NULL, 0)){
 		return 0;
 	}
 	else
@@ -299,6 +299,80 @@ std::vector<std::string> mysql_bdd::getValueSequence(std::string names)
 	}
 	trame.push_back("TE:" + std::to_string(duree) + ";");
 	
+	return trame;
+}
+
+std::vector<std::string> mysql_bdd::getValueScene(std::string name)
+{
+	std::vector<std::string> trame;
+	std::string requete = "SELECT `Id_Scene` FROM `scene` WHERE `Nom` = '" + name + "'";
+	mysql_query(mysql, requete.c_str());
+	int duree = 0;
+	MYSQL_RES *result = NULL;
+	MYSQL_ROW row;
+	MYSQL_RES *results = NULL;
+	MYSQL_ROW rows;
+	MYSQL_RES *resultss = NULL;
+	MYSQL_ROW rowss;
+	MYSQL_RES *resultsss = NULL;
+	MYSQL_ROW rowsss;
+	MYSQL_RES *resultssss = NULL;
+	MYSQL_ROW rowssss;
+	MYSQL_RES *resultsssss = NULL;
+	MYSQL_ROW rowsssss;
+	result = mysql_store_result(mysql);
+	row = mysql_fetch_row(result);
+	
+
+		requete = "SELECT Id_Sequence FROM sequencescene WHERE Id_Scene = '" + std::to_string(atoi(row[0])) + "'";
+		mysql_query(mysql, requete.c_str());
+		resultssss = mysql_store_result(mysql);
+
+		while ((rowssss = mysql_fetch_row(resultssss))) {
+			int idsequence = atoi(rowssss[0]);
+			requete = "SELECT `Id_AdressEquipement` FROM `sequenceusedequipement` WHERE `Id_Sequence` =  '" + std::to_string(idsequence) + "'";
+			mysql_query(mysql, requete.c_str());
+			result = mysql_store_result(mysql);
+
+			while ((row = mysql_fetch_row(result)))
+			{
+
+				requete = "SELECT `Adresse`,`Id_Equipement` FROM `adressequipement` WHERE `Id_AdressEquipement` = '" + std::to_string(atoi(row[0])) + "'";
+				mysql_query(mysql, requete.c_str());
+				results = mysql_store_result(mysql);
+				int addresss = 0;
+				while ((rows = mysql_fetch_row(results)))
+				{
+					addresss = atoi(rows[0]);
+					requete = "SELECT `Id_Property`,`Order` FROM `property` WHERE `Id_Equipement` = '" + std::to_string(atoi(rows[1])) + "' ORDER BY `property`.`Order` ASC ";
+					mysql_query(mysql, requete.c_str());
+					resultss = mysql_store_result(mysql);
+					while ((rowss = mysql_fetch_row(resultss)))
+					{
+						requete = "SELECT `value` FROM `valueproper` WHERE `id_property` = '" + std::to_string(atoi(rowss[0])) + "' and `id_sequence` =  '" + std::to_string(idsequence) + "'";
+						mysql_query(mysql, requete.c_str());
+						resultsss = mysql_store_result(mysql);
+						rowsss = mysql_fetch_row(resultsss);
+
+						addresss += atoi(rowss[1]) - 1;
+						std::string tramemou = "CV:" + std::to_string(addresss) + "," + std::to_string(atoi(rowsss[0])) + ";";
+						trame.push_back(tramemou);
+
+						addresss = atoi(rows[0]);
+
+					}
+				}
+
+			}
+			requete = "SELECT `Duree` FROM `sequence` WHERE `Id_Sequence` = '" + std::to_string(idsequence) + "'";
+			mysql_query(mysql, requete.c_str());
+			resultsssss = mysql_store_result(mysql);
+			rowsssss = mysql_fetch_row(resultsssss);
+			duree = atoi(rowsssss[0]);
+			trame.push_back("TE:" + std::to_string(duree) + ";");
+		}
+	
+
 	return trame;
 }
 

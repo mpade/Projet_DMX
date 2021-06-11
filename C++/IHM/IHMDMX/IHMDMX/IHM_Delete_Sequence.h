@@ -31,6 +31,8 @@ public slots:               // Slots maison
 private:
 
 	QPushButton *supprimer;
+	QPushButton *jouer;
+	QLabel *m_sequence;
 	QGroupBox *groupBox;							// pointeur --> il faudra le construire dynamiquement (new)
 	mysql_bdd * bdd;
 	QListWidget *listSequence;

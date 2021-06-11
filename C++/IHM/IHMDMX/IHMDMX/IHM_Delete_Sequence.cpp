@@ -14,12 +14,16 @@ IHM_Delete_Sequence::IHM_Delete_Sequence() : QWidget()																								//
 	{
 		grid = new QGridLayout;
 		listSequence = new QListWidget();
+		m_sequence = new QLabel("Sequence");
 		getAllSequence();
 		supprimer = new QPushButton("Supprimer", this);
-		grid->addWidget(listSequence, 0, 0);
-		grid->addWidget(supprimer, 1, 0);
+		jouer = new QPushButton("jouer", this);
+		grid->addWidget(m_sequence, 0, 0);
+		grid->addWidget(listSequence, 1, 0);
+		grid->addWidget(jouer,2, 0);
+		grid->addWidget(supprimer, 3, 0);
 		QObject::connect(supprimer, SIGNAL(clicked()), this, SLOT(getDeleteSequence()));
-		QObject::connect(listSequence, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(gettcptest()));
+		QObject::connect(jouer, SIGNAL(clicked()), this, SLOT(gettcptest()));
 		
 		setLayout(grid);
 	}
@@ -51,7 +55,7 @@ void IHM_Delete_Sequence::getDeleteSequence()
 
 void IHM_Delete_Sequence::gettcptest()
 {
-	if (tcp->connectToHost("192.168.65.67"))
+	if (tcp->connectToHost("192.168.1.101"))
 	{
 		tcp->writeData("t");
 		tcp->closeToHost();
@@ -68,7 +72,7 @@ void IHM_Delete_Sequence::gettcptest()
 		}
 		
 		QString tradata = sendtrame.c_str();
-		if (tcp->connectToHost("192.168.65.67"))
+		if (tcp->connectToHost("192.168.1.101"))
 		{
 			tcp->writeData(tradata.toUtf8());
 			tcp->closeToHost();

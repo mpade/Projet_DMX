@@ -7,7 +7,7 @@ IHM_SrolBar_Sequence::IHM_SrolBar_Sequence(const QString name,int voie, int adre
 	mysql = mysql_init(NULL);
 	QWidget::setWindowTitle(name);
 	int adressmodifi = adresse;
-	if (!mysql_real_connect(mysql, "192.168.64.102", "DMX", "dmx", "Projet_DMX", 0, NULL, 0))
+	if (!mysql_real_connect(mysql, "localhost", "root", "", "Projet_DMX", 0, NULL, 0))
 	{
 		QMessageBox msgBox;
 		msgBox.setText("Eror de connection a la BDD");
@@ -94,7 +94,7 @@ void IHM_SrolBar_Sequence::getValide() {
 
 		}
 	}
-	tcp->connectToHost("192.168.65.67", 9012);
+	tcp->connectToHost("192.168.1.101", 9012);
 	tcp->write("t");
 	tcp->close();
 	tramemou.clear();
@@ -109,7 +109,7 @@ void IHM_SrolBar_Sequence::getTcpTest() {
 	}
 	if (tramemou.size() == 0) {
 		for(int x = 0; x < trame.size(); x++){
-		tcp->connectToHost("192.168.65.67", 9012);
+		tcp->connectToHost("192.168.1.101", 9012);
 		tcp->write(trame[x].c_str());
 		tcp->close();
 		tramemou.push_back(trame[x]);}
@@ -117,7 +117,7 @@ void IHM_SrolBar_Sequence::getTcpTest() {
 	for (int i = 0; i < tramemou.size(); i++) {
 		
 		if (tramemou[i] != trame[i]) {
-			tcp->connectToHost("192.168.65.67", 9012);
+			tcp->connectToHost("192.168.1.101", 9012);
 			tcp->write(trame[i].c_str());
 			tcp->close();
 			tramemou[i] = trame[i];

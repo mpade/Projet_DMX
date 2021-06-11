@@ -28,6 +28,7 @@ public:
 
 
 	std::vector<std::string> getValueSequence(std::string);
+	std::vector<std::string> getValueScene(std::string);
 	std::vector<std::string> getEquipementForSequence(std::string);
 	std::vector<std::string> getSequenceForScene(std::string);
 

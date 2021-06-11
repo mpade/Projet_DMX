@@ -15,6 +15,7 @@
 #include <string>
 #include <QtWidgets/QApplication>
 #include <QSlider>
+#include "Client.h"
 class IHM_Delete_scene :
 	public QWidget
 {
@@ -26,13 +27,17 @@ public:
 public slots:               // Slots maison
 	void getAllScene();
 	void getDeleteScene();
+	void gettcptest();
 private:
 
 	QPushButton *supprimer;
+	QPushButton *jouer; 
+	QLabel *m_scene;
 	QGroupBox *groupBox;							// pointeur --> il faudra le construire dynamiquement (new)
 	mysql_bdd * bdd;
 	QListWidget *listScene;
 	QVBoxLayout *vbox;
 	QGridLayout *grid;
+	Client *tcp;
 };
 

@@ -37,7 +37,7 @@ void IHM_Test_En_Directe::ConnexionBdd()
 {
 	mySQL = mysql_init(NULL);
 
-	if (!mysql_real_connect(mySQL, "192.168.64.102", "DMX", "dmx", "Projet_DMX", 0, NULL, 0))
+	if (!mysql_real_connect(mySQL, "localhost", "root", "", "Projet_DMX", 0, NULL, 0))
 	{
 		QMessageBox msgBox;
 		msgBox.setText("Erreur de connection a la BDD");
@@ -102,11 +102,11 @@ void IHM_Test_En_Directe::getTcpTest() {
 	tcp = new QTcpSocket();
 	std::vector<std::string> trame;
 	for (int i = 0; i < e.size(); i++) {
-		trame.push_back("CV:" + e[i]->objectName().toStdString() + "," + std::to_string(e[i]->value()));
+		trame.push_back("CV:" + e[i]->objectName().toStdString() + "," + std::to_string(e[i]->value())+";");
 	}
 	if (tramemou.size() == 0) {
 		for (int x = 0; x < trame.size(); x++) {
-			tcp->connectToHost("192.168.65.67", 9012);
+			tcp->connectToHost("192.168.1.101", 9012);
 			tcp->write(trame[x].c_str());
 			tcp->close();
 			tramemou.push_back(trame[x]);
@@ -115,7 +115,7 @@ void IHM_Test_En_Directe::getTcpTest() {
 	for (int i = 0; i < tramemou.size(); i++) {
 
 		if (tramemou[i] != trame[i]) {
-			tcp->connectToHost("192.168.65.67", 9012);
+			tcp->connectToHost("192.168.1.101", 9012);
 			tcp->write(trame[i].c_str());
 			tcp->close();
 			tramemou[i] = trame[i];

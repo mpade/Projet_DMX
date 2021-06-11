@@ -44,51 +44,72 @@ IHM_Create_Scene::IHM_Create_Scene() {
 void IHM_Create_Scene::test() 
 {
 
-	 
+	std::string requet = "SELECT `Id_Scene` FROM `scene` WHERE `Nom` ='" + name->text().toStdString() + "'";
+	mysql_query(bdd->getmysql(), requet.c_str());
+	MYSQL_RES *result = NULL;
+	result = mysql_store_result(bdd->getmysql());
 	if (name->displayText() != ""){
 		//requete insert name scene
-		std::string requet = "INSERT INTO `scene`(`Id_Scene`, `Nom`) VALUES (NULL,'"+name->text().toStdString()+"')";
-		mysql_query(bdd->getmysql(), requet.c_str());
-		requet = "SELECT `Id_Scene` FROM `scene` WHERE `Nom` ='" + name->text().toStdString() + "'";
-		mysql_query(bdd->getmysql(), requet.c_str());
-		MYSQL_RES *result = NULL;
-		MYSQL_ROW row;
+		if (result->row_count == 0)
+		{
+			requet = "INSERT INTO `scene`(`Id_Scene`, `Nom`) VALUES (NULL,'" + name->text().toStdString() + "')";
+			mysql_query(bdd->getmysql(), requet.c_str());
+			requet = "SELECT `Id_Scene` FROM `scene` WHERE `Nom` ='" + name->text().toStdString() + "'";
+			mysql_query(bdd->getmysql(), requet.c_str());
+			MYSQL_RES *result = NULL;
+			MYSQL_ROW row;
 
-		result = mysql_store_result(bdd->getmysql());
+			result = mysql_store_result(bdd->getmysql());
 
-		row = mysql_fetch_row(result);
-		int id_scene = atoi(row[0]);
-			
-	int x = listWidgetSequenceScene->count();
-	int y = 1;
-	for (int i = 0; i < x; i++) 
-	{
-		
-		QListWidgetItem *item = listWidgetSequenceScene->takeItem(0);
-		//SELECT `Id_Sequence` FROM `sequence` WHERE `name` = 
+			row = mysql_fetch_row(result);
+			int id_scene = atoi(row[0]);
 
-		requet = "SELECT `Id_Sequence` FROM `sequence` WHERE `name` = '"+item->text().toStdString()+"'";
-		mysql_query(bdd->getmysql(), requet.c_str());
-		MYSQL_RES *result = NULL;
-		MYSQL_ROW row;
+			int x = listWidgetSequenceScene->count();
+			int y = 1;
+			for (int i = 0; i < x; i++)
+			{
 
-		result = mysql_store_result(bdd->getmysql());
+				QListWidgetItem *item = listWidgetSequenceScene->takeItem(0);
+				//SELECT `Id_Sequence` FROM `sequence` WHERE `name` = 
 
-		row = mysql_fetch_row(result);
-		int id_sequence = atoi(row[0]);
-		//INSERT INTO `sequencescene`(`Id_SequenceScene`, `Id_Sequence`, `Id_Scene`, `Order`) VALUES (NULL,'[value-2]','[value-3]','[value-4]')
-		requet = "INSERT INTO `sequencescene`(`Id_SequenceScene`, `Id_Sequence`, `Id_Scene`, `Order`) VALUES (NULL,"+std::to_string(id_sequence)+","+ std::to_string(id_scene) +","+std::to_string(y)+")";
-		mysql_query(bdd->getmysql(), requet.c_str());
-		y++;
+				requet = "SELECT `Id_Sequence` FROM `sequence` WHERE `name` = '" + item->text().toStdString() + "'";
+				mysql_query(bdd->getmysql(), requet.c_str());
+				MYSQL_RES *result = NULL;
+				MYSQL_ROW row;
+
+				result = mysql_store_result(bdd->getmysql());
+
+				row = mysql_fetch_row(result);
+				int id_sequence = atoi(row[0]);
+				//INSERT INTO `sequencescene`(`Id_SequenceScene`, `Id_Sequence`, `Id_Scene`, `Order`) VALUES (NULL,'[value-2]','[value-3]','[value-4]')
+				requet = "INSERT INTO `sequencescene`(`Id_SequenceScene`, `Id_Sequence`, `Id_Scene`, `Order`) VALUES (NULL," + std::to_string(id_sequence) + "," + std::to_string(id_scene) + "," + std::to_string(y) + ")";
+				mysql_query(bdd->getmysql(), requet.c_str());
+				y++;
+			}
+			getAllSequencelist();
+			name->clear();
+		}
+		else
+		{
+			QMessageBox msgBox;
+			msgBox.setText("nom de scene deja utiliser !");
+			msgBox.exec();
+
+		}
 	}
+	else {
+		QMessageBox msgBox;
+		msgBox.setText("Champ non rempli !");
+		msgBox.exec();
 	}
 
 }
 void IHM_Create_Scene::getTCPtest()
 {
-	trame.clear();std::string sendtrame;
+	trame.clear();
+	std::string sendtrame;
 	int x = listWidgetSequenceScene->count();
-	if (tcp->connectToHost("192.168.65.67"))
+	if (tcp->connectToHost("192.168.1.101"))
 		{
 
 			tcp->writeData("t");
@@ -107,11 +128,9 @@ void IHM_Create_Scene::getTCPtest()
 			sendtrame += trame[i];
 		}
 	}
-	
-		
 
 		QString tradata = sendtrame.c_str();
-		if (tcp->connectToHost("192.168.65.67"))
+		if (tcp->connectToHost("192.168.1.101 "))
 		{
 			tcp->writeData(tradata.toUtf8());
 			tcp->closeToHost();
@@ -141,7 +160,8 @@ void IHM_Create_Scene::gettest()
 }
 void IHM_Create_Scene::getAllSequencelist() 
 {
-
+	listWidgetSequence->clear();
+	e.clear();
 	std::string requet = "SELECT `name` FROM `sequence` WHERE 1";
 	mysql_query(bdd->getmysql(), requet.c_str());
 	int x = 0;

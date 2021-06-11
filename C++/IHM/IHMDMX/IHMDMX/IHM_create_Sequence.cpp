@@ -135,14 +135,23 @@ void IHM_Create_Sequence::slidergetEquipement() {
 				}
 
 			}getAlllistEquipemnt();
+			name->clear();
+			duree->clear();
 			}else {
-		QMessageBox msgBox;
-		msgBox.setText("nom de sequence deja utiliser !");
-		msgBox.exec();
+				QMessageBox msgBox;
+				msgBox.setText("nom de sequence deja utiliser !");
+				msgBox.exec();
 			
-		}
+			}
 		
-	}
+		
+		}
+		else	
+		{
+			QMessageBox msgBox;
+			msgBox.setText("Champ non rempli !");
+			msgBox.exec();
+		}
 	
 	
 }

@@ -2,7 +2,7 @@
 
 IHM_Update_scene::IHM_Update_scene() 
 {
-
+	tcp = new Client();
 	bdd = new mysql_bdd();
 	if (bdd->connectmysql() == 0)
 	{
@@ -16,21 +16,27 @@ IHM_Update_scene::IHM_Update_scene()
 		listScene = new QListWidget();
 		listSceneSequence = new QListWidget();
 		nameScene = new QLabel();
+		scene = new QLabel("Scene");
 		supSequence = new QPushButton();
 		supSequence->setText("Supprimer");
 		modifier = new QPushButton();
+		jouer = new QPushButton();
 		modifier->setText("Ereghistre");
+		jouer->setText("jouer");
 		getAllScene();
-		grid->addWidget(nameScene,0,1,1,3);
+		grid->addWidget(nameScene,0,1);
+		grid->addWidget(scene,0,0);
 		grid->addWidget(listScene,1,0);
 		grid->addWidget(listSceneSequence, 1, 1);
 		grid->addWidget(supSequence, 2,1);
 		grid->addWidget(modifier, 2,0);
+		grid->addWidget(jouer, 3,0,1,3);
 		setLayout(grid);
 		
 		QObject::connect(listScene, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(getSelectidScene()));
 		QObject::connect(supSequence, SIGNAL(clicked()), this, SLOT(getDeletesequencescene()));
 		QObject::connect(modifier, SIGNAL(clicked()), this, SLOT(getUpdatescene()));
+		QObject::connect(jouer, SIGNAL(clicked()), this, SLOT(getTCPtest()));
 		listSceneSequence->setSelectionMode(QAbstractItemView::SingleSelection);
 		listSceneSequence->setDragEnabled(true);
 		listSceneSequence->setAcceptDrops(true);
@@ -56,7 +62,7 @@ void IHM_Update_scene::getSelectidScene()
 
 	if (listScene->selectedItems().count() == 1) {
 		QListWidgetItem *item = listScene->currentItem();
-		nameScene->setText(item->text());
+		nameScene->setText("Scnene : " +item->text());
 		listScene->clearSelection();
 		getSequence(item->text().toStdString());
 	}
@@ -104,4 +110,37 @@ void IHM_Update_scene::getUpdatescene()
 		}
 	}
 
+}
+
+void IHM_Update_scene::getTCPtest()
+{
+	std::vector<std::string>trame;
+	std::string sendtrame;
+
+	if (tcp->connectToHost("192.168.1.101"))
+	{
+
+		tcp->writeData("t");
+		tcp->closeToHost();
+	}
+
+	if (nameScene->text() != "") {
+		std::string s = nameScene->text().toStdString();
+		int pos = s.find(": ");
+		std::string name = s.substr(pos + 2);
+
+
+		trame = bdd->getValueScene(name);
+		for (int i = 0; i < trame.size(); i++)
+		{
+			sendtrame += trame[i];
+		}
+	}
+
+	QString tradata = sendtrame.c_str();
+	if (tcp->connectToHost("192.168.1.101"))
+	{
+		tcp->writeData(tradata.toUtf8());
+		tcp->closeToHost();
+	}
 }

@@ -15,7 +15,7 @@
 #include <string>
 #include <QtWidgets/QApplication>
 #include <QSlider>
-
+#include "Client.h"
 class IHM_Update_Sequence :
 	public QWidget
 {
@@ -28,12 +28,13 @@ public slots:               // Slots maison
 	
 	void getSelectidSequence();
 	void getDeletequipementsequence();
-	//void getUpdatesequence();
+	void getTCPtest();
 
 private:
 
 	QPushButton *supequipment;
 	QPushButton *modifier;
+	QPushButton *jouer;
 	QLabel * nameSequence;
 	QGroupBox *groupBox;							// pointeur --> il faudra le construire dynamiquement (new)
 	mysql_bdd * bdd;
@@ -41,6 +42,7 @@ private:
 	QListWidget *listSequence;
 	QListWidget * listSequencequipement;
 	QGridLayout *grid;
+	Client *tcp;
 	int id_sequence = 0;
 };
 

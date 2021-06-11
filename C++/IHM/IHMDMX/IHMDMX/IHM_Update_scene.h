@@ -15,6 +15,8 @@
 #include <string>
 #include <QtWidgets/QApplication>
 #include <QSlider>
+#include "Client.h"
+
 class IHM_Update_scene :
 	public QWidget
 {
@@ -27,15 +29,18 @@ public slots:               // Slots maison
 	void getSelectidScene();
 	void getDeletesequencescene();
 	void getUpdatescene();
+	void getTCPtest();
 private:
-
+	Client * tcp;
 	QPushButton *supSequence;
 	QPushButton *modifier;
+	QPushButton *jouer;
 	QGroupBox *groupBox;							// pointeur --> il faudra le construire dynamiquement (new)
 	mysql_bdd *bdd;
 	QListWidget *listScene;
 	QListWidget * listSceneSequence;	
 	QLabel * nameScene;
+	QLabel * scene;
 	QGridLayout *grid;
 };
 
