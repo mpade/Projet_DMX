@@ -62,7 +62,7 @@ int main()
                     {
                         if (trame[i][0] == 'C' && trame[i][1] == 'V' )
                         {
-                            string s = readtcp;
+                            string s = trame[i];
                             int pos = s.find(':');
                             string sud = s.substr(pos+1);
                             std::vector<std::string> lines = serverTCP::explode(sud, ',');
@@ -84,7 +84,7 @@ int main()
                         }
                         else if(trame[i][0] == 'T' && trame[i][1] == 'E' )
                         {
-                            string s = readtcp;
+                            string s = trame[i];
                             int pos = s.find(':');
                             string sud = s.substr(pos+1);
 
