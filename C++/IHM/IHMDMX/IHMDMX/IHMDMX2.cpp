@@ -3,7 +3,7 @@
 
 IHMDMX2::IHMDMX2() : QWidget()																								// spécification du constructeur
 {
-	setGeometry(100, 100, 400, 400);																						// place la fenêtre aux coordonnés : 100px,100px
+	setGeometry(100, 100, 400, 300);																						// place la fenêtre aux coordonnés : 100px,100px
 				
 	/* Construction du bouton */
 	sequence_creat = new QPushButton("Cree une Sequence", this);																		// this = pointeur vers le widget parent																							

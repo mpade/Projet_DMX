@@ -21,7 +21,7 @@ IHM_Update_scene::IHM_Update_scene()
 		supSequence->setText("Supprimer");
 		modifier = new QPushButton();
 		jouer = new QPushButton();
-		modifier->setText("Ereghistre");
+		modifier->setText("Enregistre");
 		jouer->setText("jouer");
 		getAllScene();
 		grid->addWidget(nameScene,0,1);
@@ -116,7 +116,7 @@ void IHM_Update_scene::getTCPtest()
 {
 	std::vector<std::string>trame;
 	std::string sendtrame;
-
+	int x = listSceneSequence->count();
 	if (tcp->connectToHost("192.168.1.101"))
 	{
 
@@ -125,15 +125,18 @@ void IHM_Update_scene::getTCPtest()
 	}
 
 	if (nameScene->text() != "") {
-		std::string s = nameScene->text().toStdString();
-		int pos = s.find(": ");
-		std::string name = s.substr(pos + 2);
-
-
-		trame = bdd->getValueScene(name);
-		for (int i = 0; i < trame.size(); i++)
+		for (int i = 0; i < x; i++)
 		{
-			sendtrame += trame[i];
+			listSceneSequence->setCurrentRow(i);
+			QListWidgetItem *item = listSceneSequence->currentItem();
+			std::string name = item->text().toStdString();
+
+
+			trame = bdd->getValueSequence(name);
+			for (int i = 0; i < trame.size(); i++)
+			{
+				sendtrame += trame[i];
+			}
 		}
 	}
 
