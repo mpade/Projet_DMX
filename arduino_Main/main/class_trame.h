@@ -5,5 +5,5 @@ class trame
     int trame[];
 
   public :
-    int ecritureTrame(int);
+    int ecritureTrame(int, int);
 };

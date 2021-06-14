@@ -27,8 +27,7 @@ int LCD::displaySpot(int SpotNb)
 
 int LCD::displayAdr(String value)
 {
-  lcd.begin(16, 2);
   lcd.setCursor(0, 0); // mettre le curseur à la troisième colonne, première ligne
-  //lcd.print("adr:");
+  lcd.print("adr:");
   lcd.print(value);// afficher le numéro du spot
 }

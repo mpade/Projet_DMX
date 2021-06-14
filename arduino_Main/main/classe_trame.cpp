@@ -4,18 +4,16 @@
 
 pota value;
 
-int trame::ecritureTrame(int numSpot)
+int trame::ecritureTrame(int nbPota, int adr)
 {
-  //récupération et écriture du Spot
-  Serial.print(numSpot);
-  Serial.print("::");
 
   //écriture des valeurs des pota
-  for (int i=1; i<9; i++)
-  { 
-    Serial.print(value.getPotaValue(i));
-    Serial.print(":");
+  for (int i=1; i<=nbPota; i++)
+  {
+    Serial.print(adr+(i-1));
+    Serial.print(":"); 
+    Serial.println(value.getPotaValue(i));
+    
   }
-
-  Serial.println(" ");
+  Serial.println("");
 }

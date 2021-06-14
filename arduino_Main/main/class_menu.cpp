@@ -6,6 +6,7 @@
 #include "class_LCD.h"
 #include "spotData.h"
 
+
 int menu::MenuSpots()
 {
 
@@ -22,15 +23,25 @@ int menu::MenuSpots()
   int choixPota = 1;
 
   int nbSpots = data.GetNb();
-  byte SpotAdr[nbSpots];   
-  for (int i = 0; i < 32; i++)
+  String SpotAdr[nbSpots];   
+  for (int i = 0; i < nbSpots; i++)
   {
-    SpotAdr[i] = data.GetData();
-    //displayValue.displayAdr(SpotAdr[nbSpots]);
+    String result = data.GetData(1);
+    if(result.length() > 0)
+    {
+      SpotAdr[i] = result;
+      //displayValue.displayAdr(SpotAdr[i]);
+    }
+    else
+    {
+      i--;
+    }
   }
 
 
-  /*displayValue.displaySpot(choixSpot);
+
+  displayValue.displaySpot(choixSpot);
+  //displayValue.displayAdr(SpotAdr[choixSpot-1]); 
     while (valB == 1)
     {
 
@@ -42,8 +53,9 @@ int menu::MenuSpots()
     
         if (valB == 0)
           {
-            trame.ecritureTrame(choixSpot);
-            delay(500);
+            trame.ecritureTrame(data.GetNbPota(SpotAdr[choixSpot-1]), data.GetAdrTrame(SpotAdr[choixSpot-1]));
+            delay(1000);
+            valB = Button.getBValue();
           }
       
       //monter la valeur du choix
@@ -56,7 +68,7 @@ int menu::MenuSpots()
               }
             choixSpot--;
             displayValue.displaySpot(choixSpot);
-            displayValue.displaySpotvalue(SpotAdr[choixSpot-1]);
+            displayValue.displayAdr(SpotAdr[choixSpot-1]);
         }
 
        //descendre la valeur du choix
@@ -69,32 +81,10 @@ int menu::MenuSpots()
               }
             choixSpot++;
             displayValue.displaySpot(choixSpot);
-            displayValue.displaySpotvalue(SpotAdr[choixSpot-1]);
-        }
-
-       /* //cette partie du code est pour le choix du potentiomètre, en utilisant la valeur X du joystick
-       //monter la valeur du choix
-       if(valX == 0)
-        {
-            //revenir au premier choix si celui ci dépasse le nombre de spots enregistré
-            if (choixPota < 0)
-              {
-                choixPota = maxPota+1;
-              }
-            choixPota--;
-        }
-
-       //descendre la valeur du choix
-       if(valX == 5)
-        {
-            //revenir au premier choix si celui ci dépasse le nombre de spots enregistré
-            if (choixPota > maxPota)
-              {
-                choixPota = 0;
-              }
-            choixPota++;
+            displayValue.displayAdr(SpotAdr[choixSpot-1]);
+            
+            
         }
       delay(200);
-    }*/
-    
+    }   
 }
